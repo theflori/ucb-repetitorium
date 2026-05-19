@@ -323,19 +323,38 @@ section{padding:72px 0}
 .anmelden-section::before{content:'';position:absolute;top:0;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,182,107,.06) 0%,transparent 70%);pointer-events:none}
 .anmelden-section .container{position:relative;z-index:2}
 
-.anmelden-paths{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;max-width:1080px;margin-left:auto;margin-right:auto}
+.anmelden-paths{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:36px;max-width:1080px;margin-left:auto;margin-right:auto;align-items:stretch}
 
-.path-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px 32px 30px;position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
-.path-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(66,29,29,.1)}
+.path-card{border-radius:16px;padding:36px 32px 30px;position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease;overflow:hidden}
+.path-card:hover{transform:translateY(-3px)}
 
-.path-card-primary{border-color:var(--bordeaux);background:linear-gradient(180deg,#fff 0%,#fff 70%,rgba(240,182,107,.04) 100%);box-shadow:0 12px 32px rgba(66,29,29,.08)}
-.path-card-primary::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,var(--light-gold) 50%,var(--gold) 100%);border-radius:16px 16px 0 0}
+/* PRIMARY = Bordeaux/Gold (stark hervorgehoben) */
+.path-card-primary{background:linear-gradient(135deg,var(--bordeaux) 0%,#2D1414 100%);color:#fff;box-shadow:0 18px 44px rgba(66,29,29,.32)}
+.path-card-primary:hover{box-shadow:0 22px 52px rgba(66,29,29,.4)}
+.path-card-primary .path-icon{background:rgba(240,182,107,.15);border:1px solid rgba(240,182,107,.3);color:var(--gold)}
+.path-card-primary .path-pre{color:var(--gold)}
+.path-card-primary .path-h{color:#fff}
+.path-card-primary .path-text{color:rgba(255,255,255,.75)}
+.path-card-primary .path-features{border-top-color:rgba(255,255,255,.1)}
+.path-card-primary .path-features li{color:rgba(255,255,255,.9)}
+.path-card-primary .path-features li svg{color:var(--gold)}
+.path-card-primary .path-features li strong{color:#fff}
+.path-card-primary .path-price{background:rgba(0,0,0,.2);border:1px solid rgba(240,182,107,.2)}
+.path-card-primary .path-price-amount{color:var(--gold)}
+.path-card-primary .path-price-note{color:rgba(240,182,107,.7)}
+.path-card-primary .path-cta{background:var(--gold);color:var(--bordeaux);box-shadow:0 8px 20px rgba(240,182,107,.4)}
+.path-card-primary .path-cta:hover{background:var(--light-gold);transform:translateY(-1px)}
+.path-card-primary .path-trust{color:rgba(255,255,255,.55)}
+.path-card-primary .path-trust svg{color:var(--gold)}
 
-.path-badge{position:absolute;top:-12px;left:32px;display:inline-flex;align-items:center;gap:6px;background:var(--bordeaux);color:var(--gold);padding:5px 12px 5px 10px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;line-height:1}
-.path-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
+/* SECONDARY = weiß (dezent) */
+.path-card-secondary{background:#fff;border:1px solid var(--border)}
+.path-card-secondary:hover{box-shadow:0 14px 32px rgba(66,29,29,.08);border-color:var(--light-gold)}
+
+.path-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--bordeaux);padding:5px 12px 5px 10px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;line-height:1;width:fit-content;margin-bottom:18px}
+.path-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--bordeaux)}
 
 .path-icon{width:46px;height:46px;background:var(--shell);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--bordeaux);margin-bottom:16px}
-.path-card-primary .path-icon{background:rgba(240,182,107,.1);border-color:var(--light-gold);color:var(--deep-gold)}
 
 .path-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--deep-gold);margin-bottom:6px}
 .path-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;color:var(--near-black);line-height:1.1;letter-spacing:.005em;margin-bottom:10px}
@@ -347,34 +366,23 @@ section{padding:72px 0}
 .path-features li svg{color:var(--gold);flex-shrink:0;margin-top:3px}
 
 .path-price{background:var(--shell);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px}
-.path-card-primary .path-price{background:rgba(240,182,107,.06);border-color:var(--light-gold)}
 .path-price-amount{font-family:'Pilat Wide','Manrope',sans-serif;font-size:28px;font-weight:700;color:var(--near-black);letter-spacing:.005em;line-height:1;margin-bottom:4px}
 .path-price-note{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--deep-gold);font-weight:700}
 
 .path-anfrage-spacer{flex:1;min-height:24px}
 
-.path-cta{width:100%;text-align:center;justify-content:center;padding:14px 24px;font-size:13px;margin-bottom:12px}
-.path-card-primary .path-cta{box-shadow:0 8px 20px rgba(240,182,107,.3)}
+.path-cta{width:100%;text-align:center;padding:14px 24px;font-size:13px;margin-bottom:12px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
 
 .path-trust{display:flex;align-items:center;gap:6px;justify-content:center;font-family:'Manrope',sans-serif;font-size:10.5px;color:var(--muted);text-align:center}
 .path-trust svg{color:var(--gold);flex-shrink:0}
 
-/* ANFRAGE FORM unten */
-.anfrage-form-wrap{margin-top:60px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:44px 40px;max-width:760px;margin-left:auto;margin-right:auto;scroll-margin-top:80px}
-.anfrage-form-head{text-align:center;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.anfrage-form-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.1;margin:6px 0 8px}
-.anfrage-form-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
-
 @media(max-width:900px){
   .anmelden-paths{grid-template-columns:1fr;gap:18px}
-  .anfrage-form-wrap{padding:32px 24px;margin-top:40px}
 }
 @media(max-width:480px){
   .path-card{padding:30px 22px 24px}
   .path-h{font-size:22px}
   .path-price-amount{font-size:24px}
-  .anfrage-form-wrap{padding:26px 20px}
-  .anfrage-form-h{font-size:20px}
 }
 
 /* HOTEL */
@@ -510,11 +518,19 @@ body.modal-open{overflow:hidden}
 .faq-item.open .faq-a{display:block}
 
 /* CTA Footer */
-.cta-footer{background:var(--bordeaux);color:#fff;text-align:center;padding:64px 0;position:relative;overflow:hidden}
+.cta-footer{background:var(--bordeaux);color:#fff;text-align:center;padding:120px 20px;position:relative;overflow:hidden;background-image:url('/images/vortrag01.jpg');background-size:cover;background-position:center;background-repeat:no-repeat}
+.cta-footer::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.8);z-index:1}
 .cta-footer .container{position:relative;z-index:2}
-.cta-footer .pre{color:var(--gold)}
-.cta-footer .section-title{color:#fff;margin-left:auto;margin-right:auto;font-size:32px}
-.cta-footer p{font-size:14px;color:rgba(255,255,255,.78);margin:14px auto 24px;max-width:520px;line-height:1.6}
+.cta-footer .pre{color:var(--gold);font-size:14px}
+.cta-footer .section-title{color:#fff;margin-left:auto;margin-right:auto;font-size:64px;line-height:1.05;letter-spacing:-.02em;margin-bottom:18px}
+.cta-footer p{font-size:15px;color:rgba(255,255,255,.78);margin:14px auto 28px;max-width:560px;line-height:1.65}
+@media(max-width:768px){
+  .cta-footer{padding:80px 20px}
+  .cta-footer .section-title{font-size:42px}
+}
+@media(max-width:480px){
+  .cta-footer .section-title{font-size:34px}
+}
 
 /* FOOTER */
 .footer{background:var(--near-black);color:rgba(255,255,255,.55);padding:56px 0 24px}
@@ -722,64 +738,7 @@ body.modal-open{overflow:hidden}
   
   
 
-/* ANMELDEN — Zwei Wege */
-.anmelden-section{background:var(--shell);position:relative;overflow:hidden}
-.anmelden-section::before{content:'';position:absolute;top:0;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,182,107,.06) 0%,transparent 70%);pointer-events:none}
-.anmelden-section .container{position:relative;z-index:2}
 
-.anmelden-paths{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;max-width:1080px;margin-left:auto;margin-right:auto}
-
-.path-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px 32px 30px;position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
-.path-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(66,29,29,.1)}
-
-.path-card-primary{border-color:var(--bordeaux);background:linear-gradient(180deg,#fff 0%,#fff 70%,rgba(240,182,107,.04) 100%);box-shadow:0 12px 32px rgba(66,29,29,.08)}
-.path-card-primary::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,var(--light-gold) 50%,var(--gold) 100%);border-radius:16px 16px 0 0}
-
-.path-badge{position:absolute;top:-12px;left:32px;display:inline-flex;align-items:center;gap:6px;background:var(--bordeaux);color:var(--gold);padding:5px 12px 5px 10px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;line-height:1}
-.path-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
-
-.path-icon{width:46px;height:46px;background:var(--shell);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--bordeaux);margin-bottom:16px}
-.path-card-primary .path-icon{background:rgba(240,182,107,.1);border-color:var(--light-gold);color:var(--deep-gold)}
-
-.path-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--deep-gold);margin-bottom:6px}
-.path-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;color:var(--near-black);line-height:1.1;letter-spacing:.005em;margin-bottom:10px}
-
-.path-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
-
-.path-features{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--border);padding-top:20px}
-.path-features li{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--near-black);line-height:1.45;font-weight:500}
-.path-features li svg{color:var(--gold);flex-shrink:0;margin-top:3px}
-
-.path-price{background:var(--shell);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px}
-.path-card-primary .path-price{background:rgba(240,182,107,.06);border-color:var(--light-gold)}
-.path-price-amount{font-family:'Pilat Wide','Manrope',sans-serif;font-size:28px;font-weight:700;color:var(--near-black);letter-spacing:.005em;line-height:1;margin-bottom:4px}
-.path-price-note{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--deep-gold);font-weight:700}
-
-.path-anfrage-spacer{flex:1;min-height:24px}
-
-.path-cta{width:100%;text-align:center;justify-content:center;padding:14px 24px;font-size:13px;margin-bottom:12px}
-.path-card-primary .path-cta{box-shadow:0 8px 20px rgba(240,182,107,.3)}
-
-.path-trust{display:flex;align-items:center;gap:6px;justify-content:center;font-family:'Manrope',sans-serif;font-size:10.5px;color:var(--muted);text-align:center}
-.path-trust svg{color:var(--gold);flex-shrink:0}
-
-/* ANFRAGE FORM unten */
-.anfrage-form-wrap{margin-top:60px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:44px 40px;max-width:760px;margin-left:auto;margin-right:auto;scroll-margin-top:80px}
-.anfrage-form-head{text-align:center;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.anfrage-form-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.1;margin:6px 0 8px}
-.anfrage-form-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
-
-@media(max-width:900px){
-  .anmelden-paths{grid-template-columns:1fr;gap:18px}
-  .anfrage-form-wrap{padding:32px 24px;margin-top:40px}
-}
-@media(max-width:480px){
-  .path-card{padding:30px 22px 24px}
-  .path-h{font-size:22px}
-  .path-price-amount{font-size:24px}
-  .anfrage-form-wrap{padding:26px 20px}
-  .anfrage-form-h{font-size:20px}
-}
 
 /* HOTEL */
 .hotel{background:var(--shell);position:relative;overflow:hidden}
@@ -825,64 +784,7 @@ body.modal-open{overflow:hidden}
 }
 
 
-/* ANMELDEN — Zwei Wege */
-.anmelden-section{background:var(--shell);position:relative;overflow:hidden}
-.anmelden-section::before{content:'';position:absolute;top:0;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,182,107,.06) 0%,transparent 70%);pointer-events:none}
-.anmelden-section .container{position:relative;z-index:2}
 
-.anmelden-paths{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;max-width:1080px;margin-left:auto;margin-right:auto}
-
-.path-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:36px 32px 30px;position:relative;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
-.path-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(66,29,29,.1)}
-
-.path-card-primary{border-color:var(--bordeaux);background:linear-gradient(180deg,#fff 0%,#fff 70%,rgba(240,182,107,.04) 100%);box-shadow:0 12px 32px rgba(66,29,29,.08)}
-.path-card-primary::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,var(--light-gold) 50%,var(--gold) 100%);border-radius:16px 16px 0 0}
-
-.path-badge{position:absolute;top:-12px;left:32px;display:inline-flex;align-items:center;gap:6px;background:var(--bordeaux);color:var(--gold);padding:5px 12px 5px 10px;border-radius:100px;font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;line-height:1}
-.path-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
-
-.path-icon{width:46px;height:46px;background:var(--shell);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--bordeaux);margin-bottom:16px}
-.path-card-primary .path-icon{background:rgba(240,182,107,.1);border-color:var(--light-gold);color:var(--deep-gold)}
-
-.path-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--deep-gold);margin-bottom:6px}
-.path-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;color:var(--near-black);line-height:1.1;letter-spacing:.005em;margin-bottom:10px}
-
-.path-text{font-size:13.5px;color:var(--muted);line-height:1.6;margin-bottom:22px}
-
-.path-features{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--border);padding-top:20px}
-.path-features li{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--near-black);line-height:1.45;font-weight:500}
-.path-features li svg{color:var(--gold);flex-shrink:0;margin-top:3px}
-
-.path-price{background:var(--shell);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px}
-.path-card-primary .path-price{background:rgba(240,182,107,.06);border-color:var(--light-gold)}
-.path-price-amount{font-family:'Pilat Wide','Manrope',sans-serif;font-size:28px;font-weight:700;color:var(--near-black);letter-spacing:.005em;line-height:1;margin-bottom:4px}
-.path-price-note{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--deep-gold);font-weight:700}
-
-.path-anfrage-spacer{flex:1;min-height:24px}
-
-.path-cta{width:100%;text-align:center;justify-content:center;padding:14px 24px;font-size:13px;margin-bottom:12px}
-.path-card-primary .path-cta{box-shadow:0 8px 20px rgba(240,182,107,.3)}
-
-.path-trust{display:flex;align-items:center;gap:6px;justify-content:center;font-family:'Manrope',sans-serif;font-size:10.5px;color:var(--muted);text-align:center}
-.path-trust svg{color:var(--gold);flex-shrink:0}
-
-/* ANFRAGE FORM unten */
-.anfrage-form-wrap{margin-top:60px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:44px 40px;max-width:760px;margin-left:auto;margin-right:auto;scroll-margin-top:80px}
-.anfrage-form-head{text-align:center;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-.anfrage-form-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.1;margin:6px 0 8px}
-.anfrage-form-sub{font-size:12.5px;color:var(--muted);line-height:1.55}
-
-@media(max-width:900px){
-  .anmelden-paths{grid-template-columns:1fr;gap:18px}
-  .anfrage-form-wrap{padding:32px 24px;margin-top:40px}
-}
-@media(max-width:480px){
-  .path-card{padding:30px 22px 24px}
-  .path-h{font-size:22px}
-  .path-price-amount{font-size:24px}
-  .anfrage-form-wrap{padding:26px 20px}
-  .anfrage-form-h{font-size:20px}
-}
 
 /* HOTEL */
   .hotel-features{gap:12px}
@@ -1396,7 +1298,7 @@ body.modal-open{overflow:hidden}
             Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
           </div>
 
-          <a href="#anmelden" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt anmelden →</a>
+          <a href="/buchen/" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt buchen →</a>
         </div>
 
         <!-- Repetitorium - Coming Soon -->
@@ -1677,62 +1579,12 @@ body.modal-open{overflow:hidden}
 
         <div class="path-anfrage-spacer"></div>
 
-        <a href="#anfrage-form" class="btn btn-bordeaux-outline path-cta">Anfrage senden →</a>
+        <a href="/anfrage/" class="btn btn-bordeaux-outline path-cta">Anfrage senden →</a>
         <div class="path-trust">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Antwort persönlich vom UCB-Team
         </div>
       </div>
-    </div>
-
-    <!-- ANFRAGE-FORMULAR (für Weg B) -->
-    <div id="anfrage-form" class="anfrage-form-wrap">
-      <div class="anfrage-form-head">
-        <div class="pre" style="color:var(--deep-gold)">— Anfrage-Formular</div>
-        <h3 class="anfrage-form-h">Stell uns deine Anfrage.</h3>
-        <p class="anfrage-form-sub">Alle Felder mit * sind Pflichtfelder. Wir melden uns innerhalb von 48 Stunden persönlich bei dir.</p>
-      </div>
-
-      <form class="anfrage-form" id="leadForm" action="#" method="post">
-        <div class="form-field">
-          <label>Für welches Examen interessierst du dich? *</label>
-          <select name="examen" required>
-            <option value="">Bitte wählen</option>
-            <option value="1_staatsexamen">Erstes Juristisches Staatsexamen (verfügbar)</option>
-            <option value="2_staatsexamen">Zweites Juristisches Staatsexamen (in Vorbereitung)</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <div class="form-field"><label>Vorname *</label><input type="text" name="vorname" required></div>
-          <div class="form-field"><label>Nachname *</label><input type="text" name="nachname" required></div>
-        </div>
-        <div class="form-row">
-          <div class="form-field"><label>E-Mail *</label><input type="email" name="email" required></div>
-          <div class="form-field"><label>Telefon</label><input type="tel" name="telefon"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-field"><label>Universität *</label><input type="text" name="uni" required></div>
-          <div class="form-field"><label>Aktueller Stand *</label><select name="stand" required>
-            <option value="">Bitte wählen</option>
-            <option>Studium · 4.–6. Semester</option>
-            <option>Studium · 7.–8. Semester</option>
-            <option>Studium · 9.+ Semester</option>
-            <option>In der Examensvorbereitung (1. Examen)</option>
-            <option>Im Referendariat (2. Examen)</option>
-          </select></div>
-        </div>
-
-        <div class="form-field">
-          <label>Was möchtest du wissen oder besprechen?</label>
-          <textarea name="nachricht" placeholder="Optional: Themen, Fragen, Schwerpunkte — alles was uns hilft, dich besser kennenzulernen..."></textarea>
-        </div>
-        <div class="form-checkbox">
-          <input type="checkbox" name="datenschutz" required>
-          <span>Ich habe die <a href="/datenschutz.html" target="_blank" style="color:var(--bordeaux);text-decoration:underline">Datenschutzerklärung</a> gelesen und akzeptiere die Verarbeitung meiner Daten.</span>
-        </div>
-        <button type="submit" class="form-submit">Anfrage senden →</button>
-      </form>
     </div>
   </div>
 </section>
@@ -1817,7 +1669,7 @@ body.modal-open{overflow:hidden}
     <div class="pre">— Bereit?</div>
     <h2 class="section-title">Starte deine Examens-<br>vorbereitung.</h2>
     <p>Werde Teil des UCB Repetitoriums. Anmelden, buchen, Coaching-Gespräch führen — und dann durchziehen. Egal welches Niveau, wir holen dich da ab, wo du stehst.</p>
-    <a href="#anmelden" class="btn btn-gold">Jetzt anmelden →</a>
+    <a href="/buchen/" class="btn btn-gold">Jetzt buchen →</a>
   </div>
 </section>
 
