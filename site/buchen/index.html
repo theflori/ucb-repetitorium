@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon-180.png">
+  <title>Buchung · UCB Repetitorium</title>
+  <meta name="description" content="Klausurentraining für das Erste Staatsexamen Bayern · Bad Aibling · August 2026">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bordeaux:#421D1D;
+      --deep-bordeaux:#2D1414;
+      --gold:#F0B66B;
+      --deep-gold:#B8853E;
+      --light-gold:#F5D6A8;
+      --shell:#F8F4EE;
+      --near-black:#1A1A1A;
+      --muted:#7A6E64;
+      --border:#E5DDD0;
+      --rosewood:#D9C3B0;
+      --gold-tint:#FBF1E0;
+      --blush:#F4E8D9;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Manrope',sans-serif;font-size:14px;color:var(--near-black);background:#fff;line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+
+    /* NAV */
+    .topbar{background:var(--near-black);color:#fff;padding:14px 0;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+    .topbar-inner{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+    .topbar-logo{font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--gold);text-transform:uppercase}
+    .topbar-link{font-size:12px;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:6px;transition:color .2s}
+    .topbar-link:hover{color:var(--gold)}
+
+    /* PAGE */
+    .container{max-width:1180px;margin:0 auto;padding:0 24px}
+    .page{padding:56px 0 80px;background:var(--shell);min-height:calc(100vh - 56px);position:relative;overflow:hidden}
+    .page::before{content:'';position:absolute;top:-100px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(240,182,107,.08) 0%,transparent 70%);pointer-events:none}
+    .page .container{position:relative;z-index:2}
+
+    .breadcrumb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:24px;font-weight:500}
+    .breadcrumb a{color:var(--muted);transition:color .2s}
+    .breadcrumb a:hover{color:var(--bordeaux)}
+    .breadcrumb svg{color:var(--border)}
+
+    .page-head{margin-bottom:36px;max-width:680px}
+    .page-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--deep-gold);margin-bottom:8px}
+    .page-h{font-family:'Manrope',sans-serif;font-size:38px;font-weight:800;color:var(--near-black);letter-spacing:-.015em;line-height:1.08;margin-bottom:14px}
+    .page-sub{font-size:15px;color:var(--muted);line-height:1.65}
+
+    .buchen-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:start}
+
+    /* Form Card */
+    .form-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:36px 32px;box-shadow:0 8px 28px rgba(66,29,29,.05)}
+    .form-card-section{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    .form-card-section:last-of-type{border-bottom:none;padding-bottom:0;margin-bottom:24px}
+    .form-card-section-h{font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--deep-gold);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+    .form-card-section-h::before{content:'';width:18px;height:1px;background:var(--gold)}
+
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-field{margin-bottom:14px}
+    .form-field label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--near-black);margin-bottom:6px}
+    .form-field input,.form-field select,.form-field textarea{width:100%;padding:11px 13px;font-family:inherit;font-size:13.5px;color:var(--near-black);background:#fff;border:1px solid var(--border);border-radius:8px;transition:all .2s;outline:none}
+    .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--bordeaux);box-shadow:0 0 0 3px rgba(66,29,29,.08)}
+    .form-field textarea{min-height:90px;resize:vertical}
+
+    .form-checkbox{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);line-height:1.5;margin-top:14px}
+    .form-checkbox input{margin-top:3px;flex-shrink:0;accent-color:var(--bordeaux)}
+    .form-checkbox a{color:var(--bordeaux);text-decoration:underline}
+
+    /* Summary Card (sticky) */
+    .summary-card{background:var(--near-black);color:#fff;border-radius:14px;padding:30px 28px;position:sticky;top:88px;box-shadow:0 12px 32px rgba(66,29,29,.18)}
+    .summary-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold) 0%,var(--light-gold) 50%,var(--gold) 100%);border-radius:14px 14px 0 0}
+    .summary-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--gold);margin-bottom:8px}
+    .summary-h{font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.15;margin-bottom:6px}
+    .summary-sub{font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.5;margin-bottom:22px}
+
+    .summary-details{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;margin-bottom:18px}
+    .summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:12.5px}
+    .summary-row .label{color:rgba(255,255,255,.65)}
+    .summary-row .value{color:#fff;font-weight:600}
+
+    .summary-divider{border-top:1px solid rgba(255,255,255,.1);margin:14px 0}
+
+    .summary-price{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+    .summary-price-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);font-weight:700}
+    .summary-price-amount{font-family:'Manrope',sans-serif;font-size:34px;font-weight:800;letter-spacing:-.015em;color:#fff}
+    .summary-vat{font-size:11px;color:rgba(255,255,255,.55);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+    .summary-vat svg{color:var(--gold)}
+
+    .summary-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+    .summary-features li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(255,255,255,.75);line-height:1.45}
+    .summary-features li svg{color:var(--gold);flex-shrink:0;margin-top:2px}
+
+    .summary-trust{display:flex;align-items:center;gap:6px;justify-content:center;font-size:10.5px;color:rgba(255,255,255,.5);text-align:center;margin-top:14px}
+
+    /* Submit Button */
+    .submit-btn{width:100%;padding:16px 24px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;color:var(--bordeaux);background:var(--gold);border:none;border-radius:10px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em;transition:all .25s;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px}
+    .submit-btn:hover{background:var(--light-gold);transform:translateY(-1px);box-shadow:0 8px 20px rgba(240,182,107,.3)}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .submit-btn .spinner{display:none;width:16px;height:16px;border:2px solid rgba(66,29,29,.2);border-top-color:var(--bordeaux);border-radius:50%;animation:spin 0.8s linear infinite}
+    .submit-btn.loading .spinner{display:block}
+    .submit-btn.loading .label{opacity:.7}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Payment methods badges */
+    .payment-methods{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;padding:10px;background:rgba(255,255,255,.03);border-radius:8px}
+    .payment-methods span{font-size:10px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
+    .payment-methods .pm{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.02em}
+
+    /* Error message */
+    .error-msg{display:none;padding:12px 14px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;color:#991B1B;font-size:12.5px;margin-bottom:16px}
+    .error-msg.show{display:block}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .buchen-grid{grid-template-columns:1fr;gap:20px}
+      .summary-card{position:static}
+      .page-h{font-size:30px}
+      .form-card{padding:28px 22px}
+    }
+    @media(max-width:480px){
+      .form-row{grid-template-columns:1fr;gap:0}
+      .page{padding:36px 0 60px}
+      .page-h{font-size:26px}
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="topbar-logo">UCB Repetitorium</a>
+    <a href="/" class="topbar-link">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Zurück zur Startseite
+    </a>
+  </div>
+</div>
+
+<div class="page">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Start</a>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Buchung</span>
+    </div>
+
+    <div class="page-head">
+      <div class="page-pre">— Direktbuchung</div>
+      <h1 class="page-h">Sichere dir deinen Platz.</h1>
+      <p class="page-sub">Fülle das Formular aus, anschließend leiten wir dich zur sicheren Zahlung über Stripe weiter. Du erhältst sofort eine Bestätigung mit Rechnung und Details zu deinem Coaching-Gespräch.</p>
+    </div>
+
+    <div class="buchen-grid">
+      <!-- FORM -->
+      <form id="buchungForm" class="form-card">
+        <div id="errorMsg" class="error-msg"></div>
+
+        <div class="form-card-section">
+          <div class="form-card-section-h">Persönliche Daten</div>
+          <div class="form-row">
+            <div class="form-field"><label>Vorname *</label><input type="text" name="vorname" required></div>
+            <div class="form-field"><label>Nachname *</label><input type="text" name="nachname" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label>E-Mail *</label><input type="email" name="email" required></div>
+            <div class="form-field"><label>Telefon *</label><input type="tel" name="telefon" required></div>
+          </div>
+        </div>
+
+        <div class="form-card-section">
+          <div class="form-card-section-h">Studium &amp; Examen</div>
+          <div class="form-row">
+            <div class="form-field"><label>Universität *</label><input type="text" name="uni" required></div>
+            <div class="form-field"><label>Aktueller Stand *</label><select name="stand" required>
+              <option value="">Bitte wählen</option>
+              <option>Studium · 4.–6. Semester</option>
+              <option>Studium · 7.–8. Semester</option>
+              <option>Studium · 9.+ Semester</option>
+              <option>In der Examensvorbereitung (1. Examen)</option>
+              <option>Im Referendariat (2. Examen)</option>
+            </select></div>
+          </div>
+          <div class="form-field">
+            <label>Was möchtest du im Coaching-Gespräch besprechen? (Optional)</label>
+            <textarea name="coaching_themen" placeholder="Themen, Schwerpunkte, Fragen — alles was uns hilft, dich besser kennenzulernen..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-card-section">
+          <div class="form-card-section-h">Rechnungsadresse</div>
+          <div class="form-field"><label>Straße &amp; Hausnummer *</label><input type="text" name="adresse" required></div>
+          <div class="form-row">
+            <div class="form-field"><label>PLZ *</label><input type="text" name="plz" required></div>
+            <div class="form-field"><label>Stadt *</label><input type="text" name="stadt" required></div>
+          </div>
+          <div class="form-field"><label>Land *</label><select name="land" required>
+            <option value="DE" selected>Deutschland</option>
+            <option value="AT">Österreich</option>
+            <option value="CH">Schweiz</option>
+            <option value="other">Anderes Land</option>
+          </select></div>
+        </div>
+
+        <div class="form-card-section">
+          <div class="form-card-section-h">Zustimmungen</div>
+          <div class="form-checkbox">
+            <input type="checkbox" name="agb" required>
+            <span>Ich akzeptiere die <a href="/agb.html" target="_blank">AGB</a> und die <a href="/datenschutz.html" target="_blank">Datenschutzerklärung</a>. *</span>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" name="widerruf" required>
+            <span>Ich habe die <a href="/widerruf.html" target="_blank">Widerrufsbelehrung</a> zur Kenntnis genommen und stimme ausdrücklich zu, dass die Leistung vor Ablauf der Widerrufsfrist beginnen kann. Mir ist bekannt, dass mein Widerrufsrecht mit vollständiger Vertragserfüllung erlischt. *</span>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" name="newsletter">
+            <span>Ich möchte über neue Kursangebote informiert werden (jederzeit widerruflich).</span>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <div class="spinner"></div>
+          <span class="label">Weiter zur sicheren Zahlung →</span>
+        </button>
+
+        <div style="text-align:center;font-size:11px;color:var(--muted);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Sichere Zahlung über Stripe · SSL-verschlüsselt
+        </div>
+      </form>
+
+      <!-- SUMMARY -->
+      <div class="summary-card">
+        <div class="summary-pre">— Deine Buchung</div>
+        <h2 class="summary-h">Klausurentraining<br>B&amp;O Hotel Bad Aibling</h2>
+        <p class="summary-sub">7 Tage intensives Klausurentraining für das Erste Juristische Staatsexamen Bayern.</p>
+
+        <div class="summary-details">
+          <div class="summary-row">
+            <span class="label">Termin</span>
+            <span class="value">August 2026</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Dauer</span>
+            <span class="value">7 Tage</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Standort</span>
+            <span class="value">Bad Aibling</span>
+          </div>
+        </div>
+
+        <div class="summary-divider"></div>
+
+        <div class="summary-price">
+          <div class="summary-price-label">Gesamt</div>
+          <div class="summary-price-amount">1.290&nbsp;€</div>
+        </div>
+        <div class="summary-vat">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
+        </div>
+
+        <ul class="summary-features">
+          <li>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Persönliches Coaching-Gespräch
+          </li>
+          <li>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Auf dich zugeschnittener Lernplan
+          </li>
+          <li>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            7 Tage Klausurentraining + 1:1-Feedback
+          </li>
+          <li>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Mittag- und Abendessen inklusive
+          </li>
+          <li style="color:rgba(255,255,255,.45);font-style:italic">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.3)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Hotel-Paket (546 €) separat über das Hotel
+          </li>
+        </ul>
+
+        <div class="payment-methods">
+          <span>Bezahlung mit</span>
+          <span class="pm">Karte</span>
+          <span class="pm">·</span>
+          <span class="pm">SEPA</span>
+          <span class="pm">·</span>
+          <span class="pm">PayPal</span>
+          <span class="pm">·</span>
+          <span class="pm">Klarna</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const form = document.getElementById('buchungForm');
+const submitBtn = document.getElementById('submitBtn');
+const errorMsg = document.getElementById('errorMsg');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  errorMsg.classList.remove('show');
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+
+  // Collect form data
+  const fd = new FormData(form);
+  const data = Object.fromEntries(fd.entries());
+  data.kurs = 'klausurentraining-bad-aibling-aug-2026';
+  data.amount = 129000; // in cents
+
+  try {
+    // Call backend to create Stripe Checkout Session
+    // BACKEND ENDPOINT: implement at admin.ucb-repetitorium.de/api/create-checkout
+    const res = await fetch('https://admin.ucb-repetitorium.de/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!res.ok) throw new Error('Server-Fehler. Bitte versuche es erneut oder kontaktiere uns direkt.');
+    const { url } = await res.json();
+    if (!url) throw new Error('Es ist ein Problem aufgetreten. Bitte versuche es erneut.');
+    
+    // Redirect to Stripe Checkout
+    window.location.href = url;
+  } catch (err) {
+    errorMsg.textContent = err.message || 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut.';
+    errorMsg.classList.add('show');
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+});
+</script>
+
+</body>
+</html>
