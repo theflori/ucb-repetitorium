@@ -254,7 +254,7 @@
 // === Tab Switching ===
 async function logout() {
   await fetch('/api/auth', { method: 'DELETE' });
-  window.location.href = '/login.html';
+  window.location.href = '/';
 }
 
 document.querySelectorAll('.tab').forEach(tab => {
@@ -281,7 +281,7 @@ async function loadAll() {
     // Show errors visibly
     const errors = [];
     if (bRes.error === 'Unauthorized' || lRes.error === 'Unauthorized') {
-      window.location.href = '/login.html';
+      window.location.href = '/';
       return;
     }
     if (bRes.error) errors.push('Bookings: ' + bRes.error);

@@ -1,32 +1,37 @@
 /**
- * POST /api/auth   -> Login (set cookie)
- * DELETE /api/auth -> Logout
+ * POST /api/auth   -> Login (verifies password, sets cookie)
+ * DELETE /api/auth -> Logout (clears cookie)
+ *
+ * Required env: ADMIN_PASSWORD, AUTH_SECRET
  */
 
 export async function onRequestPost({ request, env }) {
   try {
-    const { password } = await request.json();
-    
     if (!env.ADMIN_PASSWORD) {
-      return json({ error: 'ADMIN_PASSWORD nicht gesetzt' }, 500);
+      return jsonResponse({ error: 'Server-Fehler: ADMIN_PASSWORD nicht gesetzt' }, 500);
     }
-    
-    if (!password || password !== env.ADMIN_PASSWORD) {
-      return json({ error: 'Falsches Passwort' }, 401);
+    if (!env.AUTH_SECRET) {
+      return jsonResponse({ error: 'Server-Fehler: AUTH_SECRET nicht gesetzt' }, 500);
     }
 
-    const secret = env.AUTH_SECRET || env.ADMIN_PASSWORD; // fallback if AUTH_SECRET missing
-    const token = await createToken(secret);
-    
+    const body = await request.json();
+    const password = body && body.password;
+
+    if (!password || password !== env.ADMIN_PASSWORD) {
+      return jsonResponse({ error: 'Falsches Passwort' }, 401);
+    }
+
+    const token = await createToken(env.AUTH_SECRET);
+
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Set-Cookie': `ucb_admin=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=86400`,
+        'Set-Cookie': `ucb_auth=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=86400`,
       },
     });
   } catch (err) {
-    return json({ error: err.message }, 500);
+    return jsonResponse({ error: 'Server-Fehler: ' + err.message }, 500);
   }
 }
 
@@ -35,32 +40,38 @@ export async function onRequestDelete() {
     status: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Set-Cookie': 'ucb_admin=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0',
+      'Set-Cookie': 'ucb_auth=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0',
     },
   });
 }
 
-function json(body, status = 200) {
+function jsonResponse(body, status) {
   return new Response(JSON.stringify(body), {
-    status,
+    status: status || 200,
     headers: { 'Content-Type': 'application/json' },
   });
 }
 
 async function createToken(secret) {
-  const ts = Math.floor(Date.now() / 1000).toString();
-  const sig = await hmacSha256(ts, secret);
-  return `${ts}.${sig}`;
+  const timestamp = Math.floor(Date.now() / 1000).toString();
+  const signature = await hmacSha256(timestamp, secret);
+  return timestamp + '.' + signature;
 }
 
 async function hmacSha256(message, secret) {
+  const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
     'raw',
-    new TextEncoder().encode(secret),
+    encoder.encode(secret),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign']
   );
-  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
-  return Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, '0')).join('');
+  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(message));
+  const bytes = new Uint8Array(signature);
+  let hex = '';
+  for (let i = 0; i < bytes.length; i++) {
+    hex += bytes[i].toString(16).padStart(2, '0');
+  }
+  return hex;
 }
