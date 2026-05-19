@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UCB Admin · Login</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @font-face{
+      font-family:'Pilat Wide';
+      src:url('/assets/fonts/Pilat_Wide_Bold.otf') format('opentype');
+      font-weight:700;
+      font-style:normal;
+      font-display:swap;
+    }
+    :root {
+      --bordeaux:#421D1D;
+      --gold:#F0B66B;
+      --deep-gold:#B8853E;
+      --light-gold:#F5D6A8;
+      --shell:#F8F4EE;
+      --near-black:#1A1A1A;
+      --muted:#7A6E64;
+      --border:#E5DDD0;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Manrope',sans-serif;background:var(--near-black);color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at top right,rgba(66,29,29,.4),transparent 60%),radial-gradient(ellipse at bottom left,rgba(240,182,107,.06),transparent 70%);pointer-events:none;z-index:0}
+    
+    .brand-mark{position:relative;z-index:2;margin-bottom:28px;text-align:center}
+    .brand-mark img{height:42px;width:auto;display:block;margin:0 auto 10px}
+    .brand-mark-text{font-family:'Pilat Wide','Manrope',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+    
+    .card{background:#FFF;color:var(--near-black);padding:44px 40px;border-radius:16px;max-width:420px;width:100%;box-shadow:0 24px 48px rgba(0,0,0,.3);position:relative;z-index:2}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--light-gold),var(--gold));border-radius:16px 16px 0 0}
+    
+    .pre{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--deep-gold);margin-bottom:6px}
+    h1{font-family:'Pilat Wide','Manrope',sans-serif;font-size:26px;font-weight:700;color:var(--near-black);letter-spacing:.005em;margin-bottom:10px;text-transform:uppercase;line-height:1.1}
+    .sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.55}
+    
+    .field{margin-bottom:16px}
+    label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--near-black);margin-bottom:6px}
+    input{width:100%;padding:12px 14px;font-family:inherit;font-size:14px;border:1px solid var(--border);border-radius:8px;outline:none;transition:all .2s;color:var(--near-black)}
+    input:focus{border-color:var(--bordeaux);box-shadow:0 0 0 3px rgba(66,29,29,.08)}
+    
+    .btn{width:100%;padding:13px;background:var(--bordeaux);color:var(--gold);border:none;border-radius:8px;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:all .25s;margin-top:8px}
+    .btn:hover{background:var(--near-black)}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    
+    .err{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;padding:10px 12px;border-radius:8px;font-size:12.5px;margin-bottom:14px;display:none}
+    .err.show{display:block}
+    
+    .footer-note{margin-top:20px;text-align:center;font-size:11px;color:rgba(255,255,255,.4);position:relative;z-index:2}
+  </style>
+</head>
+<body>
+
+<div class="brand-mark">
+  <img src="/assets/logos/logo-gold.png" alt="UCB Repetitorium">
+  <div class="brand-mark-text">Admin-Bereich</div>
+</div>
+
+<div class="card">
+  <div class="pre">— Geschützter Bereich</div>
+  <h1>Admin-Login</h1>
+  <p class="sub">Bitte gib das Admin-Passwort ein, um Buchungen und Anfragen zu verwalten.</p>
+  
+  <div id="err" class="err"></div>
+  
+  <form id="loginForm">
+    <div class="field">
+      <label>Passwort</label>
+      <input type="password" id="password" required autofocus autocomplete="current-password">
+    </div>
+    <button class="btn" type="submit" id="submit">Anmelden →</button>
+  </form>
+</div>
+
+<p class="footer-note">UCB Repetitorium · Internal Use Only</p>
+
+<script>
+const form = document.getElementById('loginForm');
+const err = document.getElementById('err');
+const submit = document.getElementById('submit');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  err.classList.remove('show');
+  submit.disabled = true;
+  submit.textContent = 'Prüfe...';
+
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: document.getElementById('password').value }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Falsches Passwort');
+    window.location.href = '/dashboard.html';
+  } catch (e) {
+    err.textContent = e.message;
+    err.classList.add('show');
+    submit.disabled = false;
+    submit.textContent = 'Anmelden →';
+  }
+});
+</script>
+
+</body>
+</html>

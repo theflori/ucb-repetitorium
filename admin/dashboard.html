@@ -7,6 +7,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    @font-face{
+      font-family:'Pilat Wide';
+      src:url('/assets/fonts/Pilat_Wide_Bold.otf') format('opentype');
+      font-weight:700;
+      font-style:normal;
+      font-display:swap;
+    }
     :root {
       --bordeaux:#421D1D;
       --gold:#F0B66B;
@@ -23,11 +30,14 @@
     body{font-family:'Manrope',sans-serif;background:var(--shell);color:var(--near-black);font-size:14px}
     
     /* Topbar */
-    .topbar{background:var(--near-black);color:#fff;padding:14px 0;border-bottom:3px solid var(--gold)}
+    .topbar{background:var(--near-black);color:#fff;padding:12px 0;border-bottom:3px solid var(--gold)}
     .topbar-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
-    .brand{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand img{height:32px;width:auto;display:block}
+    .brand-text{font-family:'Pilat Wide','Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;line-height:1}
+    .brand-subtext{font-family:'Manrope',sans-serif;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
     .topbar-right{display:flex;align-items:center;gap:14px;font-size:12px;color:rgba(255,255,255,.7)}
-    .logout-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:all .2s}
+    .logout-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
     .logout-btn:hover{background:rgba(255,255,255,.1);color:#fff}
     
     /* Tabs */
@@ -90,6 +100,49 @@
     
     .empty{padding:50px 20px;text-align:center;color:var(--muted);font-size:13px}
     
+    /* Clickable rows */
+    .clickable-row{cursor:pointer;transition:background .15s}
+    .clickable-row:hover td{background:#FAFAF8}
+    
+    /* Detail Modal */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,26,.75);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+    .modal-overlay.show{display:flex}
+    .modal{background:#fff;border-radius:14px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.4);position:relative;animation:modalIn .3s cubic-bezier(.2,.8,.2,1)}
+    @keyframes modalIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#F5D6A8,var(--gold));border-radius:14px 14px 0 0}
+    
+    .modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+    .modal-title-block{flex:1;min-width:0}
+    .modal-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);margin-bottom:4px}
+    .modal-title{font-family:'Pilat Wide','Manrope',sans-serif;font-size:22px;font-weight:700;color:var(--near-black);text-transform:uppercase;letter-spacing:.005em;line-height:1.15;margin-bottom:6px}
+    .modal-sub{font-size:12px;color:var(--muted)}
+    .modal-close{background:transparent;border:1px solid var(--border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--near-black);transition:all .2s;flex-shrink:0}
+    .modal-close:hover{background:var(--shell);border-color:var(--bordeaux)}
+    
+    .modal-body{padding:24px 32px 28px}
+    
+    .modal-section{margin-bottom:24px}
+    .modal-section:last-child{margin-bottom:0}
+    .modal-section-h{font-family:'Manrope',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--deep-gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .modal-section-h::before{content:'';width:16px;height:1px;background:var(--gold)}
+    
+    .modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .modal-field{background:var(--shell);border-radius:8px;padding:10px 14px}
+    .modal-field.full{grid-column:1 / -1}
+    .modal-field-label{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+    .modal-field-value{font-size:13px;color:var(--near-black);font-weight:500;word-break:break-word}
+    .modal-field-value a{color:var(--bordeaux);text-decoration:none}
+    .modal-field-value a:hover{text-decoration:underline}
+    .modal-field-value.muted{color:var(--muted);font-style:italic}
+    
+    .modal-message{background:var(--shell);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;font-size:13.5px;color:var(--near-black);line-height:1.6;white-space:pre-wrap}
+    
+    .modal-actions{padding:18px 32px;background:var(--shell);border-top:1px solid var(--border);border-radius:0 0 14px 14px;display:flex;gap:10px;flex-wrap:wrap}
+    .modal-actions .btn-primary{background:var(--bordeaux);color:var(--gold);border:none;padding:10px 18px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+    .modal-actions .btn-primary:hover{background:var(--near-black)}
+    .modal-actions .btn-secondary{background:transparent;color:var(--near-black);border:1px solid var(--border);padding:10px 18px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+    .modal-actions .btn-secondary:hover{background:var(--shell);border-color:var(--bordeaux)}
+    
     @media(max-width:900px){
       .stats{grid-template-columns:repeat(2,1fr)}
       .table-search{width:160px}
@@ -101,9 +154,15 @@
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="brand">UCB Admin</div>
+    <a href="/dashboard.html" class="brand">
+      <img src="/assets/logos/logo-gold.png" alt="UCB">
+      <div>
+        <div class="brand-text">UCB Repetitorium</div>
+        <div class="brand-subtext">Admin-Bereich</div>
+      </div>
+    </a>
     <div class="topbar-right">
-      <a href="/" class="logout-btn" style="text-decoration:none;display:inline-block">Zur Startseite</a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </div>
 </div>
@@ -173,8 +232,31 @@
   </div>
 </div>
 
+<!-- Detail Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title-block">
+        <div class="modal-pre" id="modalPre">— Details</div>
+        <div class="modal-title" id="modalTitle">Name</div>
+        <div class="modal-sub" id="modalSub">Meta</div>
+      </div>
+      <button class="modal-close" onclick="closeDetail()" aria-label="Schließen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
 <script>
 // === Tab Switching ===
+async function logout() {
+  await fetch('/api/auth', { method: 'DELETE' });
+  window.location.href = '/login.html';
+}
+
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const target = tab.dataset.tab;
@@ -198,6 +280,10 @@ async function loadAll() {
     
     // Show errors visibly
     const errors = [];
+    if (bRes.error === 'Unauthorized' || lRes.error === 'Unauthorized') {
+      window.location.href = '/login.html';
+      return;
+    }
     if (bRes.error) errors.push('Bookings: ' + bRes.error);
     if (lRes.error) errors.push('Leads: ' + lRes.error);
     
@@ -261,17 +347,17 @@ function renderBookings(filter = '') {
       </thead>
       <tbody>
         ${filtered.map(b => `
-          <tr>
+          <tr class="clickable-row" data-type="booking" data-id="${b.id}">
             <td>
               <div class="name">${escapeHtml(b.Vorname)} ${escapeHtml(b.Nachname)}</div>
-              <a class="email" href="mailto:${b.Email}">${escapeHtml(b.Email)}</a>
+              <a class="email" href="mailto:${b.Email}" onclick="event.stopPropagation()">${escapeHtml(b.Email)}</a>
             </td>
             <td><span class="status status-${b.Status}">${statusLabel(b.Status)}</span></td>
             <td>${formatDate(b.Created_At)}</td>
             <td>${escapeHtml(b.Uni || '—')}</td>
             <td><div class="meta">${escapeHtml(b.Stand || '—')}</div></td>
             <td>
-              <div class="actions">
+              <div class="actions" onclick="event.stopPropagation()">
                 ${b.Invoice_Url ? `<a class="action-btn" href="${b.Invoice_Url}" target="_blank">Rechnung</a>` : ''}
                 <a class="action-btn" href="mailto:${b.Email}">Mailen</a>
               </div>
@@ -281,6 +367,13 @@ function renderBookings(filter = '') {
       </tbody>
     </table>
   `;
+  
+  // Click handler
+  container.querySelectorAll('.clickable-row').forEach(row => {
+    row.addEventListener('click', () => {
+      showDetail(row.dataset.type, row.dataset.id);
+    });
+  });
 }
 
 function renderLeads(filter = '') {
@@ -305,10 +398,10 @@ function renderLeads(filter = '') {
       </thead>
       <tbody>
         ${filtered.map(l => `
-          <tr>
+          <tr class="clickable-row" data-type="lead" data-id="${l.id}">
             <td>
               <div class="name">${escapeHtml(l.Vorname)} ${escapeHtml(l.Nachname)}</div>
-              <a class="email" href="mailto:${l.Email}">${escapeHtml(l.Email)}</a>
+              <a class="email" href="mailto:${l.Email}" onclick="event.stopPropagation()">${escapeHtml(l.Email)}</a>
               ${l.Nachricht ? `<div class="meta">"${escapeHtml(l.Nachricht.substring(0,80))}${l.Nachricht.length > 80 ? '...' : ''}"</div>` : ''}
             </td>
             <td><span class="status status-${l.Status}">${statusLabel(l.Status)}</span></td>
@@ -316,7 +409,7 @@ function renderLeads(filter = '') {
             <td>${examenLabel[l.Examen] || l.Examen}</td>
             <td><div class="meta">${escapeHtml(l.Stand || '—')}</div></td>
             <td>
-              <div class="actions">
+              <div class="actions" onclick="event.stopPropagation()">
                 <a class="action-btn" href="mailto:${l.Email}?subject=Deine%20Anfrage%20zum%20UCB%20Repetitorium">Antworten</a>
                 <button class="action-btn" onclick="markContacted('${l.id}')">Kontaktiert</button>
               </div>
@@ -326,6 +419,13 @@ function renderLeads(filter = '') {
       </tbody>
     </table>
   `;
+  
+  // Click handler
+  container.querySelectorAll('.clickable-row').forEach(row => {
+    row.addEventListener('click', () => {
+      showDetail(row.dataset.type, row.dataset.id);
+    });
+  });
 }
 
 async function markContacted(leadId) {
@@ -356,7 +456,193 @@ function statusLabel(s) {
 document.getElementById('bookingSearch').addEventListener('input', e => renderBookings(e.target.value));
 document.getElementById('leadSearch').addEventListener('input', e => renderLeads(e.target.value));
 
-// Auto-refresh every 60s
+// === Detail Modal ===
+function showDetail(type, id) {
+  const item = type === 'booking' 
+    ? bookings.find(b => b.id === id)
+    : leads.find(l => l.id === id);
+  if (!item) return;
+  
+  const examenLabel = { 
+    '1_staatsexamen': 'Erstes Juristisches Staatsexamen', 
+    '2_staatsexamen': 'Zweites Juristisches Staatsexamen' 
+  };
+  
+  document.getElementById('modalPre').textContent = type === 'booking' ? '— Buchung' : '— Anfrage';
+  document.getElementById('modalTitle').textContent = `${item.Vorname || ''} ${item.Nachname || ''}`.trim() || '—';
+  
+  const status = statusLabel(item.Status);
+  const subBits = [
+    `<span class="status status-${item.Status}">${status}</span>`,
+    `ID: ${(item.id || '').substring(0, 10).toUpperCase()}`,
+    formatDate(item.Created_At),
+  ];
+  document.getElementById('modalSub').innerHTML = subBits.join(' · ');
+  
+  let bodyHtml = '';
+  
+  if (type === 'booking') {
+    // === BOOKING DETAILS ===
+    bodyHtml = `
+      <div class="modal-section">
+        <div class="modal-section-h">Kontakt</div>
+        <div class="modal-grid">
+          ${field('Vorname', item.Vorname)}
+          ${field('Nachname', item.Nachname)}
+          ${field('E-Mail', item.Email, 'email')}
+          ${field('Telefon', item.Telefon, 'phone')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-h">Studium &amp; Examen</div>
+        <div class="modal-grid">
+          ${field('Universität', item.Uni)}
+          ${field('Aktueller Stand', item.Stand)}
+          ${item.Kurs ? field('Kurs', item.Kurs, null, true) : ''}
+        </div>
+      </div>
+
+      ${item.Coaching_Themen ? `
+        <div class="modal-section">
+          <div class="modal-section-h">Coaching-Themen</div>
+          <div class="modal-message">${escapeHtml(item.Coaching_Themen)}</div>
+        </div>
+      ` : ''}
+
+      <div class="modal-section">
+        <div class="modal-section-h">Rechnungsadresse</div>
+        <div class="modal-grid">
+          ${field('Adresse', item.Adresse, null, true)}
+          ${field('PLZ', item.PLZ)}
+          ${field('Stadt', item.Stadt)}
+          ${field('Land', item.Land)}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-h">Zahlung</div>
+        <div class="modal-grid">
+          ${field('Betrag', item.Amount_Paid ? formatCurrency(item.Amount_Paid) : '1.290,00 €')}
+          ${field('Newsletter', item.Newsletter ? 'Ja' : 'Nein')}
+          ${field('Bezahlt am', formatDate(item.Paid_At))}
+          ${item.Stripe_Payment_Intent ? field('Stripe Payment', item.Stripe_Payment_Intent.substring(0, 24) + '…') : ''}
+        </div>
+      </div>
+    `;
+  } else {
+    // === LEAD DETAILS ===
+    bodyHtml = `
+      <div class="modal-section">
+        <div class="modal-section-h">Kontakt</div>
+        <div class="modal-grid">
+          ${field('Vorname', item.Vorname)}
+          ${field('Nachname', item.Nachname)}
+          ${field('E-Mail', item.Email, 'email')}
+          ${field('Telefon', item.Telefon, 'phone')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-h">Studium &amp; Examen</div>
+        <div class="modal-grid">
+          ${field('Examen', examenLabel[item.Examen] || item.Examen, null, true)}
+          ${field('Universität', item.Uni)}
+          ${field('Aktueller Stand', item.Stand)}
+        </div>
+      </div>
+
+      ${item.Nachricht ? `
+        <div class="modal-section">
+          <div class="modal-section-h">Nachricht</div>
+          <div class="modal-message">${escapeHtml(item.Nachricht)}</div>
+        </div>
+      ` : ''}
+
+      ${item.Internal_Notes ? `
+        <div class="modal-section">
+          <div class="modal-section-h">Interne Notizen</div>
+          <div class="modal-message">${escapeHtml(item.Internal_Notes)}</div>
+        </div>
+      ` : ''}
+
+      <div class="modal-section">
+        <div class="modal-section-h">Status</div>
+        <div class="modal-grid">
+          ${field('Anfrage eingegangen', formatDate(item.Created_At))}
+          ${item.Contacted_At ? field('Kontaktiert', formatDate(item.Contacted_At)) : field('Kontaktiert', 'Noch nicht')}
+        </div>
+      </div>
+    `;
+  }
+  
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  
+  // Action buttons
+  let actions = `
+    <a class="btn-primary" href="mailto:${item.Email}?subject=${encodeURIComponent('Deine ' + (type === 'booking' ? 'Buchung' : 'Anfrage') + ' beim UCB Repetitorium')}">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      E-Mail schreiben
+    </a>
+  `;
+  if (item.Telefon) {
+    actions += `<a class="btn-secondary" href="tel:${item.Telefon}">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Anrufen
+    </a>`;
+  }
+  if (type === 'booking' && item.Invoice_Url) {
+    actions += `<a class="btn-secondary" href="${item.Invoice_Url}" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Rechnung
+    </a>`;
+  }
+  if (type === 'lead' && item.Status === 'new') {
+    actions += `<button class="btn-secondary" onclick="markContacted('${item.id}'); closeDetail();">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Als kontaktiert markieren
+    </button>`;
+  }
+  
+  document.getElementById('modalActions').innerHTML = actions;
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click or ESC
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'modalOverlay') closeDetail();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+function field(label, value, type, fullWidth) {
+  if (!value || value === '—' || value === '') {
+    return `<div class="modal-field${fullWidth ? ' full' : ''}">
+      <div class="modal-field-label">${escapeHtml(label)}</div>
+      <div class="modal-field-value muted">Nicht angegeben</div>
+    </div>`;
+  }
+  let display = escapeHtml(String(value));
+  if (type === 'email') display = `<a href="mailto:${value}">${display}</a>`;
+  if (type === 'phone') display = `<a href="tel:${value}">${display}</a>`;
+  return `<div class="modal-field${fullWidth ? ' full' : ''}">
+    <div class="modal-field-label">${escapeHtml(label)}</div>
+    <div class="modal-field-value">${display}</div>
+  </div>`;
+}
+
+function formatCurrency(amount) {
+  return Number(amount).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+}
+
+// === Auto-refresh every 60s ===
 loadAll();
 setInterval(loadAll, 60000);
 </script>
