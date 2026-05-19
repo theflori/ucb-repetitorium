@@ -103,7 +103,8 @@
   <div class="topbar-inner">
     <div class="brand">UCB Admin</div>
     <div class="topbar-right">
-      <a href="/" class="logout-btn" style="text-decoration:none;display:inline-block">Zur Startseite</a>
+      <span>Eingeloggt</span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
   </div>
 </div>
@@ -185,6 +186,12 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+// === Logout ===
+async function logout() {
+  await fetch('/api/auth', { method: 'DELETE' });
+  window.location.href = '/';
+}
+
 // === Load Data ===
 let bookings = [];
 let leads = [];
@@ -202,6 +209,7 @@ async function loadAll() {
     renderLeads();
   } catch (e) {
     console.error('Load error:', e);
+    if (e.message?.includes('401')) window.location.href = '/';
   }
 }
 

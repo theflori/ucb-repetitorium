@@ -324,7 +324,7 @@ form.addEventListener('submit', async function(e) {
   try {
     // Call backend to create Stripe Checkout Session
     // BACKEND ENDPOINT: implement at admin.ucb-repetitorium.de/api/create-checkout
-    const res = await fetch('https://ucb-admin.pages.dev/api/create-checkout', {
+    const res = await fetch('https://admin.ucb-repetitorium.de/api/create-checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
