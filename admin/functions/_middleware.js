@@ -13,6 +13,7 @@ export async function onRequest(context) {
   const publicPaths = [
     '/',
     '/index.html',
+    '/login.html',            // ← MUSS hier sein, sonst Redirect-Loop
     '/api/auth',              // login endpoint
     '/api/create-checkout',   // public site calls this
     '/api/stripe-webhook',    // Stripe calls this
