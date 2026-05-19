@@ -7,7 +7,14 @@
   <title>Widerrufsbelehrung · UCB Repetitorium</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    :root{--bordeaux:#421D1D;--gold:#F0B66B;--deep-gold:#B8853E;--shell:#F8F4EE;--near-black:#1A1A1A;--muted:#7A6E64;--border:#E5DDD0}
+    @font-face{
+      font-family:'Pilat Wide';
+      src:url('/assets/fonts/Pilat_Wide_Bold.otf') format('opentype');
+      font-weight:700;
+      font-style:normal;
+      font-display:swap;
+    }
+        :root{--bordeaux:#421D1D;--gold:#F0B66B;--deep-gold:#B8853E;--shell:#F8F4EE;--near-black:#1A1A1A;--muted:#7A6E64;--border:#E5DDD0}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Manrope',sans-serif;font-size:14px;color:var(--near-black);background:#fff;line-height:1.65}
     a{color:var(--bordeaux);text-decoration:underline}
@@ -19,9 +26,9 @@
     .breadcrumb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:24px}
     .breadcrumb a{color:var(--muted);text-decoration:none}
     .pre{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--deep-gold);margin-bottom:6px}
-    h1{font-size:34px;font-weight:800;letter-spacing:-.015em;line-height:1.15;margin-bottom:8px}
+    h1{font-family:'Pilat Wide','Manrope',sans-serif;font-size:36px;font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.15;margin-bottom:8px}
     .meta{font-size:12px;color:var(--muted);margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
-    h2{font-size:18px;font-weight:800;margin:32px 0 12px}
+    h2{font-family:'Pilat Wide','Manrope',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.005em;margin:32px 0 12px}
     p{margin-bottom:14px;line-height:1.7}
     strong{font-weight:700}
     .box{background:var(--shell);border-left:3px solid var(--gold);padding:18px 22px;margin:20px 0;border-radius:0 8px 8px 0}

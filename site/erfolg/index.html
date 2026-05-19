@@ -7,7 +7,14 @@
   <title>Buchung erfolgreich · UCB Repetitorium</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
   <style>
-    :root{
+    @font-face{
+      font-family:'Pilat Wide';
+      src:url('/assets/fonts/Pilat_Wide_Bold.otf') format('opentype');
+      font-weight:700;
+      font-style:normal;
+      font-display:swap;
+    }
+        :root{
       --bordeaux:#421D1D;
       --gold:#F0B66B;
       --deep-gold:#B8853E;
@@ -30,7 +37,7 @@
     @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
 
     .success-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--deep-gold);margin-bottom:8px}
-    .success-h{font-family:'Manrope',sans-serif;font-size:32px;font-weight:800;color:var(--near-black);letter-spacing:-.015em;line-height:1.1;margin-bottom:14px}
+    .success-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:32px;font-weight:700;color:var(--near-black);text-transform:uppercase;letter-spacing:.005em;line-height:1.1;margin-bottom:14px}
     .success-sub{font-size:14.5px;color:var(--muted);line-height:1.65;margin-bottom:32px}
 
     .next-steps{background:var(--shell);border:1px solid var(--border);border-radius:12px;padding:24px 24px 22px;text-align:left;margin-bottom:28px}

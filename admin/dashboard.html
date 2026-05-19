@@ -254,7 +254,7 @@
 // === Tab Switching ===
 async function logout() {
   await fetch('/api/auth', { method: 'DELETE' });
-  window.location.href = '/';
+  window.location.href = '/login.html';
 }
 
 document.querySelectorAll('.tab').forEach(tab => {
@@ -281,7 +281,7 @@ async function loadAll() {
     // Show errors visibly
     const errors = [];
     if (bRes.error === 'Unauthorized' || lRes.error === 'Unauthorized') {
-      window.location.href = '/';
+      window.location.href = '/login.html';
       return;
     }
     if (bRes.error) errors.push('Bookings: ' + bRes.error);
@@ -343,7 +343,7 @@ function renderBookings(filter = '') {
   container.innerHTML = `
     <table>
       <thead>
-        <tr><th>Name</th><th>Status</th><th>Datum</th><th>Uni</th><th>Stand</th><th></th></tr>
+        <tr><th>Name</th><th>Status</th><th>Datum</th><th>Uni</th><th></th></tr>
       </thead>
       <tbody>
         ${filtered.map(b => `
@@ -355,7 +355,6 @@ function renderBookings(filter = '') {
             <td><span class="status status-${b.Status}">${statusLabel(b.Status)}</span></td>
             <td>${formatDate(b.Created_At)}</td>
             <td>${escapeHtml(b.Uni || '—')}</td>
-            <td><div class="meta">${escapeHtml(b.Stand || '—')}</div></td>
             <td>
               <div class="actions" onclick="event.stopPropagation()">
                 ${b.Invoice_Url ? `<a class="action-btn" href="${b.Invoice_Url}" target="_blank">Rechnung</a>` : ''}
@@ -394,7 +393,7 @@ function renderLeads(filter = '') {
   container.innerHTML = `
     <table>
       <thead>
-        <tr><th>Name</th><th>Status</th><th>Datum</th><th>Examen</th><th>Stand</th><th></th></tr>
+        <tr><th>Name</th><th>Status</th><th>Datum</th><th>Examen</th><th></th></tr>
       </thead>
       <tbody>
         ${filtered.map(l => `
@@ -407,7 +406,6 @@ function renderLeads(filter = '') {
             <td><span class="status status-${l.Status}">${statusLabel(l.Status)}</span></td>
             <td>${formatDate(l.Created_At)}</td>
             <td>${examenLabel[l.Examen] || l.Examen}</td>
-            <td><div class="meta">${escapeHtml(l.Stand || '—')}</div></td>
             <td>
               <div class="actions" onclick="event.stopPropagation()">
                 <a class="action-btn" href="mailto:${l.Email}?subject=Deine%20Anfrage%20zum%20UCB%20Repetitorium">Antworten</a>
@@ -497,18 +495,10 @@ function showDetail(type, id) {
       <div class="modal-section">
         <div class="modal-section-h">Studium &amp; Examen</div>
         <div class="modal-grid">
-          ${field('Universität', item.Uni)}
-          ${field('Aktueller Stand', item.Stand)}
+          ${field('Universität', item.Uni, null, true)}
           ${item.Kurs ? field('Kurs', item.Kurs, null, true) : ''}
         </div>
       </div>
-
-      ${item.Coaching_Themen ? `
-        <div class="modal-section">
-          <div class="modal-section-h">Coaching-Themen</div>
-          <div class="modal-message">${escapeHtml(item.Coaching_Themen)}</div>
-        </div>
-      ` : ''}
 
       <div class="modal-section">
         <div class="modal-section-h">Rechnungsadresse</div>
@@ -547,8 +537,7 @@ function showDetail(type, id) {
         <div class="modal-section-h">Studium &amp; Examen</div>
         <div class="modal-grid">
           ${field('Examen', examenLabel[item.Examen] || item.Examen, null, true)}
-          ${field('Universität', item.Uni)}
-          ${field('Aktueller Stand', item.Stand)}
+          ${field('Universität', item.Uni, null, true)}
         </div>
       </div>
 

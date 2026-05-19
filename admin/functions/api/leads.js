@@ -1,48 +1,37 @@
 /**
  * GET /api/leads  -> list all leads
- * Protected by middleware.
  */
 
 export async function onRequestGet({ env }) {
-  if (!env.AIRTABLE_API_KEY) {
-    return errorResponse('AIRTABLE_API_KEY environment variable not set', 500);
-  }
-  if (!env.AIRTABLE_BASE_ID) {
-    return errorResponse('AIRTABLE_BASE_ID environment variable not set', 500);
-  }
-  if (!env.AIRTABLE_LEADS_TABLE) {
-    return errorResponse('AIRTABLE_LEADS_TABLE environment variable not set', 500);
-  }
-
   try {
-    const records = await fetchAllRecords(env);
-    return new Response(JSON.stringify({ records: records, count: records.length }), {
+    if (!env.AIRTABLE_API_KEY) return jsonErr('AIRTABLE_API_KEY missing', 500);
+    if (!env.AIRTABLE_BASE_ID) return jsonErr('AIRTABLE_BASE_ID missing', 500);
+    if (!env.AIRTABLE_LEADS_TABLE) return jsonErr('AIRTABLE_LEADS_TABLE missing', 500);
+
+    const records = await fetchAllRecords(env.AIRTABLE_LEADS_TABLE, env);
+    return new Response(JSON.stringify({ records, count: records.length }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
-    return errorResponse('Airtable error: ' + err.message, 500);
+    return jsonErr(`Airtable: ${err.message}`, 500);
   }
 }
 
-function errorResponse(message, status) {
+function jsonErr(message, status) {
   return new Response(JSON.stringify({ error: message }), {
-    status: status,
+    status,
     headers: { 'Content-Type': 'application/json' },
   });
 }
 
-async function fetchAllRecords(env) {
-  const baseId = env.AIRTABLE_BASE_ID;
-  const tableName = env.AIRTABLE_LEADS_TABLE;
-  const apiKey = env.AIRTABLE_API_KEY;
-
-  const allRecords = [];
+async function fetchAllRecords(tableName, env) {
+  const all = [];
   let offset = null;
   let useSort = true;
 
   do {
-    const url = new URL('https://api.airtable.com/v0/' + baseId + '/' + encodeURIComponent(tableName));
+    const url = new URL(`https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${encodeURIComponent(tableName)}`);
     url.searchParams.set('pageSize', '100');
     if (useSort) {
       url.searchParams.set('sort[0][field]', 'Created_At');
@@ -50,35 +39,25 @@ async function fetchAllRecords(env) {
     }
     if (offset) url.searchParams.set('offset', offset);
 
-    const response = await fetch(url.toString(), {
-      headers: { 'Authorization': 'Bearer ' + apiKey },
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `Bearer ${env.AIRTABLE_API_KEY}` },
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      if (useSort && errorText.indexOf('Created_At') >= 0) {
+    if (!res.ok) {
+      const errText = await res.text();
+      if (useSort && (errText.includes('Created_At') || errText.includes('UNKNOWN_FIELD_NAME') || errText.includes('INVALID_REQUEST'))) {
         useSort = false;
         offset = null;
-        allRecords.length = 0;
+        all.length = 0;
         continue;
       }
-      throw new Error('HTTP ' + response.status + ': ' + errorText);
+      throw new Error(`HTTP ${res.status}: ${errText}`);
     }
 
-    const data = await response.json();
-    if (data.records) {
-      for (const record of data.records) {
-        const entry = { id: record.id };
-        if (record.fields) {
-          for (const key in record.fields) {
-            entry[key] = record.fields[key];
-          }
-        }
-        allRecords.push(entry);
-      }
-    }
-    offset = data.offset || null;
+    const json = await res.json();
+    all.push(...json.records.map(r => ({ id: r.id, ...r.fields })));
+    offset = json.offset;
   } while (offset);
 
-  return allRecords;
+  return all;
 }

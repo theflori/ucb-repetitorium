@@ -28,7 +28,7 @@ export async function onRequestPost({ request, env }) {
     const data = await request.json();
 
     // Validate
-    const required = ['examen', 'vorname', 'nachname', 'email', 'uni', 'stand'];
+    const required = ['examen', 'vorname', 'nachname', 'email', 'uni'];
     for (const f of required) {
       if (!data[f] || String(data[f]).trim() === '') {
         return json({ error: `Pflichtfeld fehlt: ${f}` }, 400);
@@ -95,7 +95,6 @@ async function createLead(data, env) {
           Email: data.email,
           Telefon: data.telefon || '',
           Uni: data.uni,
-          Stand: data.stand,
           Nachricht: data.nachricht || '',
           Created_At: new Date().toISOString(),
         },
@@ -136,7 +135,6 @@ async function sendInternalLeadNotification(data, examenLabel, leadId, env) {
     EMAIL: data.email,
     PHONE: data.telefon || '',
     UNI: data.uni,
-    STAND: data.stand,
     EXAMEN: examenLabel,
     MESSAGE: data.nachricht || '',
     LEAD_ID: leadId.substring(0, 8).toUpperCase(),

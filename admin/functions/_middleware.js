@@ -1,10 +1,7 @@
 /**
- * Cloudflare Pages Middleware
- * 
- * STRATEGY: Only check auth for explicitly protected paths.
- * Everything else passes through (login page, API endpoints, assets, etc.)
- * 
- * This avoids redirect loops because the login page (/) is NOT protected.
+ * Cloudflare Pages Functions middleware
+ * Protects /dashboard.html and admin read endpoints.
+ * Allows public endpoints (Stripe checkout, lead submit, webhook) without auth.
  */
 
 export async function onRequest(context) {
@@ -12,36 +9,42 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // ONLY these paths require authentication
-  const protectedPaths = [
-    '/dashboard.html',
-    '/api/bookings',
-    '/api/leads',
+  // Always-public paths (no auth required)
+  const publicPaths = [
+    '/',
+    '/index.html',
+    '/login.html',            // ← MUSS hier sein, sonst Redirect-Loop
+    '/api/auth',              // login endpoint
+    '/api/create-checkout',   // public site calls this
+    '/api/stripe-webhook',    // Stripe calls this
+    '/api/submit-lead',       // public site calls this
+    '/api/debug',             // debug always open (for troubleshooting)
   ];
   
-  // Match exact path OR path starting with `/api/leads/`
-  const requiresAuth = 
-    protectedPaths.includes(path) ||
-    path.startsWith('/api/leads/');
-
-  if (!requiresAuth) {
+  const isPublic = 
+    publicPaths.includes(path) || 
+    path.startsWith('/favicon') || 
+    path.startsWith('/assets') ||
+    path.startsWith('/_emails');
+  
+  if (isPublic) {
     return next();
   }
 
-  // Check the auth cookie
-  const cookieHeader = request.headers.get('Cookie') || '';
-  const cookieMatch = cookieHeader.match(/ucb_auth=([^;]+)/);
-  const token = cookieMatch ? cookieMatch[1] : null;
-
-  const authorized = await verifyToken(token, env.AUTH_SECRET);
-
-  if (!authorized) {
-    // HTML request → redirect to login (which is /)
-    const acceptHeader = request.headers.get('Accept') || '';
-    if (acceptHeader.indexOf('text/html') !== -1) {
-      return Response.redirect(url.origin + '/', 302);
+  // Protected paths (dashboard + bookings/leads APIs)
+  const cookie = request.headers.get('Cookie') || '';
+  const match = cookie.match(/ucb_admin=([^;]+)/);
+  const token = match ? match[1] : null;
+  
+  const secret = env.AUTH_SECRET || env.ADMIN_PASSWORD;
+  const ok = await verifyToken(token, secret);
+  
+  if (!ok) {
+    // HTML requests → redirect to login
+    if (request.headers.get('Accept')?.includes('text/html')) {
+      return Response.redirect(`${url.origin}/login.html`, 302);
     }
-    // API request → 401
+    // API requests → 401
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -53,39 +56,22 @@ export async function onRequest(context) {
 
 async function verifyToken(token, secret) {
   if (!token || !secret) return false;
-  
-  const parts = token.split('.');
-  if (parts.length !== 2) return false;
-  
-  const timestamp = parts[0];
-  const signature = parts[1];
-  
-  // Check timestamp validity
-  const ts = parseInt(timestamp, 10);
-  if (isNaN(ts)) return false;
-  
-  const age = Math.floor(Date.now() / 1000) - ts;
-  if (age < 0 || age > 86400) return false; // 24h max
-  
-  // Verify signature
-  const expectedSignature = await hmacSha256(timestamp, secret);
-  return signature === expectedSignature;
+  const [ts, sig] = token.split('.');
+  if (!ts || !sig) return false;
+  const age = Math.floor(Date.now() / 1000) - parseInt(ts, 10);
+  if (age > 86400 || age < 0) return false;
+  const expected = await hmacSha256(ts, secret);
+  return expected === sig;
 }
 
 async function hmacSha256(message, secret) {
-  const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
     'raw',
-    encoder.encode(secret),
+    new TextEncoder().encode(secret),
     { name: 'HMAC', hash: 'SHA-256' },
     false,
     ['sign']
   );
-  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(message));
-  const bytes = new Uint8Array(signature);
-  let hex = '';
-  for (let i = 0; i < bytes.length; i++) {
-    hex += bytes[i].toString(16).padStart(2, '0');
-  }
-  return hex;
+  const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
+  return Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, '0')).join('');
 }

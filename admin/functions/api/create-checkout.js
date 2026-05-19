@@ -31,7 +31,7 @@ export async function onRequestPost({ request, env }) {
     const data = await request.json();
 
     // Validate required fields
-    const required = ['vorname', 'nachname', 'email', 'telefon', 'uni', 'stand', 'adresse', 'plz', 'stadt', 'land'];
+    const required = ['vorname', 'nachname', 'email', 'telefon', 'uni', 'adresse', 'plz', 'stadt', 'land'];
     for (const f of required) {
       if (!data[f] || String(data[f]).trim() === '') {
         return json({ error: `Pflichtfeld fehlt: ${f}` }, 400);
@@ -88,8 +88,6 @@ async function createPendingBooking(data, env) {
           Email: data.email,
           Telefon: data.telefon,
           Uni: data.uni,
-          Stand: data.stand,
-          Coaching_Themen: data.coaching_themen || '',
           Adresse: data.adresse,
           PLZ: data.plz,
           Stadt: data.stadt,
@@ -132,7 +130,6 @@ async function createStripeSession(data, bookingId, env) {
   params.append('metadata[vorname]', data.vorname);
   params.append('metadata[nachname]', data.nachname);
   params.append('metadata[uni]', data.uni);
-  params.append('metadata[stand]', data.stand);
   params.append('metadata[telefon]', data.telefon);
 
   // Locale
