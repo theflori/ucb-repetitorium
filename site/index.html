@@ -152,60 +152,41 @@ section{padding:72px 0}
 }
 
 /* LERNINHALTE — 3 Rechtsgebiete + Lernübersichten */
-.lerninhalte{background:#fff;padding:80px 0;position:relative;overflow:hidden}
+.lerninhalte{background:#fff;padding:60px 0;position:relative;overflow:hidden}
 .lerninhalte::before{content:'';position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(240,182,107,.05) 0%,transparent 70%);pointer-events:none}
 .lerninhalte .container{position:relative;z-index:2}
 
-.lerninhalte-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;margin-bottom:60px}
-.lern-card{background:var(--shell);border:1px solid var(--border);border-radius:14px;padding:30px 28px;position:relative;transition:all .3s cubic-bezier(.2,.8,.2,1)}
+.lerninhalte-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:0;margin-bottom:0}
+.lern-card{background:var(--shell);border:1px solid var(--border);border-radius:12px;padding:22px 22px;position:relative;transition:all .3s cubic-bezier(.2,.8,.2,1)}
 .lern-card:hover{transform:translateY(-3px);border-color:var(--light-gold);background:#fff;box-shadow:0 12px 28px rgba(66,29,29,.08)}
-.lern-card-num{position:absolute;top:24px;right:24px;font-family:'Pilat Wide','Manrope',sans-serif;font-size:36px;font-weight:700;color:var(--light-gold);opacity:.5;line-height:1}
-.lern-card-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);margin-bottom:6px}
-.lern-card-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;margin-bottom:12px;line-height:1.1}
-.lern-card-text{font-size:13px;color:var(--muted);line-height:1.65}
+.lern-card-num{position:absolute;top:18px;right:20px;font-family:'Pilat Wide','Manrope',sans-serif;font-size:28px;font-weight:700;color:var(--light-gold);opacity:.5;line-height:1}
+.lern-card-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:var(--deep-gold);margin-bottom:4px}
+.lern-card-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;margin-bottom:8px;line-height:1.1}
+.lern-card-text{font-size:12.5px;color:var(--muted);line-height:1.55}
 
-/* LERNÜBERSICHTEN BLOCK */
-.lernuebersichten-block{background:linear-gradient(135deg,var(--shell) 0%,#FBF1E0 100%);border:1px solid var(--light-gold);border-radius:16px;padding:48px 44px;position:relative;overflow:hidden}
-.lernuebersichten-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--light-gold),var(--gold))}
-.lernuebersichten-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
-.lernuebersichten-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:30px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.1;margin-bottom:14px}
-.lernuebersichten-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:22px}
-.lernuebersichten-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
-.lernuebersichten-points li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--near-black);line-height:1.5}
-.lernuebersichten-points li svg{color:var(--gold);flex-shrink:0;margin-top:4px}
-.lernuebersichten-points li strong{font-weight:700;color:var(--near-black)}
+/* LERNÜBERSICHTEN — kompakte Inline-Zeile */
+.lernuebersichten-compact{margin-top:36px;padding:24px 0;border-top:1px solid var(--border)}
+.lc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
+.lc-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--near-black);line-height:1.5}
+.lc-item svg{color:var(--gold);flex-shrink:0;margin-top:3px}
+.lc-item strong{font-weight:700;display:inline}
 
-.lernuebersichten-quality{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px 26px}
-.quality-pre{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);margin-bottom:4px}
-.quality-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;margin-bottom:20px;line-height:1.2}
-.quality-item{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--border)}
-.quality-item:first-of-type{border-top:none;padding-top:0}
-.quality-item-icon{flex-shrink:0;width:36px;height:36px;background:rgba(240,182,107,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--deep-gold)}
-.quality-item h5{font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:700;color:var(--near-black);margin-bottom:3px}
-.quality-item p{font-size:12.5px;color:var(--muted);line-height:1.55}
-
-/* TAGESABLAUF — Timeline */
-.tagesablauf{background:var(--shell);padding:80px 0}
-.tagesablauf-timeline{max-width:780px;margin:40px auto 0;position:relative}
-.tagesablauf-timeline::before{content:'';position:absolute;left:90px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--gold) 0%,var(--light-gold) 50%,var(--gold) 100%)}
-.tag-item{display:flex;gap:24px;padding:16px 0;align-items:flex-start;position:relative}
-.tag-time{flex-shrink:0;width:76px;text-align:right;font-family:'Pilat Wide','Manrope',sans-serif;font-size:18px;font-weight:700;color:var(--bordeaux);padding-top:14px;letter-spacing:.005em}
-.tag-content{flex:1;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-left:28px;position:relative;transition:all .25s}
-.tag-content:hover{border-color:var(--light-gold);transform:translateX(2px)}
-.tag-content::before{content:'';position:absolute;left:-19px;top:20px;width:10px;height:10px;background:var(--gold);border:3px solid var(--shell);border-radius:50%;box-shadow:0 0 0 2px var(--light-gold);z-index:2}
-.tag-content h4{font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;color:var(--near-black);margin-bottom:4px}
-.tag-content p{font-size:12.5px;color:var(--muted);line-height:1.6}
+/* TAGESABLAUF — kompakte 2-Spalten Timeline */
+.tagesablauf{background:var(--shell);padding:60px 0}
+.tagesablauf-timeline{max-width:880px;margin:32px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.tag-item{display:flex;gap:14px;align-items:flex-start;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;transition:all .2s}
+.tag-item:hover{border-color:var(--light-gold);transform:translateY(-1px)}
+.tag-time{flex-shrink:0;font-family:'Pilat Wide','Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--bordeaux);letter-spacing:.005em;width:42px;padding-top:1px}
+.tag-content{flex:1;min-width:0}
+.tag-content h4{font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--near-black);margin-bottom:2px}
+.tag-content p{font-size:11.5px;color:var(--muted);line-height:1.45;margin:0}
 
 @media(max-width:768px){
   .lerninhalte-grid{grid-template-columns:1fr;gap:14px}
   .lern-card-num{font-size:28px;top:20px;right:20px}
-  .lernuebersichten-block{padding:32px 24px}
-  .lernuebersichten-grid{grid-template-columns:1fr;gap:28px}
-  .lernuebersichten-h{font-size:24px}
-  .tagesablauf-timeline::before{left:60px}
-  .tag-time{width:46px;font-size:14px}
-  .tag-content{margin-left:14px;padding:12px 16px}
-  .tag-content::before{left:-15px}
+  .lc-row{grid-template-columns:1fr;gap:14px}
+  .tagesablauf-timeline{grid-template-columns:1fr;gap:8px}
+  .tag-content p{font-size:12px}
 }
 
 /* ABLAUF — Bordeaux */
@@ -1204,10 +1185,10 @@ body.modal-open{overflow:hidden}
 <!-- LERNINHALTE — 3 Rechtsgebiete + USP Lernübersichten -->
 <section id="lerninhalte" class="lerninhalte">
   <div class="container">
-    <div class="section-head center">
+    <div class="section-head center" style="margin-bottom:32px">
       <div class="pre" style="color:var(--deep-gold)">— Lerninhalte</div>
       <h2 class="section-title">Drei Rechtsgebiete.<br>Ein System.</h2>
-      <p class="section-sub">Im Staatsexamen geht es um drei Säulen. Wir bereiten dich auf alle drei mit der gleichen Methode vor — kompakt, übersichtlich, aufs Wesentliche reduziert.</p>
+      <p class="section-sub">Zivilrecht, Strafrecht, Öffentliches Recht — kompakt, übersichtlich, aufs Wesentliche reduziert.</p>
     </div>
 
     <div class="lerninhalte-grid">
@@ -1215,69 +1196,36 @@ body.modal-open{overflow:hidden}
         <div class="lern-card-num">01</div>
         <div class="lern-card-pre">— Säule I</div>
         <h3 class="lern-card-h">Zivilrecht</h3>
-        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht, Familien- und Erbrecht. Mit Schwerpunkt auf prüfungsrelevanten Konstellationen und sicherem Aufbau.</p>
+        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht, Familien- und Erbrecht.</p>
       </div>
       <div class="lern-card">
         <div class="lern-card-num">02</div>
         <div class="lern-card-pre">— Säule II</div>
         <h3 class="lern-card-h">Strafrecht</h3>
-        <p class="lern-card-text">AT und BT, strafrechtliche Klausurtechnik, gängige Problemfälle. Du lernst, sauber zu prüfen und Argumente präzise aufzubauen.</p>
+        <p class="lern-card-text">AT und BT, Klausurtechnik, gängige Problemfälle.</p>
       </div>
       <div class="lern-card">
         <div class="lern-card-num">03</div>
         <div class="lern-card-pre">— Säule III</div>
         <h3 class="lern-card-h">Öffentliches Recht</h3>
-        <p class="lern-card-text">Verfassungs- und Verwaltungsrecht, Klausurtaktik im öffentlichen Recht, prozessuale Eigenheiten in der Examensklausur.</p>
+        <p class="lern-card-text">Verfassungs- und Verwaltungsrecht, prozessuale Eigenheiten.</p>
       </div>
     </div>
 
-    <!-- USP: Lernübersichten -->
-    <div class="lernuebersichten-block">
-      <div class="lernuebersichten-grid">
-        <div class="lernuebersichten-content">
-          <div class="pre" style="color:var(--deep-gold)">— Unsere Lernübersichten</div>
-          <h3 class="lernuebersichten-h">Warum unsere Übersichten<br>anders sind.</h3>
-          <p class="lernuebersichten-text">Wir reduzieren Stoff auf das, was du in der Klausur wirklich brauchst. Keine 800-seitigen Skripte — sondern klare Strukturen, die du verinnerlichen kannst.</p>
-          
-          <ul class="lernuebersichten-points">
-            <li>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Kompakter</strong> — fokussiert auf prüfungsrelevante Inhalte</span>
-            </li>
-            <li>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Übersichtlicher</strong> — klare Strukturen statt Textwüsten</span>
-            </li>
-            <li>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Aufs Wesentliche reduziert</strong> — kein Ballast, nur was zählt</span>
-            </li>
-          </ul>
+    <!-- Kompakte Übersichten-Zeile -->
+    <div class="lernuebersichten-compact">
+      <div class="lc-row">
+        <div class="lc-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Kompakte Lernübersichten</strong> — aufs Prüfungsrelevante reduziert</span>
         </div>
-
-        <div class="lernuebersichten-quality">
-          <div class="quality-pre">— Qualitätsmerkmale</div>
-          <h4 class="quality-h">Was du zusätzlich bekommst.</h4>
-          
-          <div class="quality-item">
-            <div class="quality-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
-            <div>
-              <h5>Feedback zu eigenen Arbeiten</h5>
-              <p>Du schreibst, wir korrigieren persönlich. Konkret, ehrlich, mit klaren Hinweisen.</p>
-            </div>
-          </div>
-          
-          <div class="quality-item">
-            <div class="quality-item-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <div>
-              <h5>Einüben des Gutachterstils</h5>
-              <p>Aufbau, Subsumtion, Schwerpunktsetzung — bis du es sicher und schnell beherrschst.</p>
-            </div>
-          </div>
+        <div class="lc-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Feedback zu eigenen Arbeiten</strong> — persönlich, konkret, ehrlich</span>
+        </div>
+        <div class="lc-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span><strong>Gutachterstil einüben</strong> — Aufbau, Subsumtion, Schwerpunkte</span>
         </div>
       </div>
     </div>
@@ -1287,10 +1235,9 @@ body.modal-open{overflow:hidden}
 <!-- TAGESABLAUF -->
 <section id="tagesablauf" class="tagesablauf">
   <div class="container">
-    <div class="section-head center">
-      <div class="pre" style="color:var(--deep-gold)">— So sieht ein Tag aus</div>
-      <h2 class="section-title">Ein Tag<br>im Repetitorium.</h2>
-      <p class="section-sub">Strukturierter Tagesablauf mit klarem Wechsel zwischen Erklärung, Anwendung und Reflexion. So sieht ein typischer Tag im Kurs aus.</p>
+    <div class="section-head center" style="margin-bottom:8px">
+      <div class="pre" style="color:var(--deep-gold)">— Tagesablauf</div>
+      <h2 class="section-title" style="font-size:28px">Ein typischer Tag.</h2>
     </div>
 
     <div class="tagesablauf-timeline">
@@ -1298,7 +1245,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">08:30</div>
         <div class="tag-content">
           <h4>Frühstück &amp; Start</h4>
-          <p>Frühstück im Hotel, kurze Tagesübersicht — was machen wir heute, was hat Priorität.</p>
+          <p>Tagesübersicht: was steht an, was hat Priorität.</p>
         </div>
       </div>
 
@@ -1306,7 +1253,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">09:00</div>
         <div class="tag-content">
           <h4>Themen-Block I</h4>
-          <p>Erklärung und Strukturierung des Tagesthemas. Lernübersicht, Kerngedanken, typische Konstellationen.</p>
+          <p>Erklärung &amp; Strukturierung des Tagesthemas.</p>
         </div>
       </div>
 
@@ -1314,7 +1261,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">11:00</div>
         <div class="tag-content">
           <h4>Anwendung &amp; Fall</h4>
-          <p>Du arbeitest selbst an einem konkreten Fall. Gutachterstil einüben, Schwerpunkte setzen.</p>
+          <p>Selbst arbeiten, Gutachterstil einüben.</p>
         </div>
       </div>
 
@@ -1322,15 +1269,15 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">12:30</div>
         <div class="tag-content">
           <h4>Mittagessen</h4>
-          <p>Gemeinsames Mittagessen im Hotel. Pause vom Stoff — Kopf bekommt Luft.</p>
+          <p>Pause vom Stoff — Kopf bekommt Luft.</p>
         </div>
       </div>
 
       <div class="tag-item">
         <div class="tag-time">14:00</div>
         <div class="tag-content">
-          <h4>Themen-Block II &amp; Klausur</h4>
-          <p>Vertiefung am Vormittagsthema oder Klausurschreiben unter Examensbedingungen.</p>
+          <h4>Themen-Block II</h4>
+          <p>Vertiefung oder Klausur unter Examensbedingungen.</p>
         </div>
       </div>
 
@@ -1338,7 +1285,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">17:00</div>
         <div class="tag-content">
           <h4>Feedback &amp; Korrektur</h4>
-          <p>Persönliches 1:1-Feedback zu deinen Arbeiten. Was lief gut, was muss besser werden.</p>
+          <p>1:1-Feedback zu deinen Arbeiten.</p>
         </div>
       </div>
 
@@ -1346,7 +1293,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">19:00</div>
         <div class="tag-content">
           <h4>Abendessen &amp; Ausklang</h4>
-          <p>Abendessen im Hotel. Optional: Wellness-Bereich, Spaziergang oder freie Lernzeit.</p>
+          <p>Optional: Wellness, Spaziergang, freie Lernzeit.</p>
         </div>
       </div>
     </div>
