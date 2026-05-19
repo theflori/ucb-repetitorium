@@ -192,7 +192,7 @@ async function sendCustomerConfirmation(booking, invoiceUrl, env) {
     INVOICE_URL: invoiceUrl || `${env.PUBLIC_SITE_URL}`,
     COURSE_DATES: 'August 2026',
     RECIPIENT_EMAIL: booking.Email,
-    SUBJECT: 'Buchung bestätigt — Klausurentraining Bad Aibling',
+    SUBJECT: 'Buchung bestätigt — Repetitorium Bad Aibling',
     PREHEADER: 'Deine Buchung ist eingegangen. Hier sind die nächsten Schritte und deine Rechnung.',
   }, env);
 
@@ -200,7 +200,7 @@ async function sendCustomerConfirmation(booking, invoiceUrl, env) {
     to: booking.Email,
     from: 'UCB Repetitorium <noreply@ucb-repetitorium.de>',
     reply_to: 'info@ucb-muc.de',
-    subject: 'Buchung bestätigt — Klausurentraining Bad Aibling',
+    subject: 'Buchung bestätigt — Repetitorium Bad Aibling',
     html,
   }, env);
 }

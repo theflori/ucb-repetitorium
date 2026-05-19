@@ -46,7 +46,7 @@ export async function onRequestPost({ request, env }) {
 
     // Email translation for examen
     const examenLabel = {
-      '1_staatsexamen': 'Erstes Staatsexamen Bayern',
+      '1_staatsexamen': 'Erstes Juristisches Staatsexamen',
       '2_staatsexamen': 'Zweites Staatsexamen Bayern',
     }[data.examen] || data.examen;
 

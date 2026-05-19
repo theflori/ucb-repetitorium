@@ -195,6 +195,26 @@ async function loadAll() {
       fetch('/api/bookings').then(r => r.json()),
       fetch('/api/leads').then(r => r.json()),
     ]);
+    
+    // Show errors visibly
+    const errors = [];
+    if (bRes.error) errors.push('Bookings: ' + bRes.error);
+    if (lRes.error) errors.push('Leads: ' + lRes.error);
+    
+    if (errors.length) {
+      const errBox = document.getElementById('errorBanner') || (() => {
+        const box = document.createElement('div');
+        box.id = 'errorBanner';
+        box.style.cssText = 'background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;padding:14px 20px;margin:0 0 20px;border-radius:8px;font-size:13px;line-height:1.6';
+        document.querySelector('.main').insertBefore(box, document.querySelector('.stats'));
+        return box;
+      })();
+      errBox.innerHTML = '<strong>⚠️ Fehler beim Laden der Daten:</strong><br>' + errors.join('<br>') + '<br><br><a href="/api/debug" target="_blank" style="color:#991B1B;text-decoration:underline">Debug-Info anzeigen →</a>';
+    } else {
+      const existing = document.getElementById('errorBanner');
+      if (existing) existing.remove();
+    }
+    
     bookings = bRes.records || [];
     leads = lRes.records || [];
     renderStats();
@@ -202,6 +222,7 @@ async function loadAll() {
     renderLeads();
   } catch (e) {
     console.error('Load error:', e);
+    alert('Fehler beim Laden: ' + e.message + '\n\nÖffne /api/debug für Details.');
   }
 }
 

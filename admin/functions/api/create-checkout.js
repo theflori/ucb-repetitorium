@@ -114,7 +114,7 @@ async function createStripeSession(data, bookingId, env) {
   params.append('mode', 'payment');
   params.append('customer_email', data.email);
   
-  // Line item: Klausurentraining
+  // Line item: Repetitorium
   params.append('line_items[0][price]', env.STRIPE_PRICE_KLAUSUREN_AUG26);
   params.append('line_items[0][quantity]', '1');
   
@@ -140,7 +140,7 @@ async function createStripeSession(data, bookingId, env) {
   
   // Billing details for invoice
   params.append('invoice_creation[enabled]', 'true');
-  params.append('invoice_creation[invoice_data][description]', 'Klausurentraining UCB Repetitorium — Bad Aibling, August 2026');
+  params.append('invoice_creation[invoice_data][description]', 'Repetitorium UCB Repetitorium — Bad Aibling, August 2026');
   params.append('invoice_creation[invoice_data][custom_fields][0][name]', 'USt-Hinweis');
   params.append('invoice_creation[invoice_data][custom_fields][0][value]', 'Umsatzsteuerfrei nach §4 Nr.21 UStG');
 
