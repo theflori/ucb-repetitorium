@@ -89,6 +89,14 @@
     .status-contacted::before{background:var(--bordeaux)}
     .status-expired{background:rgba(220,38,38,.08);color:var(--red)}
     .status-expired::before{background:var(--red)}
+    .status-unpaid{background:rgba(220,38,38,.08);color:var(--red)}
+    .status-unpaid::before{background:var(--red)}
+    .status-refunded{background:rgba(122,110,100,.12);color:var(--muted)}
+    .status-refunded::before{background:var(--muted)}
+    .status-booked{background:rgba(22,163,74,.1);color:var(--green)}
+    .status-booked::before{background:var(--green)}
+    .status-closed{background:rgba(122,110,100,.12);color:var(--muted)}
+    .status-closed::before{background:var(--muted)}
     
     .actions{display:flex;gap:6px}
     .action-btn{padding:5px 10px;background:transparent;border:1px solid var(--border);border-radius:5px;font-size:11px;font-weight:600;color:var(--near-black);cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
@@ -142,6 +150,17 @@
     .modal-actions .btn-primary:hover{background:var(--near-black)}
     .modal-actions .btn-secondary{background:transparent;color:var(--near-black);border:1px solid var(--border);padding:10px 18px;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
     .modal-actions .btn-secondary:hover{background:var(--shell);border-color:var(--bordeaux)}
+    
+    /* Status Editor */
+    .status-editor{display:flex;gap:10px;align-items:center}
+    .status-select{flex:1;padding:11px 14px;font-family:inherit;font-size:13px;border:1px solid var(--border);border-radius:8px;background:#fff;color:var(--near-black);outline:none;cursor:pointer;transition:all .2s}
+    .status-select:focus{border-color:var(--bordeaux);box-shadow:0 0 0 3px rgba(66,29,29,.08)}
+    .status-save-btn{padding:11px 18px;background:var(--bordeaux);color:var(--gold);border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .status-save-btn:hover{background:var(--near-black)}
+    .status-save-btn:disabled{opacity:.6;cursor:not-allowed}
+    .status-msg{margin-top:10px;font-size:12px;display:none}
+    .status-msg.success{display:block;color:var(--green)}
+    .status-msg.error{display:block;color:var(--red)}
     
     @media(max-width:900px){
       .stats{grid-template-columns:repeat(2,1fr)}
@@ -439,6 +458,45 @@ async function markContacted(leadId) {
   }
 }
 
+// === Manual Status Update (from modal dropdown) ===
+async function updateStatus(type, id) {
+  const select = document.getElementById('statusSelect');
+  const msg = document.getElementById('statusMsg');
+  const btn = document.querySelector('.status-save-btn');
+  if (!select) return;
+  
+  const newStatus = select.value;
+  msg.className = 'status-msg';
+  btn.disabled = true;
+  btn.textContent = 'Speichert...';
+  
+  const endpoint = type === 'booking' ? `/api/bookings/${id}` : `/api/leads/${id}`;
+  
+  try {
+    const res = await fetch(endpoint, {
+      method: 'PATCH',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ Status: newStatus })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Fehler beim Speichern');
+    
+    msg.textContent = '✓ Status gespeichert';
+    msg.className = 'status-msg success';
+    
+    // Refresh data in background, update local item
+    await loadAll();
+    
+    btn.disabled = false;
+    btn.textContent = 'Status speichern';
+  } catch (e) {
+    msg.textContent = 'Fehler: ' + e.message;
+    msg.className = 'status-msg error';
+    btn.disabled = false;
+    btn.textContent = 'Status speichern';
+  }
+}
+
 function escapeHtml(s) {
   return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -447,7 +505,10 @@ function formatDate(s) {
   return new Date(s).toLocaleDateString('de-DE', { day:'2-digit', month:'short', year:'2-digit' });
 }
 function statusLabel(s) {
-  return {paid:'Bezahlt',pending:'Ausstehend',new:'Neu',contacted:'Kontaktiert',expired:'Abgelaufen'}[s] || s;
+  return {
+    paid:'Bezahlt', pending:'Ausstehend', unpaid:'Nicht bezahlt', expired:'Abgelaufen', refunded:'Erstattet',
+    new:'Neu', contacted:'Kontaktiert', booked:'Gebucht', closed:'Abgeschlossen'
+  }[s] || s;
 }
 
 // Search
@@ -519,6 +580,21 @@ function showDetail(type, id) {
           ${item.Stripe_Payment_Intent ? field('Stripe Payment', item.Stripe_Payment_Intent.substring(0, 24) + '…') : ''}
         </div>
       </div>
+
+      <div class="modal-section">
+        <div class="modal-section-h">Status ändern</div>
+        <div class="status-editor">
+          <select id="statusSelect" class="status-select">
+            <option value="pending"${item.Status === 'pending' ? ' selected' : ''}>Ausstehend</option>
+            <option value="paid"${item.Status === 'paid' ? ' selected' : ''}>Bezahlt</option>
+            <option value="unpaid"${item.Status === 'unpaid' ? ' selected' : ''}>Nicht bezahlt</option>
+            <option value="expired"${item.Status === 'expired' ? ' selected' : ''}>Abgelaufen</option>
+            <option value="refunded"${item.Status === 'refunded' ? ' selected' : ''}>Erstattet</option>
+          </select>
+          <button class="status-save-btn" onclick="updateStatus('booking', '${item.id}')">Status speichern</button>
+        </div>
+        <div id="statusMsg" class="status-msg"></div>
+      </div>
     `;
   } else {
     // === LEAD DETAILS ===
@@ -561,6 +637,20 @@ function showDetail(type, id) {
           ${field('Anfrage eingegangen', formatDate(item.Created_At))}
           ${item.Contacted_At ? field('Kontaktiert', formatDate(item.Contacted_At)) : field('Kontaktiert', 'Noch nicht')}
         </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-h">Status ändern</div>
+        <div class="status-editor">
+          <select id="statusSelect" class="status-select">
+            <option value="new"${item.Status === 'new' ? ' selected' : ''}>Neu</option>
+            <option value="contacted"${item.Status === 'contacted' ? ' selected' : ''}>Kontaktiert</option>
+            <option value="booked"${item.Status === 'booked' ? ' selected' : ''}>Gebucht</option>
+            <option value="closed"${item.Status === 'closed' ? ' selected' : ''}>Abgeschlossen</option>
+          </select>
+          <button class="status-save-btn" onclick="updateStatus('lead', '${item.id}')">Status speichern</button>
+        </div>
+        <div id="statusMsg" class="status-msg"></div>
       </div>
     `;
   }

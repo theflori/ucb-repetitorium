@@ -19,10 +19,11 @@ export async function onRequest(context) {
     '/api/leads',
   ];
   
-  // Match exact path OR path starting with `/api/leads/`
+  // Match exact path OR path starting with `/api/leads/` or `/api/bookings/`
   const requiresAuth = 
     protectedPaths.includes(path) ||
-    path.startsWith('/api/leads/');
+    path.startsWith('/api/leads/') ||
+    path.startsWith('/api/bookings/');
 
   if (!requiresAuth) {
     return next();

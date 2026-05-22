@@ -26,12 +26,13 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Manrope',sans-serif;background:#fff;color:var(--near-black);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden}
+html{overflow-x:hidden;width:100%}
+body{font-family:'Manrope',sans-serif;background:#fff;color:var(--near-black);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:14px;overflow-x:hidden;width:100%;max-width:100vw;position:relative}
 img,svg{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
 /* CONTAINER */
-.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.container{max-width:1200px;margin:0 auto;padding:0 32px;width:100%}
 @media(max-width:640px){.container{padding:0 20px}}
 
 /* TYPO HELPERS */
@@ -83,7 +84,7 @@ a{color:inherit;text-decoration:none}
 }
 
 /* SECTION */
-section{padding:72px 0}
+section{padding:72px 0;width:100%;max-width:100%}
 .section-head{margin-bottom:40px}
 .section-head.center{text-align:center}
 .section-head.center .section-sub{margin-left:auto;margin-right:auto}
@@ -103,7 +104,7 @@ section{padding:72px 0}
 @media(max-width:900px){.usp-strip-inner{grid-template-columns:1fr 1fr;gap:18px}}
 
 /* PROBLEM — Weiß */
-.problem{background:#fff}
+.problem{background:#fff;overflow:hidden}
 .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .problem-card{padding:28px 24px;border-radius:12px;transition:all .25s;position:relative;overflow:hidden}
 .problem-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(66,29,29,.08)}
@@ -125,7 +126,7 @@ section{padding:72px 0}
 @media(max-width:900px){.problem-grid{grid-template-columns:1fr;gap:14px}}
 
 /* TAILORED — der Kern */
-.tailored{background:var(--shell)}
+.tailored{background:var(--shell);overflow:hidden}
 .tailored-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
 .tailored-visual{position:sticky;top:90px}
 .tailored-card{background:var(--bordeaux);border-radius:14px;padding:48px 40px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;min-height:520px}
@@ -172,7 +173,7 @@ section{padding:72px 0}
 .lc-item strong{font-weight:700;display:inline}
 
 /* TAGESABLAUF — kompakte 2-Spalten Timeline */
-.tagesablauf{background:var(--shell);padding:60px 0}
+.tagesablauf{background:var(--shell);padding:60px 0;overflow:hidden}
 .tagesablauf-timeline{max-width:880px;margin:32px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
 .tag-item{display:flex;gap:14px;align-items:flex-start;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;transition:all .2s}
 .tag-item:hover{border-color:var(--light-gold);transform:translateY(-1px)}
@@ -200,7 +201,7 @@ section{padding:72px 0}
 @media(max-width:900px){.ablauf-grid{grid-template-columns:1fr;gap:24px}}
 
 /* ANGEBOTE — modular: aktuelles + future placeholder */
-.angebote{background:#fff}
+.angebote{background:#fff;overflow:hidden}
 
 .examen-block{margin-bottom:48px}
 .examen-block:last-child{margin-bottom:0}
@@ -385,6 +386,27 @@ section{padding:72px 0}
   .path-price-amount{font-size:24px}
 }
 
+/* PROBEÜBERSICHTEN */
+.probe-block{margin-top:48px;padding-top:40px;border-top:1px solid var(--border)}
+.probe-head{text-align:center;margin-bottom:28px}
+.probe-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.15;margin:6px 0 8px}
+.probe-sub{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:520px;margin:0 auto}
+.probe-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.probe-item{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .25s}
+.probe-item.open{border-color:var(--light-gold)}
+.probe-item-head{width:100%;display:flex;align-items:center;gap:14px;padding:18px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit}
+.probe-item-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);flex-shrink:0;min-width:120px}
+.probe-item-title{font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;color:var(--near-black);flex:1}
+.probe-item-chevron{color:var(--muted);flex-shrink:0;transition:transform .3s}
+.probe-item.open .probe-item-chevron{transform:rotate(180deg)}
+.probe-item-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.2,.8,.2,1)}
+.probe-item.open .probe-item-body{max-height:200px}
+.probe-item-body p{padding:0 22px 18px;font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+@media(max-width:768px){
+  .probe-item-tag{min-width:90px;font-size:11px}
+  .probe-h{font-size:20px}
+}
+
 /* HOTEL */
 .hotel{background:var(--shell);position:relative;overflow:hidden}
 .hotel::before{content:'';position:absolute;top:-80px;right:-100px;width:380px;height:380px;border:1px solid rgba(240,182,107,.1);border-radius:50%;pointer-events:none}
@@ -406,6 +428,19 @@ section{padding:72px 0}
 
 /* HOTEL SLIDER */
 .hotel-slider{aspect-ratio:4/5;border-radius:12px;position:relative;overflow:hidden;margin-bottom:18px;background:var(--near-black);box-shadow:0 12px 36px rgba(66,29,29,.12)}
+/* Hotel Video — vollbreit, Querformat, unter dem Grid */
+.hotel-video-wide{position:relative;width:100%;margin-top:40px;aspect-ratio:16/9;max-height:460px;border-radius:14px;overflow:hidden;background:var(--near-black);box-shadow:0 14px 40px rgba(66,29,29,.14);cursor:pointer}
+.hotel-video-wide video{width:100%;height:100%;object-fit:cover;display:block}
+.hotel-video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(240,182,107,.95);border:none;color:var(--bordeaux);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;box-shadow:0 8px 24px rgba(0,0,0,.35);padding-left:4px;z-index:2}
+.hotel-video-play:hover{transform:translate(-50%,-50%) scale(1.08);background:var(--gold)}
+.hotel-video-wide.playing .hotel-video-play{opacity:0;pointer-events:none}
+.hotel-video-label{position:absolute;left:16px;bottom:16px;display:flex;align-items:center;gap:7px;padding:7px 13px;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);border-radius:100px;color:#fff;font-size:12px;font-weight:600;pointer-events:none;transition:opacity .25s;z-index:2}
+.hotel-video-label svg{color:var(--gold)}
+.hotel-video-wide.playing .hotel-video-label{opacity:0}
+@media(max-width:768px){
+  .hotel-video-wide{margin-top:28px;border-radius:10px}
+  .hotel-video-play{width:54px;height:54px}
+}
 .hotel-slider-track{position:absolute;inset:0}
 .hotel-slide{position:absolute;inset:0;background-size:cover;background-position:center center;background-repeat:no-repeat;opacity:0;transition:opacity .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}
 .hotel-slide.active{opacity:1;pointer-events:auto}
@@ -472,7 +507,7 @@ body.modal-open{overflow:hidden}
 
 
 /* TESTIMONIALS — vor dem Footer */
-.testimonials{background:#fff;border-top:1px solid var(--border)}
+.testimonials{background:#fff;border-top:1px solid var(--border);overflow:hidden}
 .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .testimonial-card{background:var(--shell);border:1px solid var(--border);border-radius:12px;padding:28px 26px;position:relative}
 .testimonial-quote-mark{position:absolute;top:18px;right:22px;font-family:'Playfair Display',serif;font-style:italic;font-size:48px;color:var(--gold);line-height:1;opacity:.5}
@@ -508,7 +543,7 @@ body.modal-open{overflow:hidden}
 @media(max-width:900px){.form-wrap{grid-template-columns:1fr;gap:32px}.form-card{padding:24px 20px}.form-row{grid-template-columns:1fr}}
 
 /* FAQ */
-.faq{background:#fff}
+.faq{background:#fff;overflow:hidden}
 .faq-list{margin-top:36px;max-width:820px}
 .faq-item{border-bottom:1px solid var(--border);padding:18px 0}
 .faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Manrope',sans-serif;font-size:15px;font-weight:600;letter-spacing:-.005em;color:var(--near-black);gap:18px;line-height:1.45}
@@ -1012,7 +1047,7 @@ body.modal-open{overflow:hidden}
           <div class="tailored-card-flow">
             <div class="tailored-flow-item"><div class="tailored-flow-num">01</div><div>Anmeldung &amp; Buchung</div></div>
             <div class="tailored-flow-item"><div class="tailored-flow-num">02</div><div>Persönliches Coaching-Gespräch</div></div>
-            <div class="tailored-flow-item"><div class="tailored-flow-num">03</div><div>Auf dich zugeschnittener Plan</div></div>
+            <div class="tailored-flow-item"><div class="tailored-flow-num">03</div><div>Auf dich zugeschnittenes Lernen</div></div>
             <div class="tailored-flow-item"><div class="tailored-flow-num">04</div><div>Intensives Training &amp; Feedback</div></div>
           </div>
         </div>
@@ -1033,8 +1068,8 @@ body.modal-open{overflow:hidden}
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
           <div class="tailored-content">
-            <h3>Plan auf dich zugeschnitten</h3>
-            <p>Wir trainieren intensiv, was dir fehlt, und beschleunigen, wo du sicher bist.</p>
+            <h3>Kurs auf dich zugeschnitten</h3>
+            <p>Im Kurs mit Nachfragen und in Einzelgesprächen trainieren wir intensiv, was dir fehlt, und vertiefen, wo du sicher bist.</p>
           </div>
         </div>
         <div class="tailored-item">
@@ -1069,14 +1104,247 @@ body.modal-open{overflow:hidden}
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           </div>
           <div class="tailored-content">
-            <h3>Einüben des Gutachterstils</h3>
-            <p>Aufbau, Subsumtion, Schwerpunktsetzung — du lernst, in der Prüfung sauber zu strukturieren.</p>
+            <h3>Einüben des Gutachtenstils</h3>
+            <p>Aufbau, Subsumtion, Schwerpunktsetzung — du lernst, in der Klausur sauber zu strukturieren.</p>
+          </div>
+        </div>
+        <div class="tailored-item">
+          <div class="tailored-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="tailored-content">
+            <h3>Arbeiten mit konkreten Fällen</h3>
+            <p>Wir arbeiten an echten Fällen, wie sie in der Klausur drankommen — statt trockener Theorie. So überträgst du Wissen direkt in die Anwendung.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ANGEBOTE — modular -->
+<section id="angebote" class="angebote">
+  <div class="container">
+    <div class="section-head">
+      <div class="pre" style="color:var(--deep-gold)">— Aktuelles Angebot</div>
+      <h2 class="section-title">Unser Kursangebot.</h2>
+      <p class="section-sub">Aktuell verfügbar: das Repetitorium für das Erste Juristische Staatsexamen Bayern. Weitere Formate folgen.</p>
+    </div>
+
+    <!-- ERSTES STAATSEXAMEN -->
+    <div class="examen-block">
+      <div class="examen-block-head">
+        <div class="examen-tag examen-tag-active">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Verfügbar
+        </div>
+        <h3 class="examen-block-h">Aktuell verfügbar · Erstes Juristisches Staatsexamen</h3>
+      </div>
+
+      <div class="angebote-grid">
+        <!-- Featured: Bad Aibling August 2026 -->
+        <div class="angebot-card featured">
+          <div class="angebot-badge">Verfügbar</div>
+          <div class="angebot-pre">— Repetitorium</div>
+          <h3 class="angebot-h">B&amp;O Parkhotel<br>Bad Aibling</h3>
+          <p class="angebot-text">Eine Woche intensives Repetitorium mit Coaching-Gespräch zu Beginn und persönlichem Lernplan. Übernachtung optional — als Sonderkondition fürs Repetitorium (546&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
+
+          <div class="angebot-meta">
+            <div class="angebot-meta-item">
+              <div class="lbl">Termin</div>
+              <div class="val">August 2026</div>
+            </div>
+            <div class="angebot-meta-item">
+              <div class="lbl">Dauer</div>
+              <div class="val">7 Tage intensiv</div>
+            </div>
+            <div class="angebot-meta-item">
+              <div class="lbl">Standort</div>
+              <div class="val">Bad Aibling</div>
+            </div>
+          </div>
+
+          <div class="angebot-price"><span class="currency">€</span>1.290</div>
+          <div class="angebot-price-note">Inkl. Mittag- &amp; Abendessen · Hotel-Sonderkondition 546&nbsp;€ separat</div>
+          <div class="angebot-vat-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
+          </div>
+
+          <a href="/buchen/" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt buchen →</a>
+        </div>
+
+        <!-- Repetitorium - Coming Soon -->
+        <div class="angebot-card upcoming">
+          <div class="angebot-badge">Weitere Termine in Planung</div>
+          <h3 class="angebot-h">Repetitorium<br>1. Staatsexamen</h3>
+          <p class="angebot-text">Weitere Termine fürs 1. Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
+          <a href="#anmelden" class="btn btn-bordeaux-outline">Mehr erfahren</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZWEITES STAATSEXAMEN — dezent -->
+    <div class="examen-block-compact">
+      <div class="examen-block-compact-head">
+        <div class="examen-tag examen-tag-soon">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          In Vorbereitung
+        </div>
+        <div class="examen-block-compact-text">
+          <strong>Zweites Staatsexamen Bayern</strong> — Repetitorium für Assessorexamen, Aktenvortrag und weitere Formate für Referendare. Geplant ab 2027.
+        </div>
+        <a href="#anmelden" class="examen-block-compact-link">Informieren&nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- PROBEÜBERSICHTEN -->
+    <div class="probe-block">
+      <div class="probe-head">
+        <div class="pre" style="color:var(--deep-gold)">— Probeübersichten</div>
+        <h3 class="probe-h">So sehen unsere Lernübersichten aus.</h3>
+        <p class="probe-sub">Drei Fall-Übersichten, wie wir sie im Kurs einsetzen. Kompakt, strukturiert, aufs Wesentliche reduziert. Klicke zum Aufklappen.</p>
+      </div>
+      <div class="probe-list">
+        <div class="probe-item">
+          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
+            <span class="probe-item-tag">Zivilrecht</span>
+            <span class="probe-item-title">Fall-Übersicht Kaufrecht</span>
+            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="probe-item-body">
+            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine kompakte Strukturierung der prüfungsrelevanten Konstellationen im Kaufrecht.</p>
+          </div>
+        </div>
+        <div class="probe-item">
+          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
+            <span class="probe-item-tag">Strafrecht</span>
+            <span class="probe-item-title">Fall-Übersicht Tötungsdelikte</span>
+            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="probe-item-body">
+            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine klare Aufbauhilfe für die Prüfung der Tötungsdelikte mit den gängigen Problemfeldern.</p>
+          </div>
+        </div>
+        <div class="probe-item">
+          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
+            <span class="probe-item-tag">Öffentliches Recht</span>
+            <span class="probe-item-title">Fall-Übersicht Grundrechte</span>
+            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="probe-item-body">
+            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine strukturierte Prüfungsreihenfolge für die Grundrechte mit Schwerpunktsetzung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="hotel" class="hotel">
+  <div class="container">
+    <div class="hotel-grid">
+      <div>
+        <div class="pre" style="color:var(--deep-gold)">— Optional · B&amp;O Parkhotel Bad Aibling</div>
+        <h2 class="section-title">Lernen mit Abstand.<br>Vom Alltag.</h2>
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:560px">Das Repetitorium findet im B&amp;O Parkhotel Bad Aibling statt. Mittag- und Abendessen sind im Kurspreis enthalten. Übernachtung &amp; Frühstück buchst du separat über das Hotel — mit Zugang zum <strong>Wellness-Bereich</strong>.</p>
+
+        <div class="hotel-features">
+          <div class="hotel-feature">
+            <div class="hotel-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="hotel-feature-content">
+              <h4>Bad Aibling</h4>
+              <p>Eine Stunde von München. Mitten im Alpenvorland.</p>
+            </div>
+          </div>
+          <div class="hotel-feature">
+            <div class="hotel-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2.5a2.5 2.5 0 0 1 0 5H2"/><path d="M16 12h2.5a2.5 2.5 0 0 1 0 5H16"/><path d="M9 12h2.5a2.5 2.5 0 0 1 0 5H9"/><path d="M2 7s1-1 3-1 3 1 5 1 3-1 5-1 3 1 5 1 2-1 2-1"/></svg>
+            </div>
+            <div class="hotel-feature-content">
+              <h4>Wellness inklusive</h4>
+              <p>Sauna, Pool und Ruhebereiche für Erholung am Abend.</p>
+            </div>
+          </div>
+          <div class="hotel-feature">
+            <div class="hotel-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            </div>
+            <div class="hotel-feature-content">
+              <h4>Verpflegung inklusive</h4>
+              <p>Mittag- und Abendessen inklusive. Frühstück mit Hotelbuchung.</p>
+            </div>
+          </div>
+          <div class="hotel-feature">
+            <div class="hotel-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="hotel-feature-content">
+              <h4>Premium-Zimmer</h4>
+              <p>Ruhige Zimmer mit Komfort — alles für eine Woche Fokus.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-flexible">
+          <div class="hotel-flexible-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h4>Du entscheidest.</h4>
+            <p>Übernachtung ist optional und wird direkt beim Hotel gebucht. Gib bei der Anfrage <strong>„UCB-Repetitorium"</strong> an, um die Sonderkondition zu erhalten. Auch ohne Übernachtung kannst du teilnehmen — Pendler reisen täglich an. <a href="https://www.bo-parkhotel.de" target="_blank" rel="noopener" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Zum B&amp;O Parkhotel →</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-visual">
+        <div class="hotel-slider" id="hotelSlider">
+          <div class="hotel-slider-track">
+            <div class="hotel-slide active" style="background-image:url('https://www.bo-parkhotel.de/wp-content/uploads/2024/06/BO-Parkhotel-Oberbayern.jpg')"></div>
+            <div class="hotel-slide" style="background-image:url('https://www.bad-aibling.de/fileadmin/Mediendatenbank/KULTUR-EVENTS/MICE_Bad_Aibling/BundO_Parkhotel/BundO-Parkhotel-Bad-Aibling-Cambridge-Saal-Aussenansicht.jpg')"></div>
+            <div class="hotel-slide" style="background-image:url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/a5/c0/ee/b-o-parkhotel.jpg?w=900&amp;h=500&amp;s=1')"></div>
+          </div>
+          <div class="hotel-slider-overlay">
+            <strong>B&amp;O Parkhotel</strong>
+            Bad Aibling · Oberbayern
+          </div>
+          <div class="hotel-slider-dots">
+            <button class="hotel-slider-dot active" data-slide="0" aria-label="Bild 1"></button>
+            <button class="hotel-slider-dot" data-slide="1" aria-label="Bild 2"></button>
+            <button class="hotel-slider-dot" data-slide="2" aria-label="Bild 3"></button>
+          </div>
+        </div>
+
+        <div class="hotel-visual-stats">
+          <div class="hotel-visual-stat">
+            <div class="num">546&nbsp;€</div>
+            <div class="lbl">Sonderkondition Repetitorium · 7 Nächte inkl. Frühstück</div>
+          </div>
+          <div class="hotel-visual-stat">
+            <div class="num">★★★★</div>
+            <div class="lbl">B&amp;O Parkhotel · 4-Sterne</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video vollbreit unter dem Grid -->
+    <div class="hotel-video-wide" id="hotelVideo">
+      <video id="boVideo" poster="https://www.bo-parkhotel.de/wp-content/uploads/2024/06/BO-Parkhotel-Oberbayern.jpg" preload="none" playsinline>
+        <source src="https://www.bo-parkhotel.de/wp-content/uploads/2024/10/BO-Parkhotel-Imagefilm.mp4" type="video/mp4">
+      </video>
+      <button class="hotel-video-play" id="hotelVideoPlay" aria-label="Video abspielen">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="hotel-video-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Imagefilm B&amp;O Parkhotel ansehen
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- LERNINHALTE — 3 Rechtsgebiete + USP Lernübersichten -->
 <section id="lerninhalte" class="lerninhalte">
@@ -1092,7 +1360,7 @@ body.modal-open{overflow:hidden}
         <div class="lern-card-num">01</div>
         <div class="lern-card-pre">— Säule I</div>
         <h3 class="lern-card-h">Zivilrecht</h3>
-        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht, Familien- und Erbrecht.</p>
+        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht.</p>
       </div>
       <div class="lern-card">
         <div class="lern-card-num">02</div>
@@ -1117,11 +1385,11 @@ body.modal-open{overflow:hidden}
         </div>
         <div class="lc-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Feedback zu eigenen Arbeiten</strong> — persönlich, konkret, ehrlich</span>
+          <span><strong>Feedback zu eigenen Arbeiten</strong> — persönlich, konkret, kompetent</span>
         </div>
         <div class="lc-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span><strong>Gutachterstil einüben</strong> — Aufbau, Subsumtion, Schwerpunkte</span>
+          <span><strong>Gutachtenstil einüben</strong> — Aufbau, Subsumtion, Schwerpunkte</span>
         </div>
       </div>
     </div>
@@ -1157,7 +1425,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">11:00</div>
         <div class="tag-content">
           <h4>Anwendung &amp; Fall</h4>
-          <p>Selbst arbeiten, Gutachterstil einüben.</p>
+          <p>Selbst arbeiten, Gutachtenstil einüben.</p>
         </div>
       </div>
 
@@ -1165,7 +1433,7 @@ body.modal-open{overflow:hidden}
         <div class="tag-time">12:30</div>
         <div class="tag-content">
           <h4>Mittagessen</h4>
-          <p>Pause vom Stoff — Kopf bekommt Luft.</p>
+          <p>Stärkung — angenehme Atmosphäre in der Gruppe.</p>
         </div>
       </div>
 
@@ -1228,7 +1496,7 @@ body.modal-open{overflow:hidden}
         </div>
         <span class="ablauf-num">SCHRITT 03</span>
         <h3 class="ablauf-h">Coaching-Gespräch</h3>
-        <p class="ablauf-text">Wir lernen dich kennen: Stand, Ziele, Schwerpunkte. Daraus entsteht dein Lernplan.</p>
+        <p class="ablauf-text">Wir lernen dich kennen: Stand, Ziele, Schwerpunkte. Daraus entsteht ein persönlicher Eindruck, welche Themen vertieft werden müssen.</p>
       </div>
       <div class="ablauf-step">
         <div class="ablauf-step-icon">
@@ -1237,176 +1505,6 @@ body.modal-open{overflow:hidden}
         <span class="ablauf-num">SCHRITT 04</span>
         <h3 class="ablauf-h">Intensives Training</h3>
         <p class="ablauf-text">Klausuren schreiben, Feedback erhalten, gezielt besser werden.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ANGEBOTE — modular -->
-<section id="angebote" class="angebote">
-  <div class="container">
-    <div class="section-head">
-      <div class="pre" style="color:var(--deep-gold)">— Aktuelles Angebot</div>
-      <h2 class="section-title">Unser Kursangebot.</h2>
-      <p class="section-sub">Aktuell verfügbar: das Repetitorium für das Erste Juristische Staatsexamen Bayern. Weitere Formate folgen.</p>
-    </div>
-
-    <!-- ERSTES STAATSEXAMEN -->
-    <div class="examen-block">
-      <div class="examen-block-head">
-        <div class="examen-tag examen-tag-active">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Verfügbar
-        </div>
-        <h3 class="examen-block-h">Aktuell verfügbar · Erstes Juristisches Staatsexamen</h3>
-      </div>
-
-      <div class="angebote-grid">
-        <!-- Featured: Bad Aibling August 2026 -->
-        <div class="angebot-card featured">
-          <div class="angebot-badge">Verfügbar</div>
-          <div class="angebot-pre">— Repetitorium</div>
-          <h3 class="angebot-h">B&amp;O Parkhotel<br>Bad Aibling</h3>
-          <p class="angebot-text">Eine Woche intensives Repetitorium mit Coaching-Gespräch zu Beginn und persönlichem Lernplan. Hotel-Paket separat über das Hotel (546&nbsp;€ für 7 Nächte mit Frühstück).</p>
-
-          <div class="angebot-meta">
-            <div class="angebot-meta-item">
-              <div class="lbl">Termin</div>
-              <div class="val">August 2026</div>
-            </div>
-            <div class="angebot-meta-item">
-              <div class="lbl">Dauer</div>
-              <div class="val">7 Tage intensiv</div>
-            </div>
-            <div class="angebot-meta-item">
-              <div class="lbl">Standort</div>
-              <div class="val">Bad Aibling</div>
-            </div>
-          </div>
-
-          <div class="angebot-price"><span class="currency">€</span>1.290</div>
-          <div class="angebot-price-note">Inkl. Mittag- &amp; Abendessen · Hotel-Paket 546&nbsp;€ separat</div>
-          <div class="angebot-vat-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
-          </div>
-
-          <a href="/buchen/" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt buchen →</a>
-        </div>
-
-        <!-- Repetitorium - Coming Soon -->
-        <div class="angebot-card upcoming">
-          <div class="angebot-badge">Weitere Termine in Planung</div>
-          <h3 class="angebot-h">Repetitorium<br>1. Staatsexamen</h3>
-          <p class="angebot-text">Weitere Termine fürs 1. Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
-          <a href="#anmelden" class="btn btn-bordeaux-outline">Mehr erfahren</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ZWEITES STAATSEXAMEN — dezent -->
-    <div class="examen-block-compact">
-      <div class="examen-block-compact-head">
-        <div class="examen-tag examen-tag-soon">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          In Vorbereitung
-        </div>
-        <div class="examen-block-compact-text">
-          <strong>Zweites Staatsexamen Bayern</strong> — Repetitorium für Assessorexamen, Aktenvortrag und weitere Formate für Referendare. Geplant ab 2027.
-        </div>
-        <a href="#anmelden" class="examen-block-compact-link">Informieren&nbsp;→</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOTEL -->
-<section id="hotel" class="hotel">
-  <div class="container">
-    <div class="hotel-grid">
-      <div>
-        <div class="pre" style="color:var(--deep-gold)">— Optional · B&amp;O Parkhotel Bad Aibling</div>
-        <h2 class="section-title">Lernen mit Abstand.<br>Vom Alltag.</h2>
-        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:560px">Das Repetitorium findet im B&amp;O Parkhotel Bad Aibling statt. Mittag- und Abendessen sind im Kurspreis enthalten. Übernachtung &amp; Frühstück buchst du separat über das Hotel — mit Zugang zum <strong>Wellness-Bereich</strong>.</p>
-
-        <div class="hotel-features">
-          <div class="hotel-feature">
-            <div class="hotel-feature-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div class="hotel-feature-content">
-              <h4>Bad Aibling</h4>
-              <p>Eine Stunde von München. Mitten im Alpenvorland.</p>
-            </div>
-          </div>
-          <div class="hotel-feature">
-            <div class="hotel-feature-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2.5a2.5 2.5 0 0 1 0 5H2"/><path d="M16 12h2.5a2.5 2.5 0 0 1 0 5H16"/><path d="M9 12h2.5a2.5 2.5 0 0 1 0 5H9"/><path d="M2 7s1-1 3-1 3 1 5 1 3-1 5-1 3 1 5 1 2-1 2-1"/></svg>
-            </div>
-            <div class="hotel-feature-content">
-              <h4>Wellness inklusive</h4>
-              <p>Sauna, Pool und Ruhebereiche für Erholung am Abend.</p>
-            </div>
-          </div>
-          <div class="hotel-feature">
-            <div class="hotel-feature-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            </div>
-            <div class="hotel-feature-content">
-              <h4>Verpflegung geregelt</h4>
-              <p>Mittag- und Abendessen inklusive. Frühstück mit Hotelbuchung.</p>
-            </div>
-          </div>
-          <div class="hotel-feature">
-            <div class="hotel-feature-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div class="hotel-feature-content">
-              <h4>Premium-Zimmer</h4>
-              <p>Ruhige Zimmer mit Komfort — alles für eine Woche Fokus.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hotel-flexible">
-          <div class="hotel-flexible-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div>
-            <h4>Du entscheidest.</h4>
-            <p>Hotel ist optional. Auch ohne Übernachtung kannst du teilnehmen — der Kurs findet trotzdem im B&amp;O Parkhotel statt. Pendler reisen einfach täglich an.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hotel-visual">
-        <div class="hotel-slider" id="hotelSlider">
-          <div class="hotel-slider-track">
-            <div class="hotel-slide active" style="background-image:url('https://www.bo-parkhotel.de/wp-content/uploads/2024/06/BO-Parkhotel-Oberbayern.jpg')"></div>
-            <div class="hotel-slide" style="background-image:url('https://www.bad-aibling.de/fileadmin/Mediendatenbank/KULTUR-EVENTS/MICE_Bad_Aibling/BundO_Parkhotel/BundO-Parkhotel-Bad-Aibling-Cambridge-Saal-Aussenansicht.jpg')"></div>
-            <div class="hotel-slide" style="background-image:url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/a5/c0/ee/b-o-parkhotel.jpg?w=900&amp;h=500&amp;s=1')"></div>
-          </div>
-          <div class="hotel-slider-overlay">
-            <strong>B&amp;O Parkhotel</strong>
-            Bad Aibling · Oberbayern
-          </div>
-          <div class="hotel-slider-dots">
-            <button class="hotel-slider-dot active" data-slide="0" aria-label="Bild 1"></button>
-            <button class="hotel-slider-dot" data-slide="1" aria-label="Bild 2"></button>
-            <button class="hotel-slider-dot" data-slide="2" aria-label="Bild 3"></button>
-          </div>
-        </div>
-        <div class="hotel-visual-stats">
-          <div class="hotel-visual-stat">
-            <div class="num">546&nbsp;€</div>
-            <div class="lbl">7 Nächte inkl. Frühstück · separat zu buchen</div>
-          </div>
-          <div class="hotel-visual-stat">
-            <div class="num">★★★★</div>
-            <div class="lbl">B&amp;O Parkhotel · 4-Sterne</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1583,56 +1681,6 @@ body.modal-open{overflow:hidden}
   </div>
 </section>
 
-<!-- TESTIMONIALS — vor dem Footer -->
-<section id="testimonials" class="testimonials">
-  <div class="container">
-    <div class="section-head center">
-      <div class="pre" style="color:var(--deep-gold)">— Echte Stimmen. Echte Erfolge.</div>
-      <h2 class="section-title">Was Teilnehmer<br>über uns sagen.</h2>
-      <p class="section-sub">Studierende, die mit UCB ihre Examensvorbereitung neu strukturiert haben — und uns ihre Erfahrungen anvertraut haben.</p>
-    </div>
-
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <span class="testimonial-result">Examen bestanden</span>
-        <p class="testimonial-quote">Das Coaching-Gespräch zu Beginn hat alles verändert. Plötzlich hatte ich einen Plan, der zu mir passt — nicht zu allen anderen. In der Woche habe ich mehr verstanden als in den Monaten davor.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">LK</div>
-          <div class="testimonial-author-info">
-            <div class="name">Lara K.</div>
-            <div class="meta">LMU München</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <span class="testimonial-result">Examen bestanden</span>
-        <p class="testimonial-quote">Was UCB ausmacht: Sie nehmen sich wirklich Zeit für dich. Der Plan ist auf mich zugeschnitten, das Feedback persönlich. Endlich nicht mehr eine Nummer in einer großen Gruppe.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JM</div>
-          <div class="testimonial-author-info">
-            <div class="name">Jonas M.</div>
-            <div class="meta">Uni Augsburg</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-quote-mark">"</div>
-        <span class="testimonial-result">Examen bestanden</span>
-        <p class="testimonial-quote">Die Lernumgebung im Hotel hat alles geändert. Keine Ablenkung, keine Zoom-Müdigkeit. Nur Fokus, Klausuren, Feedback. Ich bin als ein anderer Mensch nach Hause gefahren.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SB</div>
-          <div class="testimonial-author-info">
-            <div class="name">Sophia B.</div>
-            <div class="meta">Uni Regensburg</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="faq">
   <div class="container">
@@ -1649,10 +1697,57 @@ body.modal-open{overflow:hidden}
       <div class="faq-item"><div class="faq-q">Wie genau funktioniert das Coaching-Gespräch?</div><div class="faq-a">Nach deiner Anmeldung vereinbaren wir ein kurzes Gespräch — telefonisch oder per Video. Wir wollen verstehen: Wo stehst du? Welche Themen sind deine Stärken? Wo brauchst du am meisten Unterstützung? Daraus bauen wir deinen persönlichen Plan für die Trainingswoche.</div></div>
       <div class="faq-item"><div class="faq-q">Was unterscheidet UCB von anderen Formaten?</div><div class="faq-a">Wir richten uns nicht an die größtmögliche Gruppe, sondern individuell an dich. Statt fixem Lehrplan für alle bekommst du einen Plan, der auf dich zugeschnitten ist. Statt Massenbetrieb arbeiten wir in echten Kleingruppen mit 1:1-Feedback. Statt Auswendiglernen trainieren wir Methodik.</div></div>
       <div class="faq-item"><div class="faq-q">Welche Themen werden im Repetitorium behandelt?</div><div class="faq-a">Im Repetitorium für das Erste Juristische Staatsexamen Bayern liegen die Schwerpunkte auf den examensrelevanten Pflichtfächern Zivilrecht, Strafrecht und Öffentliches Recht. Welche Themen für dich gewichtet werden, klären wir im Coaching-Gespräch. Im Mittelpunkt steht immer die Klausurmethodik: Sachverhalt erfassen, Probleme erkennen, sauber gutachten, Punkte holen.</div></div>
-      <div class="faq-item"><div class="faq-q">Muss ich im Hotel übernachten?</div><div class="faq-a">Nein. Der Kurs findet zwar im B&amp;O Parkhotel Bad Aibling statt, aber die Übernachtung ist optional. Mittag- und Abendessen sind im Kurspreis enthalten — Übernachtung und Frühstück buchst du separat (546 € p. P. für 7 Nächte). Wer pendelt oder anderweitig untergebracht ist, reist täglich an. Bonus: Mit der Hotelbuchung hast du Zugang zum Wellness-Bereich des B&amp;O Parkhotels.</div></div>
-      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.290 € sind enthalten: Coaching-Gespräch zu Beginn, persönlicher Lernplan, sieben Tage intensives Repetitorium, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliche Klausurkorrekturen und 1:1-Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht (546 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
+      <div class="faq-item"><div class="faq-q">Muss ich im Hotel übernachten?</div><div class="faq-a">Nein. Der Kurs findet zwar im B&amp;O Parkhotel Bad Aibling statt, aber die Übernachtung ist optional. Mittag- und Abendessen sind im Kurspreis enthalten — Übernachtung und Frühstück buchst du separat — als Sonderkondition fürs Repetitorium (546 € p. P. für 7 Nächte) über das B&amp;O Parkhotel. Wer pendelt oder anderweitig untergebracht ist, reist täglich an. Bonus: Mit der Hotelbuchung hast du Zugang zum Wellness-Bereich des B&amp;O Parkhotels.</div></div>
+      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.290 € sind enthalten: Coaching-Gespräch zu Beginn, persönlicher Lernplan, sieben Tage intensives Repetitorium, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliche Klausurkorrekturen und 1:1-Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht — als Sonderkondition fürs Repetitorium (546 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
       <div class="faq-item"><div class="faq-q">Was wenn ich kurzfristig absagen muss?</div><div class="faq-a">Bis 4 Wochen vor Kursstart: kostenfreie Stornierung minus Bearbeitungspauschale. Zwischen 4 und 2 Wochen vor Beginn: 50% des Kurspreises. Innerhalb von 2 Wochen vor Beginn: voller Kurspreis. Hotel-Stornierung läuft direkt über das B&amp;O Parkhotel zu deren Konditionen.</div></div>
       <div class="faq-item"><div class="faq-q">Plant ihr weitere Formate?</div><div class="faq-a">Ja. Aktuell starten wir mit dem Repetitorium im B&amp;O Parkhotel Bad Aibling im August 2026 — das ist unser erstes und derzeit einziges Angebot. Geplant sind: weitere Klausurenkurse für das 1. Examen sowie ab 2027 Formate für das 2. Staatsexamen (Assessorexamen, Aktenvortrag, Stationsbegleitung). Wenn du interessiert bist, melde dich an — wir informieren dich, sobald Neues kommt.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <div class="section-head center">
+      <div class="pre" style="color:var(--deep-gold)">— Stimmen zu UCB</div>
+      <h2 class="section-title">Endlich<br>persönliches Lernen.</h2>
+      <p class="section-sub">Was Studierende allgemein über das Lernen mit UCB sagen.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">Endlich mal persönliches Lernen. Man hatte immer Zeit für mich — und endlich habe ich mich getraut zu fragen.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">LK</div>
+          <div class="testimonial-author-info">
+            <div class="name">Lara K.</div>
+            <div class="meta">LMU München</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">Endlich mal eine Stelle bei Jura, wo man persönliche Fragen stellen kann. Man wird ernst genommen, ganz ohne Druck.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JM</div>
+          <div class="testimonial-author-info">
+            <div class="name">Jonas M.</div>
+            <div class="meta">Uni Augsburg</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-quote">Durch UCB habe ich das Studium geschafft. Persönlich, geduldig und immer auf Augenhöhe — nicht eine Nummer in einer großen Gruppe.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SB</div>
+          <div class="testimonial-author-info">
+            <div class="name">Sophia B.</div>
+            <div class="meta">Uni Regensburg</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1771,6 +1866,30 @@ body.modal-open{overflow:hidden}
   });
 })();
 
+// HOTEL VIDEO
+(function(){
+  const wrap = document.getElementById('hotelVideo');
+  if(!wrap) return;
+  const video = document.getElementById('boVideo');
+  const playBtn = document.getElementById('hotelVideoPlay');
+  if(!video || !playBtn) return;
+  
+  playBtn.addEventListener('click', function(){
+    wrap.classList.add('playing');
+    video.controls = true;
+    video.play();
+  });
+  video.addEventListener('pause', function(){
+    if(video.currentTime === 0 || video.ended){
+      wrap.classList.remove('playing');
+    }
+  });
+  video.addEventListener('ended', function(){
+    wrap.classList.remove('playing');
+    video.controls = false;
+  });
+})();
+
 // HOTEL SLIDER
 (function(){
   const slider = document.getElementById('hotelSlider');
@@ -1779,41 +1898,21 @@ body.modal-open{overflow:hidden}
   const dots = slider.querySelectorAll('.hotel-slider-dot');
   let current = 0;
   let timer = null;
-  
+
   function show(index){
-    slides.forEach(function(s,i){
-      s.classList.toggle('active', i === index);
-    });
-    dots.forEach(function(d,i){
-      d.classList.toggle('active', i === index);
-    });
+    slides.forEach(function(s,i){ s.classList.toggle('active', i === index); });
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === index); });
     current = index;
   }
-  
-  function next(){
-    show((current + 1) % slides.length);
-  }
-  
-  function start(){
-    stop();
-    timer = setInterval(next, 5000);
-  }
-  
-  function stop(){
-    if(timer){ clearInterval(timer); timer = null; }
-  }
-  
+  function next(){ show((current + 1) % slides.length); }
+  function start(){ stop(); timer = setInterval(next, 5000); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
   dots.forEach(function(d, i){
-    d.addEventListener('click', function(){
-      show(i);
-      start();
-    });
+    d.addEventListener('click', function(){ show(i); start(); });
   });
-  
-  // Pause on hover
   slider.addEventListener('mouseenter', stop);
   slider.addEventListener('mouseleave', start);
-  
   start();
 })();
 
@@ -1848,46 +1947,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
   });
 });
 
-// Hotel slider
-(function(){
-  var slider = document.getElementById('hotelSlider');
-  if(!slider) return;
-  var slides = slider.querySelectorAll('.hotel-slide');
-  var dots = slider.querySelectorAll('.hotel-slider-dot');
-  var current = 0;
-  var autoplay = null;
-
-  function go(idx){
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = (idx + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-
-  function next(){ go(current + 1); }
-
-  function startAutoplay(){
-    stopAutoplay();
-    autoplay = setInterval(next, 4500);
-  }
-
-  function stopAutoplay(){
-    if(autoplay){ clearInterval(autoplay); autoplay = null; }
-  }
-
-  dots.forEach(function(dot, i){
-    dot.addEventListener('click', function(){
-      go(i);
-      startAutoplay();
-    });
-  });
-
-  slider.addEventListener('mouseenter', stopAutoplay);
-  slider.addEventListener('mouseleave', startAutoplay);
-
-  startAutoplay();
-})();
+// Hotel slider (removed — replaced by video player above)
 
 </script>
 
