@@ -175,6 +175,15 @@ section{padding:72px 0;width:100%;max-width:100%}
 /* TAGESABLAUF — kompakte 2-Spalten Timeline */
 .tagesablauf{background:var(--shell);padding:60px 0;overflow:hidden}
 .tagesablauf-timeline{max-width:880px;margin:32px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+.tagesablauf-summary{max-width:760px;margin:28px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tag-summary-item{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 24px;transition:all .25s}
+.tag-summary-item:hover{border-color:var(--light-gold);box-shadow:0 8px 24px rgba(66,29,29,.06)}
+.tag-summary-icon{width:48px;height:48px;border-radius:10px;background:rgba(240,182,107,.12);border:1px solid var(--light-gold);display:flex;align-items:center;justify-content:center;color:var(--deep-gold);flex-shrink:0}
+.tag-summary-label{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);margin-bottom:3px}
+.tag-summary-value{font-family:'Pilat Wide','Manrope',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.005em;color:var(--near-black);line-height:1.2}
+@media(max-width:600px){
+  .tagesablauf-summary{grid-template-columns:1fr;gap:12px}
+}
 .tag-item{display:flex;gap:14px;align-items:flex-start;padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:8px;transition:all .2s}
 .tag-item:hover{border-color:var(--light-gold);transform:translateY(-1px)}
 .tag-time{flex-shrink:0;font-family:'Pilat Wide','Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--bordeaux);letter-spacing:.005em;width:42px;padding-top:1px}
@@ -1156,7 +1165,7 @@ body.modal-open{overflow:hidden}
           <div class="angebot-badge">Verfügbar</div>
           <div class="angebot-pre">— Repetitorium</div>
           <h3 class="angebot-h">B&amp;O Parkhotel<br>Bad Aibling</h3>
-          <p class="angebot-text">Eine Woche intensives Repetitorium mit Coaching-Gespräch zu Beginn und persönlichem Lernplan. Übernachtung optional — als Sonderkondition fürs Repetitorium (546&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
+          <p class="angebot-text">Eine Woche intensives Repetitorium mit Coaching-Gespräch im Vorfeld und intensives Training. Übernachtung optional — als Sonderkondition fürs Repetitorium (549,50&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
 
           <div class="angebot-meta">
             <div class="angebot-meta-item">
@@ -1173,8 +1182,8 @@ body.modal-open{overflow:hidden}
             </div>
           </div>
 
-          <div class="angebot-price"><span class="currency">€</span>1.290</div>
-          <div class="angebot-price-note">Inkl. Mittag- &amp; Abendessen · Hotel-Sonderkondition 546&nbsp;€ separat</div>
+          <div class="angebot-price"><span class="currency">€</span>1.390</div>
+          <div class="angebot-price-note">Inkl. Mittag- &amp; Abendessen · Hotel-Sonderkondition 549,50&nbsp;€ separat</div>
           <div class="angebot-vat-badge">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
@@ -1302,7 +1311,7 @@ body.modal-open{overflow:hidden}
           </div>
           <div>
             <h4>Du entscheidest.</h4>
-            <p>Übernachtung ist optional und wird direkt beim Hotel gebucht. Gib bei der Anfrage <strong>„UCB-Repetitorium"</strong> an, um die Sonderkondition zu erhalten. Auch ohne Übernachtung kannst du teilnehmen — Pendler reisen täglich an. <a href="https://www.bo-parkhotel.de" target="_blank" rel="noopener" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Zum B&amp;O Parkhotel →</a></p>
+            <p>Übernachtung ist optional und wird direkt beim Hotel gebucht. Beim Zahlvorgang die Mail des Hotels angeben — als Stichwort zur Buchung <strong>„Jura Repetitorium"</strong> nennen, um die Sonderkondition zu erhalten. Auch ohne Übernachtung kannst du teilnehmen — Pendler reisen täglich an. <a href="https://www.bo-parkhotel.de" target="_blank" rel="noopener" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Zum B&amp;O Parkhotel →</a></p>
           </div>
         </div>
       </div>
@@ -1327,7 +1336,7 @@ body.modal-open{overflow:hidden}
 
         <div class="hotel-visual-stats">
           <div class="hotel-visual-stat">
-            <div class="num">546&nbsp;€</div>
+            <div class="num">549,50&nbsp;€</div>
             <div class="lbl">Sonderkondition Repetitorium · 7 Nächte inkl. Frühstück</div>
           </div>
           <div class="hotel-visual-stat">
@@ -1360,8 +1369,8 @@ body.modal-open{overflow:hidden}
   <div class="container">
     <div class="section-head center" style="margin-bottom:32px">
       <div class="pre" style="color:var(--deep-gold)">— Lerninhalte</div>
-      <h2 class="section-title">Drei Rechtsgebiete.<br>Ein System.</h2>
-      <p class="section-sub">Zivilrecht, Strafrecht, Öffentliches Recht — kompakt, übersichtlich, aufs Wesentliche reduziert.</p>
+      <h2 class="section-title">Drei Rechtsgebiete.</h2>
+      <p class="section-sub">Zivilrecht, Strafrecht, Öffentliches Recht.</p>
     </div>
 
     <div class="lerninhalte-grid">
@@ -1410,63 +1419,27 @@ body.modal-open{overflow:hidden}
   <div class="container">
     <div class="section-head center" style="margin-bottom:8px">
       <div class="pre" style="color:var(--deep-gold)">— Tagesablauf</div>
-      <h2 class="section-title" style="font-size:28px">Ein typischer Tag.</h2>
+      <h2 class="section-title" style="font-size:28px">Kurs 9 – 21 Uhr.</h2>
+      <p class="section-sub" style="margin-top:14px">Strukturierter Trainingstag mit Mittag- und Abendessen inklusive.</p>
     </div>
 
-    <div class="tagesablauf-timeline">
-      <div class="tag-item">
-        <div class="tag-time">08:30</div>
-        <div class="tag-content">
-          <h4>Frühstück &amp; Start</h4>
-          <p>Tagesübersicht: was steht an, was hat Priorität.</p>
+    <div class="tagesablauf-summary">
+      <div class="tag-summary-item">
+        <div class="tag-summary-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="tag-summary-content">
+          <div class="tag-summary-label">Kurszeit</div>
+          <div class="tag-summary-value">09:00 – 21:00 Uhr</div>
         </div>
       </div>
-
-      <div class="tag-item">
-        <div class="tag-time">09:00</div>
-        <div class="tag-content">
-          <h4>Themen-Block I</h4>
-          <p>Erklärung &amp; Strukturierung des Tagesthemas.</p>
+      <div class="tag-summary-item">
+        <div class="tag-summary-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
         </div>
-      </div>
-
-      <div class="tag-item">
-        <div class="tag-time">11:00</div>
-        <div class="tag-content">
-          <h4>Anwendung &amp; Fall</h4>
-          <p>Selbst arbeiten, Gutachtenstil einüben.</p>
-        </div>
-      </div>
-
-      <div class="tag-item">
-        <div class="tag-time">12:30</div>
-        <div class="tag-content">
-          <h4>Mittagessen</h4>
-          <p>Stärkung — angenehme Atmosphäre in der Gruppe.</p>
-        </div>
-      </div>
-
-      <div class="tag-item">
-        <div class="tag-time">14:00</div>
-        <div class="tag-content">
-          <h4>Themen-Block II</h4>
-          <p>Vertiefung oder Klausur unter Examensbedingungen.</p>
-        </div>
-      </div>
-
-      <div class="tag-item">
-        <div class="tag-time">17:00</div>
-        <div class="tag-content">
-          <h4>Feedback &amp; Korrektur</h4>
-          <p>1:1-Feedback zu deinen Arbeiten.</p>
-        </div>
-      </div>
-
-      <div class="tag-item">
-        <div class="tag-time">19:00</div>
-        <div class="tag-content">
-          <h4>Abendessen &amp; Ausklang</h4>
-          <p>Optional: Wellness, Spaziergang, freie Lernzeit.</p>
+        <div class="tag-summary-content">
+          <div class="tag-summary-label">Inklusive</div>
+          <div class="tag-summary-value">Mittag- &amp; Abendessen</div>
         </div>
       </div>
     </div>
@@ -1478,7 +1451,7 @@ body.modal-open{overflow:hidden}
   <div class="container">
     <div class="section-head title-light">
       <div class="pre" style="color:var(--gold)">— So läuft es ab</div>
-      <h2 class="section-title">In vier Schritten<br>zu deinem Plan.</h2>
+      <h2 class="section-title">In vier Schritten<br>zu deinem Erfolg.</h2>
       <p class="section-sub" style="color:rgba(255,255,255,.7)">So funktioniert es bei UCB — von der Anmeldung bis ins Training. Klare Struktur, transparente Schritte, kein Auswahlverfahren.</p>
     </div>
 
@@ -1513,7 +1486,7 @@ body.modal-open{overflow:hidden}
         </div>
         <span class="ablauf-num">SCHRITT 04</span>
         <h3 class="ablauf-h">Intensives Training</h3>
-        <p class="ablauf-text">Klausuren schreiben, Feedback erhalten, gezielt besser werden.</p>
+        <p class="ablauf-text">Fälle lösen, Feedback erhalten, gezielt besser werden.</p>
       </div>
     </div>
   </div>
@@ -1639,7 +1612,7 @@ body.modal-open{overflow:hidden}
         </ul>
 
         <div class="path-price">
-          <div class="path-price-amount">1.290&nbsp;€</div>
+          <div class="path-price-amount">1.390&nbsp;€</div>
           <div class="path-price-note">Repetitorium · 7 Tage · USt-frei</div>
         </div>
 
@@ -1706,8 +1679,8 @@ body.modal-open{overflow:hidden}
       <div class="faq-item"><div class="faq-q">Wie genau funktioniert das Coaching-Gespräch?</div><div class="faq-a">Nach deiner Anmeldung vereinbaren wir ein kurzes Gespräch — telefonisch oder per Video. Wir wollen verstehen: Wo stehst du? Welche Themen sind deine Stärken? Wo brauchst du am meisten Unterstützung? Daraus bauen wir deinen persönlichen Plan für die Trainingswoche.</div></div>
       <div class="faq-item"><div class="faq-q">Was unterscheidet UCB von anderen Formaten?</div><div class="faq-a">Wir richten uns nicht an die größtmögliche Gruppe, sondern individuell an dich. Statt fixem Lehrplan für alle bekommst du einen Plan, der auf dich zugeschnitten ist. Statt Massenbetrieb arbeiten wir in echten Kleingruppen mit 1:1-Feedback. Statt Auswendiglernen trainieren wir Methodik.</div></div>
       <div class="faq-item"><div class="faq-q">Welche Themen werden im Repetitorium behandelt?</div><div class="faq-a">Im Repetitorium für das Erste Juristische Staatsexamen Bayern liegen die Schwerpunkte auf den examensrelevanten Pflichtfächern Zivilrecht, Strafrecht und Öffentliches Recht. Welche Themen für dich gewichtet werden, klären wir im Coaching-Gespräch. Im Mittelpunkt steht immer die Klausurmethodik: Sachverhalt erfassen, Probleme erkennen, sauber gutachten, Punkte holen.</div></div>
-      <div class="faq-item"><div class="faq-q">Muss ich im Hotel übernachten?</div><div class="faq-a">Nein. Der Kurs findet zwar im B&amp;O Parkhotel Bad Aibling statt, aber die Übernachtung ist optional. Mittag- und Abendessen sind im Kurspreis enthalten — Übernachtung und Frühstück buchst du separat — als Sonderkondition fürs Repetitorium (546 € p. P. für 7 Nächte) über das B&amp;O Parkhotel. Wer pendelt oder anderweitig untergebracht ist, reist täglich an. Bonus: Mit der Hotelbuchung hast du Zugang zum Wellness-Bereich des B&amp;O Parkhotels.</div></div>
-      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.290 € sind enthalten: Coaching-Gespräch zu Beginn, persönlicher Lernplan, sieben Tage intensives Repetitorium, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliche Klausurkorrekturen und 1:1-Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht — als Sonderkondition fürs Repetitorium (546 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
+      <div class="faq-item"><div class="faq-q">Muss ich im Hotel übernachten?</div><div class="faq-a">Nein. Der Kurs findet zwar im B&amp;O Parkhotel Bad Aibling statt, aber die Übernachtung ist optional. Mittag- und Abendessen sind im Kurspreis enthalten — Übernachtung und Frühstück buchst du separat — als Sonderkondition fürs Repetitorium (549,50 € p. P. für 7 Nächte) über das B&amp;O Parkhotel. Wer pendelt oder anderweitig untergebracht ist, reist täglich an. Bonus: Mit der Hotelbuchung hast du Zugang zum Wellness-Bereich des B&amp;O Parkhotels.</div></div>
+      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.390 € sind enthalten: Coaching-Gespräch im Vorfeld, intensives Training über sieben Tage intensives Repetitorium, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliche Klausurkorrekturen und 1:1-Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht — als Sonderkondition fürs Repetitorium (549,50 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
       <div class="faq-item"><div class="faq-q">Was wenn ich kurzfristig absagen muss?</div><div class="faq-a">Bis 4 Wochen vor Kursstart: kostenfreie Stornierung minus Bearbeitungspauschale. Zwischen 4 und 2 Wochen vor Beginn: 50% des Kurspreises. Innerhalb von 2 Wochen vor Beginn: voller Kurspreis. Hotel-Stornierung läuft direkt über das B&amp;O Parkhotel zu deren Konditionen.</div></div>
       <div class="faq-item"><div class="faq-q">Plant ihr weitere Formate?</div><div class="faq-a">Ja. Aktuell starten wir mit dem Repetitorium im B&amp;O Parkhotel Bad Aibling vom 02.–09.08.2026 — das ist unser erstes und derzeit einziges Angebot. Geplant sind: weitere Klausurenkurse für das 1. Examen sowie ab 2027 Formate für das 2. Staatsexamen (Assessorexamen, Aktenvortrag, Stationsbegleitung). Wenn du interessiert bist, melde dich an — wir informieren dich, sobald Neues kommt.</div></div>
     </div>
