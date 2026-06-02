@@ -400,17 +400,18 @@ section{padding:72px 0;width:100%;max-width:100%}
 .probe-head{text-align:center;margin-bottom:28px}
 .probe-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:var(--near-black);letter-spacing:.005em;line-height:1.15;margin:6px 0 8px}
 .probe-sub{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:520px;margin:0 auto}
-.probe-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.probe-item{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .25s}
-.probe-item.open{border-color:var(--light-gold)}
-.probe-item-head{width:100%;display:flex;align-items:center;gap:14px;padding:18px 22px;background:none;border:none;cursor:pointer;text-align:left;font-family:inherit}
-.probe-item-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);flex-shrink:0;min-width:120px}
+.probe-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.probe-item-head{width:100%;display:flex;align-items:center;gap:14px;padding:18px 22px;background:#fff;border:1px solid var(--border);border-radius:12px;cursor:pointer;text-align:left;font-family:inherit;text-decoration:none;transition:all .25s}
+.probe-item-head:hover{border-color:var(--light-gold);transform:translateY(-1px);box-shadow:0 6px 18px rgba(66,29,29,.06)}
+.probe-item-head:hover .probe-item-chevron{color:var(--bordeaux);transform:translate(2px,-2px)}
+.probe-item-tag{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);flex-shrink:0;min-width:180px}
 .probe-item-title{font-family:'Manrope',sans-serif;font-size:14px;font-weight:700;color:var(--near-black);flex:1}
-.probe-item-chevron{color:var(--muted);flex-shrink:0;transition:transform .3s}
-.probe-item.open .probe-item-chevron{transform:rotate(180deg)}
-.probe-item-body{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.2,.8,.2,1)}
-.probe-item.open .probe-item-body{max-height:200px}
-.probe-item-body p{padding:0 22px 18px;font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+.probe-item-chevron{color:var(--muted);flex-shrink:0;transition:all .25s}
+@media(max-width:600px){
+  .probe-item-head{flex-wrap:wrap;padding:14px 16px;gap:6px}
+  .probe-item-tag{min-width:auto;width:100%}
+  .probe-item-title{font-size:13px}
+}
 @media(max-width:768px){
   .probe-item-tag{min-width:90px;font-size:11px}
   .probe-h{font-size:20px}
@@ -1221,39 +1222,39 @@ body.modal-open{overflow:hidden}
       <div class="probe-head">
         <div class="pre" style="color:var(--deep-gold)">— Probeübersichten</div>
         <h3 class="probe-h">So sehen unsere Lernübersichten aus.</h3>
-        <p class="probe-sub">Drei Fall-Übersichten, wie wir sie im Kurs einsetzen. Kompakt, strukturiert, aufs Wesentliche reduziert. Klicke zum Aufklappen.</p>
+        <p class="probe-sub">Sechs Original-Übersichten aus dem Kurs. Kompakt, strukturiert, aufs Wesentliche reduziert. Klick öffnet das PDF.</p>
       </div>
       <div class="probe-list">
-        <div class="probe-item">
-          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
-            <span class="probe-item-tag">Zivilrecht</span>
-            <span class="probe-item-title">Fall-Übersicht Kaufrecht</span>
-            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="probe-item-body">
-            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine kompakte Strukturierung der prüfungsrelevanten Konstellationen im Kaufrecht.</p>
-          </div>
-        </div>
-        <div class="probe-item">
-          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
-            <span class="probe-item-tag">Strafrecht</span>
-            <span class="probe-item-title">Fall-Übersicht Tötungsdelikte</span>
-            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="probe-item-body">
-            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine klare Aufbauhilfe für die Prüfung der Tötungsdelikte mit den gängigen Problemfeldern.</p>
-          </div>
-        </div>
-        <div class="probe-item">
-          <button class="probe-item-head" onclick="this.parentElement.classList.toggle('open')">
-            <span class="probe-item-tag">Öffentliches Recht</span>
-            <span class="probe-item-title">Fall-Übersicht Grundrechte</span>
-            <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="probe-item-body">
-            <p>Übersicht folgt in Kürze. Im Kurs erhältst du eine strukturierte Prüfungsreihenfolge für die Grundrechte mit Schwerpunktsetzung.</p>
-          </div>
-        </div>
+        <a class="probe-item-head" href="/assets/ubersicht_zivilrecht.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Zivilrecht</span>
+          <span class="probe-item-title">Übersicht Zivilrecht</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="probe-item-head" href="/assets/ubersicht_strafrecht.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Strafrecht</span>
+          <span class="probe-item-title">Übersicht Strafrecht</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="probe-item-head" href="/assets/ubersicht_offentliches_recht.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Öffentliches Recht</span>
+          <span class="probe-item-title">Übersicht Öffentliches Recht</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="probe-item-head" href="/assets/ubersicht_kauf_und_werkrecht.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Zivilrecht · vertieft</span>
+          <span class="probe-item-title">Übersicht Kauf- und Werkrecht</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="probe-item-head" href="/assets/ubersicht_unterlassen.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Strafrecht · vertieft</span>
+          <span class="probe-item-title">Übersicht Unterlassen</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+        <a class="probe-item-head" href="/assets/ubersicht_der_verwaltungsakt.pdf" target="_blank" rel="noopener">
+          <span class="probe-item-tag">Öffentliches Recht · vertieft</span>
+          <span class="probe-item-title">Übersicht Der Verwaltungsakt</span>
+          <svg class="probe-item-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
       </div>
     </div>
   </div>
