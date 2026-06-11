@@ -181,6 +181,15 @@ section{padding:72px 0;width:100%;max-width:100%}
 .tag-summary-icon{width:48px;height:48px;border-radius:10px;background:rgba(240,182,107,.12);border:1px solid var(--light-gold);display:flex;align-items:center;justify-content:center;color:var(--deep-gold);flex-shrink:0}
 .tag-summary-label{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;color:var(--deep-gold);margin-bottom:3px}
 .tag-summary-value{font-family:'Pilat Wide','Manrope',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.005em;color:var(--near-black);line-height:1.2}
+.tagesablauf-phases{max-width:760px;margin:28px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tag-phase{background:#fff;border:1px solid var(--border);border-radius:12px;padding:26px 26px;transition:all .25s}
+.tag-phase:hover{border-color:var(--light-gold);box-shadow:0 8px 24px rgba(66,29,29,.06)}
+.tag-phase-label{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--deep-gold);margin-bottom:6px}
+.tag-phase-h{font-family:'Pilat Wide','Manrope',sans-serif;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:.005em;color:var(--near-black);line-height:1.2;margin-bottom:10px}
+.tag-phase-text{font-size:13.5px;color:var(--muted);line-height:1.65}
+.tagesablauf-meta{display:flex;align-items:center;justify-content:center;gap:10px;margin:22px auto 0;font-size:13px;font-weight:600;color:var(--near-black)}
+.tagesablauf-meta svg{color:var(--deep-gold);flex-shrink:0}
+@media(max-width:700px){.tagesablauf-phases{grid-template-columns:1fr;gap:12px}}
 @media(max-width:600px){
   .tagesablauf-summary{grid-template-columns:1fr;gap:12px}
 }
@@ -960,7 +969,7 @@ body.modal-open{overflow:hidden}
             </div>
             <div class="hero-meta-text">
               <div class="lbl">Fokus</div>
-              <div class="val">1. &amp; 2. Staatsexamen</div>
+              <div class="val">1. Staatsexamen Bayern</div>
             </div>
           </div>
           <div class="hero-meta-item">
@@ -999,7 +1008,7 @@ body.modal-open{overflow:hidden}
     <div class="usp-strip-inner">
       <div class="usp-item">
         <svg class="usp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>
-        <div class="usp-text">Individuelles Coaching-Gespräch zu Beginn</div>
+        <div class="usp-text">Individuelles Coaching-Gespräch vor Kursstart</div>
       </div>
       <div class="usp-item">
         <svg class="usp-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -1023,7 +1032,7 @@ body.modal-open{overflow:hidden}
     <div class="section-head">
       <div class="pre" style="color:var(--deep-gold)">— Das UCB Repetitorium</div>
       <h2 class="section-title">Examensvorbereitung,<br>die zu dir passt.</h2>
-      <p class="section-sub">Wir bereiten dich auf das Juristische Staatsexamen vor — mit persönlicher Betreuung, klaren Lerninhalten und Lernplänen, die wirklich zu dir passen.</p>
+      <p class="section-sub">Wir bereiten dich auf das Juristische Staatsexamen vor — mit persönlicher Betreuung, klaren Lerninhalten und Lernübersichten, die wirklich zu dir passen.</p>
     </div>
 
     <div class="problem-grid">
@@ -1039,7 +1048,7 @@ body.modal-open{overflow:hidden}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3 class="problem-h">Methodik &amp; Strategie</h3>
-        <p class="problem-text">Klausur strukturieren, sauber gutachten, gezielt Punkte holen.</p>
+        <p class="problem-text">Klausur strukturieren, sauber den Gutachtenstil einhalten, gezielt Punkte holen.</p>
       </div>
       <div class="problem-card c3">
         <div class="problem-icon-wrap">
@@ -1061,7 +1070,7 @@ body.modal-open{overflow:hidden}
           <div>
             <div class="tailored-card-pre">— Unser Ansatz</div>
             <h2 class="tailored-card-h">Verstehen.<br>Nicht auswendig lernen.</h2>
-            <p class="tailored-card-text">Wir setzen auf Systemverständnis statt Stoffmasse. Im 1:1, abgestimmt auf dich.</p>
+            <p class="tailored-card-text">Wir setzen auf Systemverständnis statt Stoffmasse. Mit praktischen Arbeiten und persönlichem Feedback.</p>
           </div>
           <div class="tailored-card-flow">
             <div class="tailored-flow-item"><div class="tailored-flow-num">01</div><div>Anmeldung &amp; Buchung</div></div>
@@ -1078,8 +1087,8 @@ body.modal-open{overflow:hidden}
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>
           </div>
           <div class="tailored-content">
-            <h3>Coaching-Gespräch zu Beginn</h3>
-            <p>Wo stehst du, wo willst du hin, was funktioniert bei dir? Daraus entsteht dein Plan.</p>
+            <h3>Coaching-Gespräch vor Kursstart</h3>
+            <p>Wo stehst du, wo willst du hin, was funktioniert bei dir? Daraus entsteht dein Kurs.</p>
           </div>
         </div>
         <div class="tailored-item">
@@ -1097,7 +1106,7 @@ body.modal-open{overflow:hidden}
           </div>
           <div class="tailored-content">
             <h3>Echte Kleingruppe</h3>
-            <p>Jede Frage wird beantwortet — niemand verschwindet im Hintergrund.</p>
+            <p>Jede Frage wird beantwortet — niemand wird übergangen.</p>
           </div>
         </div>
         <div class="tailored-item">
@@ -1153,20 +1162,16 @@ body.modal-open{overflow:hidden}
     <!-- ERSTES STAATSEXAMEN -->
     <div class="examen-block">
       <div class="examen-block-head">
-        <div class="examen-tag examen-tag-active">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Verfügbar
-        </div>
-        <h3 class="examen-block-h">Aktuell verfügbar · Erstes Juristisches Staatsexamen</h3>
+        <h3 class="examen-block-h">Crashkurs für das Erste Juristische Staatsexamen</h3>
       </div>
 
       <div class="angebote-grid">
         <!-- Featured: Bad Aibling August 2026 -->
         <div class="angebot-card featured">
           <div class="angebot-badge">Verfügbar</div>
-          <div class="angebot-pre">— Repetitorium</div>
+          <div class="angebot-pre">— Crashkurs</div>
           <h3 class="angebot-h">B&amp;O Parkhotel<br>Bad Aibling</h3>
-          <p class="angebot-text">Eine Woche intensives Repetitorium mit Coaching-Gespräch im Vorfeld und intensives Training. Übernachtung optional — als Sonderkondition fürs Repetitorium (549,50&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
+          <p class="angebot-text">Ein intensiver Crashkurs mit Coaching-Gespräch im Vorfeld und intensivem Training. Übernachtung optional — als Sonderkondition fürs Repetitorium (549,50&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
 
           <div class="angebot-meta">
             <div class="angebot-meta-item">
@@ -1185,11 +1190,6 @@ body.modal-open{overflow:hidden}
 
           <div class="angebot-price"><span class="currency">€</span>1.390</div>
           <div class="angebot-price-note">Inkl. Mittag- &amp; Abendessen · Hotel-Sonderkondition 549,50&nbsp;€ separat</div>
-          <div class="angebot-vat-badge">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Umsatzsteuerfrei nach §&nbsp;4 Nr.&nbsp;21 UStG
-          </div>
-
           <a href="/buchen/" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt buchen →</a>
         </div>
 
@@ -1198,7 +1198,7 @@ body.modal-open{overflow:hidden}
           <div class="angebot-badge">Weitere Termine in Planung</div>
           <h3 class="angebot-h">Repetitorium<br>1. Staatsexamen</h3>
           <p class="angebot-text">Weitere Termine fürs 1. Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
-          <a href="#anmelden" class="btn btn-bordeaux-outline">Mehr erfahren</a>
+          <a href="#anmelden" class="btn btn-bordeaux-outline">Informieren →</a>
         </div>
       </div>
     </div>
@@ -1220,7 +1220,7 @@ body.modal-open{overflow:hidden}
     <!-- PROBEÜBERSICHTEN -->
     <div class="probe-block">
       <div class="probe-head">
-        <div class="pre" style="color:var(--deep-gold)">— Probeübersichten</div>
+        <div class="pre" style="color:var(--deep-gold)">— Beispiel-Übersichten</div>
         <h3 class="probe-h">So sehen unsere Lernübersichten aus.</h3>
         <p class="probe-sub">Drei Original-Übersichten aus dem Kurs. Kompakt, strukturiert, aufs Wesentliche reduziert. Klick öffnet das PDF.</p>
       </div>
@@ -1248,9 +1248,9 @@ body.modal-open{overflow:hidden}
   <div class="container">
     <div class="hotel-grid">
       <div>
-        <div class="pre" style="color:var(--deep-gold)">— Optional · B&amp;O Parkhotel Bad Aibling</div>
+        <div class="pre" style="color:var(--deep-gold)">— Übernachtung im B&amp;O Parkhotel Bad Aibling</div>
         <h2 class="section-title">Lernen mit Abstand.<br>Vom Alltag.</h2>
-        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:560px">Das Repetitorium findet im B&amp;O Parkhotel Bad Aibling statt. Mittag- und Abendessen sind im Kurspreis enthalten. Übernachtung &amp; Frühstück buchst du separat über das Hotel — mit Zugang zum <strong>Wellness-Bereich</strong>.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:560px">Der Crashkurs findet im B&amp;O Parkhotel Bad Aibling statt. Mittag- und Abendessen sind im Kurspreis enthalten. Übernachtung &amp; Frühstück buchst du separat über das Hotel — mit Zugang zum <strong>Wellness-Bereich</strong>.</p>
 
         <div class="hotel-features">
           <div class="hotel-feature">
@@ -1297,7 +1297,7 @@ body.modal-open{overflow:hidden}
           </div>
           <div>
             <h4>Du entscheidest.</h4>
-            <p>Übernachtung ist optional und wird direkt beim Hotel gebucht. Beim Zahlvorgang die Mail des Hotels angeben — als Stichwort zur Buchung <strong>„Jura Repetitorium"</strong> nennen, um die Sonderkondition zu erhalten. Auch ohne Übernachtung kannst du teilnehmen — Pendler reisen täglich an. <a href="https://www.bo-parkhotel.de" target="_blank" rel="noopener" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Zum B&amp;O Parkhotel →</a></p>
+            <p>Übernachtung ist optional und wird direkt beim Hotel gebucht. Beim Zahlvorgang die <a href="mailto:tagung@bo-parkhotel.de" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Mail des Hotels</a> angeben — als Stichwort <strong>„UCB Crashkurs"</strong> nennen, um die Sonderkondition zu erhalten. Auch ohne Übernachtung kannst du teilnehmen — Pendler reisen täglich an. <a href="https://www.bo-parkhotel.de" target="_blank" rel="noopener" style="color:var(--bordeaux);font-weight:600;text-decoration:underline">Zum B&amp;O Parkhotel →</a></p>
           </div>
         </div>
       </div>
@@ -1356,7 +1356,7 @@ body.modal-open{overflow:hidden}
     <div class="section-head center" style="margin-bottom:32px">
       <div class="pre" style="color:var(--deep-gold)">— Lerninhalte</div>
       <h2 class="section-title">Drei Rechtsgebiete.</h2>
-      <p class="section-sub">Zivilrecht, Strafrecht, Öffentliches Recht.</p>
+      <p class="section-sub">Crashkurs. Fokus auf Systematik und Verständnis — das bringt die Punkte im Examen.</p>
     </div>
 
     <div class="lerninhalte-grid">
@@ -1364,19 +1364,19 @@ body.modal-open{overflow:hidden}
         <div class="lern-card-num">01</div>
         <div class="lern-card-pre">— Säule I</div>
         <h3 class="lern-card-h">Zivilrecht</h3>
-        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht.</p>
+        <p class="lern-card-text">BGB AT, Schuldrecht, Sachenrecht — inklusive examensrelevanter Besonderheiten der Nebengebiete.</p>
       </div>
       <div class="lern-card">
         <div class="lern-card-num">02</div>
         <div class="lern-card-pre">— Säule II</div>
         <h3 class="lern-card-h">Strafrecht</h3>
-        <p class="lern-card-text">AT und BT, Klausurtechnik, gängige Problemfälle.</p>
+        <p class="lern-card-text">AT, BT und Prozessrecht — inklusive examensrelevanter Problemfälle.</p>
       </div>
       <div class="lern-card">
         <div class="lern-card-num">03</div>
         <div class="lern-card-pre">— Säule III</div>
         <h3 class="lern-card-h">Öffentliches Recht</h3>
-        <p class="lern-card-text">Verfassungs- und Verwaltungsrecht, prozessuale Eigenheiten.</p>
+        <p class="lern-card-text">Allgemeines und Besonderes Verwaltungsrecht, Verfassungsrecht — inklusive examensrelevanter Problemfälle.</p>
       </div>
     </div>
 
@@ -1406,28 +1406,25 @@ body.modal-open{overflow:hidden}
     <div class="section-head center" style="margin-bottom:8px">
       <div class="pre" style="color:var(--deep-gold)">— Tagesablauf</div>
       <h2 class="section-title" style="font-size:28px">Kurs 9 – 21 Uhr.</h2>
-      <p class="section-sub" style="margin-top:14px">Strukturierter Trainingstag mit Mittag- und Abendessen inklusive.</p>
+      <p class="section-sub" style="margin-top:14px">Strukturierter Trainingstag.</p>
     </div>
 
-    <div class="tagesablauf-summary">
-      <div class="tag-summary-item">
-        <div class="tag-summary-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="tag-summary-content">
-          <div class="tag-summary-label">Kurszeit</div>
-          <div class="tag-summary-value">09:00 – 21:00 Uhr</div>
-        </div>
+    <div class="tagesablauf-phases">
+      <div class="tag-phase">
+        <div class="tag-phase-label">Vormittag</div>
+        <div class="tag-phase-h">Theorie-Teil</div>
+        <p class="tag-phase-text">Erläuterungen mit strukturierten Übersichten.</p>
       </div>
-      <div class="tag-summary-item">
-        <div class="tag-summary-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-        <div class="tag-summary-content">
-          <div class="tag-summary-label">Inklusive</div>
-          <div class="tag-summary-value">Mittag- &amp; Abendessen</div>
-        </div>
+      <div class="tag-phase">
+        <div class="tag-phase-label">Nachmittag</div>
+        <div class="tag-phase-h">Praxis-Teil</div>
+        <p class="tag-phase-text">Lösen von Fällen, Arbeiten mit echtem Feedback.</p>
       </div>
+    </div>
+
+    <div class="tagesablauf-meta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Kurs 9 – 21 Uhr · Mittag- und Abendessen inklusive
     </div>
   </div>
 </section>
@@ -1448,7 +1445,7 @@ body.modal-open{overflow:hidden}
         </div>
         <span class="ablauf-num">SCHRITT 01</span>
         <h3 class="ablauf-h">Anmelden</h3>
-        <p class="ablauf-text">Anmeldeformular ausfüllen. Wir melden uns mit allen Details.</p>
+        <p class="ablauf-text">Anmeldeformular ausfüllen.</p>
       </div>
       <div class="ablauf-step">
         <div class="ablauf-step-icon">
@@ -1471,8 +1468,8 @@ body.modal-open{overflow:hidden}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
         </div>
         <span class="ablauf-num">SCHRITT 04</span>
-        <h3 class="ablauf-h">Intensives Training</h3>
-        <p class="ablauf-text">Fälle lösen, Feedback erhalten, gezielt besser werden.</p>
+        <h3 class="ablauf-h">Fälle lösen</h3>
+        <p class="ablauf-text">Intensiv trainieren, Feedback erhalten, gezielt besser werden.</p>
       </div>
     </div>
   </div>
@@ -1485,7 +1482,7 @@ body.modal-open{overflow:hidden}
     <div class="section-head center">
       <div class="pre" style="color:var(--deep-gold)">— Impressionen</div>
       <h2 class="section-title">Einblicke in<br>unsere Kurse.</h2>
-      <p class="section-sub">Konzentriertes Arbeiten, persönliches Coaching, intensive Klausurenphasen — so läuft eine Trainingswoche bei uns ab.</p>
+      <p class="section-sub">Konzentriertes Arbeiten, persönliches Coaching, intensives Lernen — so läuft eine Trainingswoche bei uns ab.</p>
     </div>
 
     <div class="impressionen-grid">
@@ -1496,11 +1493,11 @@ body.modal-open{overflow:hidden}
           <span class="impression-desc">Intensive Klausurenbesprechung in der Kleingruppe</span>
         </figcaption>
       </figure>
-      <figure class="impression-card" data-index="1" data-large="images/vortrag01.jpg" data-label="1:1-Coaching" data-desc="Persönliche Klausurkorrektur und individuelles Feedback — direkt am Tisch, ohne Umwege, mit konkreten Verbesserungsvorschlägen.">
+      <figure class="impression-card" data-index="1" data-large="images/vortrag01.jpg" data-label="1:1-Coaching" data-desc="Persönliches Feedback und individuelle Betreuung — direkt am Tisch, ohne Umwege, mit konkreten Verbesserungsvorschlägen.">
         <div class="impression-img" style="background-image:url('images/vortrag01.jpg')"></div>
         <figcaption>
           <span class="impression-label">1:1-Coaching</span>
-          <span class="impression-desc">Persönliche Klausurkorrektur und individuelles Feedback</span>
+          <span class="impression-desc">Persönliches Feedback und individuelle Betreuung</span>
         </figcaption>
       </figure>
       <figure class="impression-card" data-index="2" data-large="images/buch01.jpg" data-label="Klausurensimulation" data-desc="Echte Examensatmosphäre — unter Originalbedingungen schreiben, um sich an Zeitdruck und Konzentration zu gewöhnen.">
@@ -1570,7 +1567,6 @@ body.modal-open{overflow:hidden}
     <div class="anmelden-paths">
       <!-- WEG A: Direktbuchung -->
       <div class="path-card path-card-primary">
-        <div class="path-badge">Empfohlen</div>
         <div class="path-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.68.94 6.36 2.64"/></svg>
         </div>
@@ -1599,7 +1595,7 @@ body.modal-open{overflow:hidden}
 
         <div class="path-price">
           <div class="path-price-amount">1.390&nbsp;€</div>
-          <div class="path-price-note">Repetitorium · 7 Tage · USt-frei</div>
+          <div class="path-price-note">Repetitorium · 7 Tage</div>
         </div>
 
         <a href="/buchen/" class="btn btn-gold path-cta">Jetzt buchen →</a>
@@ -1621,19 +1617,19 @@ body.modal-open{overflow:hidden}
         <ul class="path-features">
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Unverbindliche Anfrage — keine Zahlung
+            Die Anfrage ist unverbindlich
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Persönliche Antwort innerhalb von 48 Stunden
+            Persönliche Antwort innerhalb von 2 Arbeitstagen
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Beratung zum passenden Kursformat
           </li>
           <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Buchungslink direkt per Mail im Anschluss
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Oder direkt anrufen: <a href="tel:+4989645205">089&nbsp;645205</a>
           </li>
         </ul>
 
@@ -1654,19 +1650,18 @@ body.modal-open{overflow:hidden}
   <div class="container">
     <div class="section-head">
       <div class="pre" style="color:var(--deep-gold)">— Häufige Fragen</div>
-      <h2 class="section-title">Was du wissen musst.</h2>
-      <p class="section-sub">Die wichtigsten Antworten auf einen Blick. Bei weiteren Fragen schreib uns einfach.</p>
+      <p class="section-sub"><strong>Die wichtigsten Antworten auf einen Blick.</strong> Bei weiteren Fragen schreib uns einfach.</p>
     </div>
 
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">Was ist das UCB Repetitorium?</div><div class="faq-a">Das UCB Repetitorium bereitet umfassend auf die Juristischen Staatsexamina (1. und 2. Staatsexamen) vor — mit persönlichem Coaching, individuellen Lernplänen und intensivem Training. Aktuell verfügbar ist unser Format für das Erste Juristische Staatsexamen vom 02.–09.08.2026 — weitere Formate folgen.</div></div>
+      <div class="faq-item"><div class="faq-q">Was ist das UCB Repetitorium?</div><div class="faq-a">Das UCB Repetitorium bereitet umfassend auf die Juristischen Staatsexamina (1. und 2. Staatsexamen) vor — mit persönlichem Coaching, individuellem Fragen und intensivem Training. Aktuell verfügbar ist unser Format für das Erste Juristische Staatsexamen vom 02.–09.08.2026 — weitere Formate folgen.</div></div>
       <div class="faq-item"><div class="faq-q">Für welches Examen ist das Repetitorium?</div><div class="faq-a">Das aktuelle Repetitorium im B&amp;O Parkhotel Bad Aibling vom 02.–09.08.2026 richtet sich an Examenskandidaten für das <strong>Erste Juristische Staatsexamen in Bayern</strong>. Formate für das Zweite Staatsexamen (Assessorexamen) sind in Vorbereitung und für 2027 geplant.</div></div>
-      <div class="faq-item"><div class="faq-q">Für wen ist das Repetitorium geeignet?</div><div class="faq-a">Für alle, die ihr Examen schreiben wollen — egal welches Niveau. Manche wollen sicher bestehen, andere zielen auf ein zweistelliges Ergebnis. Wir decken die ganze Bandbreite ab. Im Coaching-Gespräch klären wir gemeinsam dein Ziel und bauen darauf den Plan auf. Es gibt kein Auswahlverfahren — wer dabei sein will, ist dabei.</div></div>
-      <div class="faq-item"><div class="faq-q">Wie genau funktioniert das Coaching-Gespräch?</div><div class="faq-a">Nach deiner Anmeldung vereinbaren wir ein kurzes Gespräch — telefonisch oder per Video. Wir wollen verstehen: Wo stehst du? Welche Themen sind deine Stärken? Wo brauchst du am meisten Unterstützung? Daraus bauen wir deinen persönlichen Plan für die Trainingswoche.</div></div>
-      <div class="faq-item"><div class="faq-q">Was unterscheidet UCB von anderen Formaten?</div><div class="faq-a">Wir richten uns nicht an die größtmögliche Gruppe, sondern individuell an dich. Statt fixem Lehrplan für alle bekommst du einen Plan, der auf dich zugeschnitten ist. Statt Massenbetrieb arbeiten wir in echten Kleingruppen mit 1:1-Feedback. Statt Auswendiglernen trainieren wir Methodik.</div></div>
-      <div class="faq-item"><div class="faq-q">Welche Themen werden im Repetitorium behandelt?</div><div class="faq-a">Im Repetitorium für das Erste Juristische Staatsexamen Bayern liegen die Schwerpunkte auf den examensrelevanten Pflichtfächern Zivilrecht, Strafrecht und Öffentliches Recht. Welche Themen für dich gewichtet werden, klären wir im Coaching-Gespräch. Im Mittelpunkt steht immer die Klausurmethodik: Sachverhalt erfassen, Probleme erkennen, sauber gutachten, Punkte holen.</div></div>
+      <div class="faq-item"><div class="faq-q">Für wen ist das Repetitorium geeignet?</div><div class="faq-a">Für alle, die ihr Examen schreiben wollen — egal welches Niveau. Manche wollen sicher bestehen, andere zielen auf ein zweistelliges Ergebnis. Wir decken die ganze Bandbreite ab. Im Coaching-Gespräch klären wir gemeinsam dein Ziel und bauen darauf deine Betreuung auf.</div></div>
+      <div class="faq-item"><div class="faq-q">Wie genau funktioniert das Coaching-Gespräch?</div><div class="faq-a">Nach deiner Anmeldung vereinbaren wir ein kurzes Gespräch — telefonisch oder per Video. Wir wollen verstehen: Wo stehst du? Welche Themen sind deine Stärken? Wo brauchst du am meisten Unterstützung?</div></div>
+      <div class="faq-item"><div class="faq-q">Was unterscheidet UCB von anderen Formaten?</div><div class="faq-a">Wir richten uns nicht an die größtmögliche Gruppe, sondern individuell an dich. Statt Massenbetrieb arbeiten wir in echten Kleingruppen mit persönlichem Feedback. Statt Auswendiglernen trainieren wir Methodik.</div></div>
+      <div class="faq-item"><div class="faq-q">Welche Themen werden im Repetitorium behandelt?</div><div class="faq-a">Im Crashkurs für das Erste Juristische Staatsexamen Bayern liegen die Schwerpunkte auf den examensrelevanten Pflichtfächern Zivilrecht, Strafrecht und Öffentliches Recht. Die Themen werden durch unsere jahrgangsbesten Dozenten nach der Examensrelevanz gewichtet. Neben Theorievermittlung liegt ein Schwerpunkt auf praktischem Arbeiten und Lernen durch Feedback.</div></div>
       <div class="faq-item"><div class="faq-q">Muss ich im Hotel übernachten?</div><div class="faq-a">Nein. Der Kurs findet zwar im B&amp;O Parkhotel Bad Aibling statt, aber die Übernachtung ist optional. Mittag- und Abendessen sind im Kurspreis enthalten — Übernachtung und Frühstück buchst du separat — als Sonderkondition fürs Repetitorium (549,50 € p. P. für 7 Nächte) über das B&amp;O Parkhotel. Wer pendelt oder anderweitig untergebracht ist, reist täglich an. Bonus: Mit der Hotelbuchung hast du Zugang zum Wellness-Bereich des B&amp;O Parkhotels.</div></div>
-      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.390 € sind enthalten: Coaching-Gespräch im Vorfeld, intensives Training über sieben Tage intensives Repetitorium, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliche Klausurkorrekturen und 1:1-Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht — als Sonderkondition fürs Repetitorium (549,50 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
+      <div class="faq-item"><div class="faq-q">Was ist im Kurspreis enthalten?</div><div class="faq-a">Im Kurspreis von 1.390 € sind enthalten: Coaching-Gespräch im Vorfeld, intensives Training über sieben Tage, <strong>Mittag- und Abendessen</strong>, alle Lernmaterialien, persönliches Feedback. <strong>Übernachtung und Frühstück</strong> sind nicht im Kurspreis enthalten und werden separat über das B&amp;O Parkhotel Bad Aibling gebucht — als Sonderkondition fürs Repetitorium (549,50 € p. P. für 7 Nächte inkl. Frühstück).</div></div>
       <div class="faq-item"><div class="faq-q">Was wenn ich kurzfristig absagen muss?</div><div class="faq-a">Bis 4 Wochen vor Kursstart: kostenfreie Stornierung minus Bearbeitungspauschale. Zwischen 4 und 2 Wochen vor Beginn: 50% des Kurspreises. Innerhalb von 2 Wochen vor Beginn: voller Kurspreis. Hotel-Stornierung läuft direkt über das B&amp;O Parkhotel zu deren Konditionen.</div></div>
       <div class="faq-item"><div class="faq-q">Plant ihr weitere Formate?</div><div class="faq-a">Ja. Aktuell starten wir mit dem Repetitorium im B&amp;O Parkhotel Bad Aibling vom 02.–09.08.2026 — das ist unser erstes und derzeit einziges Angebot. Geplant sind: weitere Klausurenkurse für das 1. Examen sowie ab 2027 Formate für das 2. Staatsexamen (Assessorexamen, Aktenvortrag, Stationsbegleitung). Wenn du interessiert bist, melde dich an — wir informieren dich, sobald Neues kommt.</div></div>
     </div>
@@ -1953,7 +1948,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <h3 style="font-family:'Pilat Wide','Manrope',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;color:#1A1A1A;margin-bottom:8px">Anfrage erhalten!</h3>
-          <p style="font-size:14px;color:#7A6E64;line-height:1.6">Vielen Dank — wir melden uns innerhalb von 48 Stunden persönlich bei dir. Eine Bestätigungs-E-Mail ist unterwegs.</p>
+          <p style="font-size:14px;color:#7A6E64;line-height:1.6">Vielen Dank — wir melden uns innerhalb von 2 Arbeitstagen persönlich bei dir. Eine Bestätigungs-E-Mail ist unterwegs.</p>
         </div>
       `;
       wrap.scrollIntoView({behavior:'smooth',block:'center'});
