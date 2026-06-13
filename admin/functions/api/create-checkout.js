@@ -116,10 +116,10 @@ async function createStripeSession(data, bookingId, env) {
   params.append('line_items[0][price]', env.STRIPE_PRICE_KLAUSUREN_AUG26);
   params.append('line_items[0][quantity]', '1');
   
-  // Payment methods
-  ['card', 'sepa_debit', 'paypal', 'klarna'].forEach((pm, i) => {
-    params.append(`payment_method_types[${i}]`, pm);
-  });
+  // Payment methods — Stripe shows whatever is activated in the dashboard
+  // (dashboard.stripe.com/settings/payment_methods) and supports this
+  // currency/country. SEPA stays off as long as it is off in the dashboard.
+  params.append('automatic_payment_methods[enabled]', 'true');
 
   // URLs
   params.append('success_url', `${env.PUBLIC_SITE_URL}/erfolg/?session_id={CHECKOUT_SESSION_ID}`);
