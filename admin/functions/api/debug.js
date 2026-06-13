@@ -11,10 +11,38 @@ export async function onRequestGet({ env }) {
       AIRTABLE_BOOKINGS_TABLE: env.AIRTABLE_BOOKINGS_TABLE || 'MISSING',
       AIRTABLE_LEADS_TABLE: env.AIRTABLE_LEADS_TABLE || 'MISSING',
     },
+    stripe_check: {
+      STRIPE_SECRET_KEY: env.STRIPE_SECRET_KEY ? `set (${env.STRIPE_SECRET_KEY.substring(0, 7)}...${env.STRIPE_SECRET_KEY.substring(env.STRIPE_SECRET_KEY.length - 4)})` : 'MISSING',
+      STRIPE_PRICE_KLAUSUREN_AUG26: env.STRIPE_PRICE_KLAUSUREN_AUG26 || 'MISSING',
+      STRIPE_WEBHOOK_SECRET: env.STRIPE_WEBHOOK_SECRET ? `set (${env.STRIPE_WEBHOOK_SECRET.substring(0, 7)}...)` : 'MISSING',
+      PUBLIC_SITE_URL: env.PUBLIC_SITE_URL || 'MISSING',
+    },
+    stripe_price_test: null,
     bookings_test: null,
     leads_test: null,
     raw_bookings_response: null,
   };
+
+  // Verify the price exists in THIS account/mode using the secret key
+  if (env.STRIPE_SECRET_KEY && env.STRIPE_PRICE_KLAUSUREN_AUG26) {
+    try {
+      const res = await fetch(`https://api.stripe.com/v1/prices/${env.STRIPE_PRICE_KLAUSUREN_AUG26}`, {
+        headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` },
+      });
+      const j = await res.json();
+      result.stripe_price_test = {
+        status: res.status,
+        ok: res.ok,
+        price_active: j.active ?? null,
+        price_amount: j.unit_amount ?? null,
+        price_currency: j.currency ?? null,
+        livemode: j.livemode ?? null,
+        error: j.error ? { type: j.error.type, message: j.error.message } : null,
+      };
+    } catch (err) {
+      result.stripe_price_test = { error: err.message };
+    }
+  }
 
   // Try to fetch from Bookings table
   if (env.AIRTABLE_API_KEY && env.AIRTABLE_BASE_ID && env.AIRTABLE_BOOKINGS_TABLE) {
