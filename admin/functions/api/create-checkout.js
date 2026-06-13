@@ -54,7 +54,7 @@ export async function onRequestPost({ request, env }) {
 
   } catch (err) {
     console.error('create-checkout error:', err);
-    return json({ error: err.message || 'Server-Fehler' }, 500);
+    return json({ error: err.message || 'Server-Fehler', detail: String(err && err.message) }, 500);
   }
 }
 
@@ -137,9 +137,7 @@ async function createStripeSession(data, bookingId, env) {
   
   // Billing details for invoice
   params.append('invoice_creation[enabled]', 'true');
-  params.append('invoice_creation[invoice_data][description]', 'Repetitorium UCB Repetitorium — Bad Aibling, August 2026');
-  params.append('invoice_creation[invoice_data][custom_fields][0][name]', 'USt-Hinweis');
-  params.append('invoice_creation[invoice_data][custom_fields][0][value]', 'Umsatzsteuerfrei nach §4 Nr.21 UStG');
+  params.append('invoice_creation[invoice_data][description]', 'Repetitorium UCB — Bad Aibling, August 2026');
 
   const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
