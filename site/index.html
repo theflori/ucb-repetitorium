@@ -1933,7 +1933,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     data.datenschutz = !!data.datenschutz;
     
     try {
-      const res = await fetch('https://ucb-admin.pages.dev/api/submit-lead', {
+      const res = await fetch('https://admin.ucb-rep.de/api/submit-lead', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify(data)
