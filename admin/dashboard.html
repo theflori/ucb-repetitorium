@@ -333,7 +333,7 @@ async function loadAll() {
 
 function renderStats() {
   const paid = bookings.filter(b => b.Status === 'paid');
-  const revenue = paid.reduce((sum, b) => sum + (b.Amount_Paid || 1290), 0);
+  const revenue = paid.reduce((sum, b) => sum + (b.Amount_Paid || 1390), 0);
   const openLeads = leads.filter(l => l.Status === 'new').length;
   const oneWeekAgo = Date.now() - 7*24*60*60*1000;
   const thisWeek = [...bookings, ...leads].filter(r => new Date(r.Created_At).getTime() > oneWeekAgo).length;
@@ -574,7 +574,7 @@ function showDetail(type, id) {
       <div class="modal-section">
         <div class="modal-section-h">Zahlung</div>
         <div class="modal-grid">
-          ${field('Betrag', item.Amount_Paid ? formatCurrency(item.Amount_Paid) : '1.290,00 €')}
+          ${field('Betrag', item.Amount_Paid ? formatCurrency(item.Amount_Paid) : '1.390,00 €')}
           ${field('Newsletter', item.Newsletter ? 'Ja' : 'Nein')}
           ${field('Bezahlt am', formatDate(item.Paid_At))}
           ${item.Stripe_Payment_Intent ? field('Stripe Payment', item.Stripe_Payment_Intent.substring(0, 24) + '…') : ''}
