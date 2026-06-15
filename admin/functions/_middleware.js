@@ -17,6 +17,7 @@ export async function onRequest(context) {
     '/dashboard.html',
     '/api/bookings',
     '/api/leads',
+    '/api/resend-confirmation',
   ];
   
   // Match exact path OR path starting with `/api/leads/` or `/api/bookings/`

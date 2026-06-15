@@ -184,21 +184,35 @@ async function verifyStripeWebhook(payload, sigHeader, secret) {
 // === Emails (via Resend) ===
 
 async function sendCustomerConfirmation(booking, invoiceUrl, env) {
-  const html = await renderEmail('booking-confirmation', {
-    FIRST_NAME: booking.Vorname,
-    LAST_NAME: booking.Nachname,
-    EMAIL: booking.Email,
-    BOOKING_ID: booking.id.substring(0, 8).toUpperCase(),
-    INVOICE_URL: invoiceUrl || `${env.PUBLIC_SITE_URL}`,
-    COURSE_DATES: 'August 2026',
-    RECIPIENT_EMAIL: booking.Email,
-    SUBJECT: 'Buchung bestätigt — Repetitorium Bad Aibling',
-    PREHEADER: 'Deine Buchung ist eingegangen. Hier sind die nächsten Schritte und deine Rechnung.',
-  }, env);
+  const firstName = booking.Vorname || '';
+  const bookingId = (booking.id || '').substring(0, 8).toUpperCase();
+  const invoiceLine = invoiceUrl
+    ? `<p style="margin:0 0 16px">Deine Rechnung kannst du hier abrufen: <a href="${invoiceUrl}" style="color:#421D1D">Rechnung ansehen</a></p>`
+    : '';
+
+  const html = `<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;background:#F8F4EE;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1A1A1A;line-height:1.6">
+  <div style="max-width:560px;margin:0 auto;padding:32px 24px">
+    <div style="background:#421D1D;color:#F0B66B;padding:20px 24px;border-radius:10px 10px 0 0;font-size:18px;font-weight:700;letter-spacing:.02em">UCB REPETITORIUM</div>
+    <div style="background:#fff;padding:28px 24px;border:1px solid #E5DDD0;border-top:none;border-radius:0 0 10px 10px">
+      <p style="margin:0 0 16px">Hallo ${firstName},</p>
+      <p style="margin:0 0 16px">vielen Dank — deine Buchung ist bei uns eingegangen und bestätigt.</p>
+      <table style="width:100%;border-collapse:collapse;margin:0 0 20px;font-size:14px">
+        <tr><td style="padding:8px 0;color:#7A6E64">Kurs</td><td style="padding:8px 0;text-align:right;font-weight:600">Repetitorium — Erstes Juristisches Staatsexamen Bayern</td></tr>
+        <tr><td style="padding:8px 0;color:#7A6E64;border-top:1px solid #E5DDD0">Termin</td><td style="padding:8px 0;text-align:right;font-weight:600;border-top:1px solid #E5DDD0">2.–9. August 2026, Bad Aibling</td></tr>
+        <tr><td style="padding:8px 0;color:#7A6E64;border-top:1px solid #E5DDD0">Buchungsnummer</td><td style="padding:8px 0;text-align:right;font-weight:600;border-top:1px solid #E5DDD0">${bookingId}</td></tr>
+      </table>
+      ${invoiceLine}
+      <p style="margin:0 0 16px">Wir melden uns persönlich bei dir, um dein Coaching-Gespräch vor Kursstart zu vereinbaren.</p>
+      <p style="margin:0 0 4px">Bei Fragen erreichst du uns unter <a href="mailto:info@ucb-muc.de" style="color:#421D1D">info@ucb-muc.de</a> oder 089 645205.</p>
+      <p style="margin:24px 0 0;color:#7A6E64;font-size:13px">UCB - Lohmer Repetitorium UG (haftungsbeschränkt)</p>
+    </div>
+  </div>
+</body></html>`;
 
   await sendMail({
     to: booking.Email,
-    from: 'UCB Repetitorium <noreply@ucb-repetitorium.de>',
+    from: 'UCB Repetitorium <noreply@ucb-rep.de>',
     reply_to: 'info@ucb-muc.de',
     subject: 'Buchung bestätigt — Repetitorium Bad Aibling',
     html,
@@ -214,59 +228,30 @@ async function sendInternalNotification(booking, session, env) {
     klarna: 'Klarna',
   }[paymentMethod] || paymentMethod;
 
-  const html = await renderEmail('internal-booking', {
-    FIRST_NAME: booking.Vorname,
-    LAST_NAME: booking.Nachname,
-    EMAIL: booking.Email,
-    PHONE: booking.Telefon || '—',
-    UNI: booking.Uni,
-    BOOKING_ID: booking.id.substring(0, 8).toUpperCase(),
-    BOOKED_AT: new Date().toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' }),
-    COURSE_DATES: 'August 2026',
-    PAYMENT_METHOD: pmLabel,
-    NEWSLETTER_OPT_IN: booking.Newsletter ? 'Ja' : 'Nein',
-    RECIPIENT_EMAIL: env.ADMIN_EMAIL,
-    SUBJECT: `Neue Buchung — ${booking.Vorname} ${booking.Nachname}`,
-    PREHEADER: `${booking.Vorname} hat gerade gebucht. Coaching-Gespräch in 48h vereinbaren.`,
-  }, env);
+  const bookedAt = new Date().toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' });
+  const html = `<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"></head>
+<body style="margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#1A1A1A;line-height:1.6">
+  <div style="max-width:560px;margin:0 auto;padding:24px">
+    <h2 style="margin:0 0 16px;font-size:18px">Neue Buchung — ${booking.Vorname} ${booking.Nachname}</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:14px">
+      <tr><td style="padding:6px 0;color:#7A6E64">Name</td><td style="padding:6px 0;text-align:right">${booking.Vorname} ${booking.Nachname}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">E-Mail</td><td style="padding:6px 0;text-align:right">${booking.Email}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">Telefon</td><td style="padding:6px 0;text-align:right">${booking.Telefon || '—'}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">Universität</td><td style="padding:6px 0;text-align:right">${booking.Uni || '—'}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">Zahlart</td><td style="padding:6px 0;text-align:right">${pmLabel}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">Newsletter</td><td style="padding:6px 0;text-align:right">${booking.Newsletter ? 'Ja' : 'Nein'}</td></tr>
+      <tr><td style="padding:6px 0;color:#7A6E64">Gebucht am</td><td style="padding:6px 0;text-align:right">${bookedAt}</td></tr>
+    </table>
+    <p style="margin:16px 0 0;font-size:13px;color:#7A6E64">Coaching-Gespräch vor Kursstart vereinbaren.</p>
+  </div>
+</body></html>`;
 
   await sendMail({
     to: env.ADMIN_EMAIL,
-    from: 'UCB Buchungen <noreply@ucb-repetitorium.de>',
-    subject: `🎉 Neue Buchung — ${booking.Vorname} ${booking.Nachname}`,
+    from: 'UCB Buchungen <noreply@ucb-rep.de>',
+    subject: `Neue Buchung — ${booking.Vorname} ${booking.Nachname}`,
     html,
   }, env);
-}
-
-async function renderEmail(templateName, vars, env) {
-  // In production: serve _layout.html and template HTML from Cloudflare Pages assets or KV
-  // For now: fetch from public path
-  const layoutRes = await fetch(`${env.PUBLIC_SITE_URL}/_emails/_layout.html`);
-  const tplRes = await fetch(`${env.PUBLIC_SITE_URL}/_emails/${templateName}.html`);
-  let layout = await layoutRes.text();
-  let template = await tplRes.text();
-  
-  // Replace template-specific conditionals first
-  template = handleConditionals(template, vars);
-  
-  // Inject template content into layout
-  let html = layout.replace('{{CONTENT}}', template);
-
-  // Replace all variables
-  for (const [key, val] of Object.entries(vars)) {
-    html = html.replaceAll(`{{${key}}}`, String(val ?? ''));
-  }
-  // Strip any unfilled placeholders
-  html = html.replace(/\{\{[A-Z_]+\}\}/g, '');
-  return html;
-}
-
-function handleConditionals(template, vars) {
-  // Handles {{IF_X}}...{{END_IF}} — strips block if X is empty/false
-  return template.replace(/\{\{IF_([A-Z_]+)\}\}([\s\S]*?)\{\{END_IF\}\}/g, (match, key, content) => {
-    const v = vars[key] || vars[`${key}_STRING`] || vars[key.toLowerCase()];
-    return v && String(v).trim() !== '' && v !== false ? content : '';
-  });
 }
 
 async function sendMail(opts, env) {

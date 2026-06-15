@@ -676,6 +676,12 @@ function showDetail(type, id) {
       Rechnung
     </a>`;
   }
+  if (type === 'booking') {
+    actions += `<button class="btn-secondary" id="resendBtn" onclick="resendConfirmation('${item.id}', '${(item.Email || '').replace(/'/g, "\\'")}')">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Bestätigung senden
+    </button>`;
+  }
   if (type === 'lead' && item.Status === 'new') {
     actions += `<button class="btn-secondary" onclick="markContacted('${item.id}'); closeDetail();">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -686,6 +692,42 @@ function showDetail(type, id) {
   document.getElementById('modalActions').innerHTML = actions;
   document.getElementById('modalOverlay').classList.add('show');
   document.body.style.overflow = 'hidden';
+}
+
+function resendConfirmation(bookingId, customerEmail) {
+  const choice = prompt(
+    'Bestätigungsmail senden an:\n\n' +
+    '• Leer lassen + OK → an Kunde (' + (customerEmail || 'keine E-Mail') + ')\n' +
+    '• E-Mail eingeben → Testmail an diese Adresse',
+    ''
+  );
+  if (choice === null) return; // cancelled
+
+  const btn = document.getElementById('resendBtn');
+  const orig = btn ? btn.innerHTML : '';
+  if (btn) { btn.disabled = true; btn.innerHTML = 'Senden…'; }
+
+  const body = { bookingId };
+  const to = choice.trim();
+  if (to && to.includes('@')) body.to = to;
+
+  fetch('/api/resend-confirmation', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(body),
+  })
+    .then(async (r) => {
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.detail || data.error || ('HTTP ' + r.status));
+      alert('Bestätigung gesendet an: ' + (data.sent_to || 'Empfänger'));
+    })
+    .catch((err) => {
+      alert('Fehler beim Senden: ' + err.message);
+    })
+    .finally(() => {
+      if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+    });
 }
 
 function closeDetail() {
