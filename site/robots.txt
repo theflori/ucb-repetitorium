@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /erfolg/
+
+Sitemap: https://ucb-rep.de/sitemap.xml
