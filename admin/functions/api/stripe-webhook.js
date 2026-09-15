@@ -199,7 +199,7 @@ async function sendCustomerConfirmation(booking, invoiceUrl, env) {
       <p style="margin:0 0 16px">vielen Dank — deine Buchung ist bei uns eingegangen und bestätigt.</p>
       <table style="width:100%;border-collapse:collapse;margin:0 0 20px;font-size:14px">
         <tr><td style="padding:8px 0;color:#7A6E64">Kurs</td><td style="padding:8px 0;text-align:right;font-weight:600">Repetitorium — Erstes Juristisches Staatsexamen Bayern</td></tr>
-        <tr><td style="padding:8px 0;color:#7A6E64;border-top:1px solid #E5DDD0">Termin</td><td style="padding:8px 0;text-align:right;font-weight:600;border-top:1px solid #E5DDD0">2.–9. August 2026, Bad Aibling</td></tr>
+        <tr><td style="padding:8px 0;color:#7A6E64;border-top:1px solid #E5DDD0">Termin</td><td style="padding:8px 0;text-align:right;font-weight:600;border-top:1px solid #E5DDD0">1.–8. August 2027, Bad Aibling</td></tr>
         <tr><td style="padding:8px 0;color:#7A6E64;border-top:1px solid #E5DDD0">Buchungsnummer</td><td style="padding:8px 0;text-align:right;font-weight:600;border-top:1px solid #E5DDD0">${bookingId}</td></tr>
       </table>
       ${invoiceLine}

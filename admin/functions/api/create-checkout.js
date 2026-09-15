@@ -137,7 +137,7 @@ async function createStripeSession(data, bookingId, env) {
   
   // Billing details for invoice
   params.append('invoice_creation[enabled]', 'true');
-  params.append('invoice_creation[invoice_data][description]', 'Repetitorium UCB — Bad Aibling, August 2026');
+  params.append('invoice_creation[invoice_data][description]', 'Repetitorium UCB — Bad Aibling, August 2027');
 
   const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
