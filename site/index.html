@@ -250,7 +250,9 @@ section{padding:72px 0;width:100%;max-width:100%}
 .examen-tag-active{background:var(--gold-tint);color:var(--deep-gold);border:1px solid var(--light-gold)}
 .examen-tag-soon{background:var(--shell);color:var(--muted);border:1px solid var(--border)}
 @media(max-width:640px){.examen-block-head{flex-direction:column;align-items:flex-start;gap:10px}.examen-block-h{font-size:18px}}
-.angebote-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:0}
+.angebote-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;margin-top:0}
+.angebote-grid-secondary{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+@media(max-width:860px){.angebote-grid-secondary{grid-template-columns:1fr}}
 .angebot-card{background:var(--shell);border:1px solid var(--border);border-radius:14px;padding:40px 36px;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .angebot-card.featured{background:var(--bordeaux);color:#fff;border:1px solid var(--bordeaux)}
 .angebot-badge{display:inline-block;font-family:'Pilat Wide','Manrope',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:5px 12px;border-radius:4px;margin-bottom:16px;width:fit-content}
@@ -279,6 +281,18 @@ section{padding:72px 0;width:100%;max-width:100%}
 .angebot-price-note{font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-top:-12px;margin-bottom:18px}
 .angebot-card.featured .angebot-price-note{color:rgba(240,182,107,.7)}
 .angebot-card.upcoming .angebot-price-note{color:var(--dim)}
+.angebot-card.notify{background:#fff;border:1px solid var(--border)}
+.angebot-card.notify .angebot-pre{color:var(--deep-gold)}
+.angebot-card.notify .angebot-h{color:var(--near-black)}
+.angebot-card.notify .angebot-text{color:var(--muted)}
+.angebot-card.notify .angebot-feature-list{list-style:none;padding:0;margin:0 0 24px}
+.angebot-card.notify .angebot-feature-list li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--near-black);line-height:1.5;margin-bottom:9px}
+.angebot-card.notify .angebot-feature-list svg{color:var(--deep-gold);flex-shrink:0;margin-top:3px}
+.angebot-card.notify .angebot-when{display:inline-flex;align-items:center;gap:7px;font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--deep-gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:16px}
+.angebot-card.notify .angebot-when svg{color:var(--deep-gold)}
+.btn-notify{display:inline-flex;align-items:center;gap:8px;background:var(--bordeaux);color:#fff;font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;padding:13px 22px;border-radius:8px;text-decoration:none;transition:all .2s;margin-top:auto;width:fit-content}
+.btn-notify:hover{background:#2e1414}
+
 .angebot-card.upcoming{
   background:#fff;
   border:1px dashed var(--rosewood);
@@ -1277,12 +1291,43 @@ body.modal-open{overflow:hidden}
           <a href="/buchen/" class="btn btn-gold" style="margin-top:auto;width:fit-content">Jetzt buchen →</a>
         </div>
 
-        <!-- Repetitorium - Coming Soon -->
+        <!-- Repetitorium - weitere Termine -->
         <div class="angebot-card upcoming">
           <div class="angebot-badge">Weitere Termine in Planung</div>
           <h3 class="angebot-h">Repetitorium<br>1. Staatsexamen</h3>
-          <p class="angebot-text">Weitere Termine fürs 1. Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
-          <a href="#anmelden" class="btn btn-bordeaux-outline">Informieren →</a>
+          <p class="angebot-text">Weitere Termine fürs Erste Juristische Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
+          <a href="/anfrage/?kurs=crashkurs" class="btn btn-bordeaux-outline">Informieren →</a>
+        </div>
+      </div>
+
+      <!-- Zwei neue Angebote: Jahreskurs + Klausurenkurs -->
+      <div class="angebote-grid-secondary">
+        <div class="angebot-card notify">
+          <div class="angebot-pre">— Neu</div>
+          <h3 class="angebot-h">Jahreskurs</h3>
+          <div class="angebot-when"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Ab Frühjahr 2027</div>
+          <p class="angebot-text">In Kleingruppen vor Ort. Zwei Tage à drei Stunden. Bildet den gesamten Examensstoff inklusive Nebengebiete ab.</p>
+          <ul class="angebot-feature-list">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Kleingruppen vor Ort</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 2 Tage à 3 Stunden</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Gesamter Examensstoff inkl. Nebengebiete</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Dauer: 1 Jahr</li>
+          </ul>
+          <a href="/anfrage/?kurs=jahreskurs" class="btn-notify"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Jetzt benachrichtigen →</a>
+        </div>
+
+        <div class="angebot-card notify">
+          <div class="angebot-pre">— Neu</div>
+          <h3 class="angebot-h">Klausurenkurs</h3>
+          <div class="angebot-when"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Ab März 2027</div>
+          <p class="angebot-text">30 Original-Examensklausuren, geschrieben unter Examensbedingungen mit Aufsicht. Korrektur mit persönlichem Feedback und Lösungsbesprechung vor Ort in Kleingruppen.</p>
+          <ul class="angebot-feature-list">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 Original-Examensklausuren</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Schreiben unter Examensbedingungen mit Aufsicht</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Korrektur mit persönlichem Feedback</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Lösungsbesprechung vor Ort in Kleingruppen</li>
+          </ul>
+          <a href="/anfrage/?kurs=klausurenkurs" class="btn-notify"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Jetzt benachrichtigen →</a>
         </div>
       </div>
     </div>

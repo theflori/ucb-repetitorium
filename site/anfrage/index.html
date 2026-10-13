@@ -124,9 +124,11 @@
     <form id="leadForm">
       <div class="form-field">
         <label>Für welches Examen interessierst du dich? *</label>
-        <select name="examen" required>
+        <select name="examen" id="examen-select" required>
           <option value="">Bitte wählen</option>
-          <option value="1_staatsexamen">Erstes Juristisches Staatsexamen (verfügbar)</option>
+          <option value="crashkurs">Crashkurs 1. Staatsexamen — Bad Aibling (verfügbar)</option>
+          <option value="jahreskurs">Jahreskurs — ab Frühjahr 2027</option>
+          <option value="klausurenkurs">Klausurenkurs — ab März 2027</option>
           <option value="2_staatsexamen">Zweites Juristisches Staatsexamen (in Vorbereitung)</option>
         </select>
       </div>
@@ -202,5 +204,15 @@ form.addEventListener('submit', async (e) => {
 });
 </script>
 
+<script>
+(function(){
+  var kurs = new URLSearchParams(window.location.search).get('kurs');
+  if(!kurs) return;
+  var sel = document.getElementById('examen-select');
+  if(!sel) return;
+  var map = {crashkurs:'crashkurs', jahreskurs:'jahreskurs', klausurenkurs:'klausurenkurs'};
+  if(map[kurs]){ sel.value = map[kurs]; }
+})();
+</script>
 </body>
 </html>
