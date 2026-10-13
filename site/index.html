@@ -265,6 +265,7 @@ section{padding:72px 0;width:100%;max-width:100%}
 .angebot-card.upcoming .angebot-pre{color:var(--deep-gold)}
 .angebot-text{font-size:14px;line-height:1.65;margin-bottom:24px;flex:1}
 .angebot-card.featured .angebot-text{color:rgba(255,255,255,.78)}
+.angebot-sublocation{font-family:'Manrope',sans-serif;font-size:13px;font-weight:600;color:var(--gold);margin:-6px 0 4px;letter-spacing:.01em}
 .angebot-card.upcoming .angebot-text{color:var(--muted)}
 .angebot-meta{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:24px;padding:16px 0;border-top:1px solid rgba(240,182,107,.18);border-bottom:1px solid rgba(240,182,107,.18)}
 .angebot-card.upcoming .angebot-meta{border-color:var(--border)}
@@ -804,7 +805,7 @@ body.modal-open{overflow:hidden}
   .examen-tag{font-size:10px;padding:4px 9px}
   .angebote-grid{gap:14px;margin-top:0}
   .angebot-card{padding:28px 22px}
-  .angebot-card.upcoming{min-height:auto;padding:24px 20px}
+  .angebot-card.upcoming{min-height:auto;padding:40px 36px}
   .angebot-card.upcoming::after{width:50px;height:50px}
   .angebot-badge{font-size:9px;padding:4px 9px;margin-bottom:12px}
   .angebot-pre{font-size:12px}
@@ -1254,7 +1255,7 @@ body.modal-open{overflow:hidden}
     <div class="section-head">
       <div class="pre" style="color:var(--deep-gold)">— Aktuelles Angebot</div>
       <h2 class="section-title">Unser Kursangebot.</h2>
-      <p class="section-sub">Aktuell verfügbar: das Repetitorium für das Erste Juristische Staatsexamen Bayern. Weitere Formate folgen.</p>
+      <p class="section-sub">Der Crashkurs ist jetzt buchbar. Jahreskurs, Klausurenkurs und weitere Termine kannst du unverbindlich vormerken — wir benachrichtigen dich, sobald es losgeht.</p>
     </div>
 
     <!-- ERSTES STAATSEXAMEN -->
@@ -1268,7 +1269,8 @@ body.modal-open{overflow:hidden}
         <div class="angebot-card featured">
           <div class="angebot-badge">Verfügbar</div>
           <div class="angebot-pre">— Crashkurs</div>
-          <h3 class="angebot-h">B&amp;O Parkhotel<br>Bad Aibling</h3>
+          <h3 class="angebot-h">Crashkurs<br>1. Staatsexamen</h3>
+          <div class="angebot-sublocation">B&amp;O Parkhotel Bad Aibling</div>
           <p class="angebot-text">Ein intensiver Crashkurs mit Coaching-Gespräch im Vorfeld und intensivem Training. Übernachtung optional — als Sonderkondition fürs Repetitorium (549,50&nbsp;€ für 7 Nächte mit Frühstück), separat über das Hotel buchbar.</p>
 
           <div class="angebot-meta">
@@ -1294,9 +1296,9 @@ body.modal-open{overflow:hidden}
         <!-- Repetitorium - weitere Termine -->
         <div class="angebot-card upcoming">
           <div class="angebot-badge">Weitere Termine in Planung</div>
-          <h3 class="angebot-h">Repetitorium<br>1. Staatsexamen</h3>
-          <p class="angebot-text">Weitere Termine fürs Erste Juristische Staatsexamen folgen. Lass dich informieren, sobald neue Termine verfügbar sind.</p>
-          <a href="/anfrage/?kurs=crashkurs" class="btn btn-bordeaux-outline">Informieren →</a>
+          <h3 class="angebot-h">Weitere<br>Crashkurs-Termine</h3>
+          <p class="angebot-text">Der Crashkurs ist aktuell einmalig im August 2027. Weitere Termine fürs Erste Juristische Staatsexamen sind in Planung — trag dich ein, dann meldest du dich als Erste:r, sobald ein neuer Termin steht.</p>
+          <a href="/anfrage/?kurs=crashkurs" class="btn btn-bordeaux-outline" style="margin-top:auto;width:fit-content">Vormerken lassen →</a>
         </div>
       </div>
 
